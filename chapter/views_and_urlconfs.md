@@ -10,7 +10,7 @@ Views + urls 圖
 首先，在`views.py`輸入下列程式碼：
 
 ```
-#trips/views.py
+# trips/views.py
 
 from django.http import HttpResponse
 
@@ -21,7 +21,7 @@ def hello_world(request):
 ```
 Django 從網頁接收到 `request` 後，會自動產生一個 [HttpRequest](https://docs.djangoproject.com/en/1.7/ref/request-response/#httprequest-objects) 物件，裡面包含了 request body, request method, metadata，使用者資訊等等，並當成第一個參數傳入對應的 View function，也就是這裡的 def ( Python function ) `hello_world`。
 
-在這個例子，我們並沒有用到 `request`，而是把一個字串`"Hello World!"`封裝成 [HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest) 物件 (需要先從 django.http 模組 import 此類別) ，其中也包含了 content type, status code 等等需要回傳給瀏覽器的資訊。
+在這個例子，我們並沒有用到 `request`，而是把一個字串`"Hello World!"`封裝成 [HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest) 物件 (需要先從 django.http 模組 import 此類別) ，其中包含了 content type, status code 等等需要回傳給瀏覽器的資訊。
 
 ## Django Urls
 
@@ -36,18 +36,18 @@ Django 從網頁接收到 `request` 後，會自動產生一個 [HttpRequest](ht
 
 urlpatterns = patterns('',
     ...
-    url(r'^$', 'trips.views.hello_world'),
+    url(r'^hello/$', 'trips.views.hello_world'),
 )
 ```
 我們透過 [url function](https://docs.djangoproject.com/en/1.7/ref/urls/#django.conf.urls.url) 傳入兩個參數：
-1. Regular Expression: `^$`表示空值，也就是所謂的首頁。
-2. View function: 在這裡我們指定對應到 Django app `trips`的`views.py`裡面的`hello_world`function。
+1. Regular Expression: `^hello/$`表示所有指向 URL `/hello/`的 request
+2. View function: 在這裡我們指定對應到 Django app `trips` -> `views.py` -> `hello_world`function。
 
 ## Hello World
 現在，啟動你的 web server。 ( 如果剛剛沒關閉的話，通常 Django 會在你修改程式碼後，自動重新啟動 web server )
 ```
 python manage.py runserver
 ```
-在瀏覽器輸入[http://localhost:8000/](http://localhost:8000/)，你會看到網頁不再是"It worked!"，而是我們在 HttpResponse 傳入的文字`Hello World!`。
+在瀏覽器輸入[http://localhost:8000/hello/](http://localhost:8000/hello/)，你會看到網頁顯示我們在 HttpResponse 傳入的文字`Hello World!`。
 
 HelloWorld screenshot
