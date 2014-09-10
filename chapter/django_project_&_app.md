@@ -16,13 +16,14 @@ cd mysite
 整個 project 的檔案結構如下:
 
 ```
-- mysite
-  - mysite
-    - __init__.py
-    - settings.py
-    - urls.py
-    - wsgi.py
-  - manage.py
+mysite/
+├── mysite
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── db.sqlite3
+└── manage.py
 ```
 (加上註解)
 
