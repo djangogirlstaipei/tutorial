@@ -1,5 +1,7 @@
 # Templates
 
+
+
 ## 加上 HTML / CSS & 動態內容
 
 上一章的例子，只是很簡單的顯示一行字串。讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
@@ -59,7 +61,9 @@ mkdir templates
 
 `{{ current_time }}`
 
-## render
+## render to template
+
+最後，我們回到 View 把 HTML 的部分移除，並使用 [render](https://docs.djangoproject.com/en/1.7/topics/http/shortcuts/) 這個 Django shortcut function，幫助我們把變數傳到指定的 template:
 
 ```
 # trips/views.py
