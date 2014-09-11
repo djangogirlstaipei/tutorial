@@ -19,7 +19,7 @@ def hello_world(request):
     return HttpResponse("Hello World!")
 
 ```
-Django 從網頁接收到 `request` 後，會自動產生一個 [HttpRequest](https://docs.djangoproject.com/en/1.7/ref/request-response/#httprequest-objects) 物件，裡面包含了 request body, request method, metadata，使用者資訊等等，並當成第一個參數傳入對應的 View function，也就是這裡的 def ( Python function ) `hello_world`。
+Django 從網頁接收到 `request` 後，會自動產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，裡面包含了 request body, request method, metadata，使用者資訊等等，並當成第一個參數傳入對應的 View function，也就是這裡的 def ( Python function ) `hello_world`。
 
 在這個例子，我們並沒有用到 `request`，而是把一個字串`"Hello World!"`封裝成 [HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest) 物件 (需要先從 django.http 模組 import 此類別) ，其中包含了 content type, status code 等等需要回傳給瀏覽器的資訊。
 
@@ -29,10 +29,12 @@ Django 從網頁接收到 `request` 後，會自動產生一個 [HttpRequest](ht
 
 `URLconf`( URL configuration )，它像 Django 網站的目錄一樣，當使用者從瀏覽器輸入 URL 時，我們透過這個目錄找到符合條件的 View function，進而執行裡面的程式碼。
 
-打開 startproject 時自動產生的`urls.py`，在 urlpatterns 當中加入以下程式：
+打開 mysite/urls.py ，在 `urlpatterns` 當中加入以下程式：
 
 ```
 # mysite/urls.py
+
+...
 
 urlpatterns = patterns('',
     ...

@@ -1,16 +1,18 @@
 # Admin
 
 
-`mysite/settings.py`
 ```
+# mysite/settings.py
+
 INSTALLED_APPS = (
     'django.contrib.admin',
-...
+    ...
 )
 ```
 
-`mysite/urls.py`
 ```
+# mysite/urls.py
+
 from django.contrib import admin
 admin.autodiscover()
 
