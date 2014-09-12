@@ -25,7 +25,6 @@ mysite/
 ├── db.sqlite3
 └── manage.py
 ```
-(加上註解)
 
 `manage.py`是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
 ```
