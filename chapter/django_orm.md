@@ -17,7 +17,7 @@ python manage.py shell
 
 ```
 >>> from trips.models import Post
->>>
+>>> Post.objects.create(title='Django 大冒險', content='從靜態到動態', photo='http://google.com', location='CLBC大安店')
 ```
 
 ### Read
@@ -27,6 +27,7 @@ python manage.py shell
 
 ```
 >>> Post.objects.all()
+[<Post: my first post>, <Post: My second trip>, <Post: Django 大冒險>]
 
 所有資料 example
 
@@ -36,12 +37,13 @@ python manage.py shell
 
 而只想顯示部分資料時有以下兩種方式：
 ```
->>> Post.objects.get()
+>>> Post.objects.get(id=1)
+<Post: my first post>
 
 單筆資料 example
 
->>> Post.objects.filter()
-
+>>> Post.objects.filter(id__gt=1)
+[<Post: My second trip>, <Post: Django 大冒險>]
 List example
 
 ```
