@@ -44,12 +44,13 @@ admin.site.register(Post)
 ```
 現在，讓我們在瀏覽器輸入 [http://localhost:8000/admin](http://localhost:8000/admin)，你會看到後台管理的登入頁面：
 
-admin 登入 screenshot
+![](./../images/django-admin-login.png)
 
 請輸入你在第一次同步資料庫時創造的 superuser 帳號密碼，進入後台管理首頁 ：
 
 管理介面首頁 screenshot
+![](./../images/django-admin-main-screen.png)
 
 除了剛剛註冊的 Model，預設你還可以在這裡管理使用者 ( User ) 和 群組 ( Group ) ，你可以試著利用後台管理介面新增一筆 Post：
 
-create screenshot
+![](./../images/django-admin-create.png)
