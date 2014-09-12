@@ -64,10 +64,12 @@ def hello_world(request):
 
 現在我們來設定，Hello World 範例的 URL Conf：
 
-打開 startproject 時自動產生的`urls.py`，在 urlpatterns 當中加入以下程式：
+打開 mysite/urls.py ，在 `urlpatterns` 當中加入以下程式：
 
 ```
 # mysite/urls.py
+
+...
 
 urlpatterns = patterns('',
     ...

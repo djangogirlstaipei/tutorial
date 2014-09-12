@@ -2,7 +2,7 @@
 
 ## 建立 Django project
 
-接下來，我們要利用`django-admin`來建立第一個 Django project `mysite`:
+接下來，我們要利用 [django-admin](https://docs.djangoproject.com/en/dev/ref/django-admin/) 來建立第一個 Django project `mysite`:
 ```
 django-admin.py startproject mysite
 ```
@@ -26,7 +26,7 @@ mysite/
 └── manage.py
 ```
 
-`manage.py`是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
+[manage.py](https://docs.djangoproject.com/en/dev/ref/django-admin/) 是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
 ```
 python manage.py <command> [options]
 ```
@@ -64,7 +64,7 @@ Options:
   -h, --help            show this help message and exit
 
 ```
-`runserver`可以啟動一個簡單的 web server，以便於我們在開發階段使用:
+[runserver](https://docs.djangoproject.com/en/dev/ref/django-admin/#runserver-port-or-address-port) 可以啟動一個簡單的 web server，以便於我們在`開發階段`使用:
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py runserver
 ...
