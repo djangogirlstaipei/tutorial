@@ -2,4 +2,4 @@
 
 
 ## MVC
-圖
+![Model-Template-View](.././images/MTV.png)
