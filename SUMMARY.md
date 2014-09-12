@@ -17,4 +17,8 @@
    * [Template tags](chapter/template_tags.md)
    * [Deploy](chapter/deploy.md)
 * [Django 進階教學](-_django/README.md)
+   * [Advanced Templates](-_django/advanced_templates.md)
+   * [Advanced Models](-_django/advanced_models.md)
+   * [Forms](-_django/forms.md)
+   * [Deploy again!](-_django/deploy_again)
 
