@@ -18,7 +18,7 @@ def hello_world(request):
             <head>
             </head>
             <body>
-                Hello World! {current_time}
+                Hello World! <em style="color:LightSeaGreen;">{current_time}</em>
             </body>
         </html>
     """.format(current_time=datetime.now())
@@ -31,7 +31,7 @@ def hello_world(request):
 
 如果你的 web server 沒有關閉，在瀏覽器輸入 [http://localhost:8000/hello/](http://localhost:8000/hello/) 後，會發現網頁不只變比較漂亮，還多了現在的時間。( 你可以重新載入同一個頁面試試 )
 
-HelloWorld Now screenshot
+![hello-world-html-string.png](./../images/hello-world-html-string.png)
 
 
 ## 建立 templates 資料夾
@@ -47,12 +47,11 @@ mkdir templates
 ```
 
 ```
-- mysite
-  - mysite
-  - templates
-    - hello_world.html
-  - trips
-  - manage.py
+├── mysite
+├── templates
+│   └── hello_world.html
+├── trips
+└── manage.py
 ```
 
 `index.html`
@@ -74,4 +73,29 @@ def hello_world(request):
                   current_time=datetime.now())
 ```
 
-HelloWorld Now screenshot2
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>I come from template!!</title>
+    <style>
+        body {
+           background-color: lightyellow;
+        }
+        em {
+            color: LightSeaGreen;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <em>{{ current_time }}</em>
+</body>
+
+</html>
+
+```
+
+![HelloWorld From Template](./../images/hello-world-from-template.png)
