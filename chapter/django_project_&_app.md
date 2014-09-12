@@ -90,12 +90,13 @@ python manage.py startapp trips
 ```
 `startapp`會按照你的命名建立一個同名資料夾和 app 預設的檔案結構如下：
 ```
-- trips
-  - __init__.py
-  - models.py
-  - tests.py
-  - views.py
-  - admin.py
+trips
+├── __init__.py
+├── admin.py
+├── models.py
+├── tests.py
+└── views.py
+
 ```
 加上註解
 
@@ -104,17 +105,18 @@ python manage.py startapp trips
 最後，讓我們再來回顧一下整個 Django project 和建立一個 Django app 後的檔案結構：
 
 ```
-- mysite
-  - mysite
-    - __init__.py
-    - settings.py
-    - urls.py
-    - wsgi.py
-  - trips
-    - __init__.py
-    - models.py
-    - tests.py
-    - views.py
-    - admin.py
-  - manage.py
+mysite
+├── mysite
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── trips
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── db.sqlite3
+└── manage.py
 ```
