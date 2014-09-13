@@ -2,7 +2,7 @@
 
 ## 建立 Django project
 
-接下來，我們要利用 [django-admin](https://docs.djangoproject.com/en/dev/ref/django-admin/) 來建立第一個 Django project `mysite`:
+接下來，我們要利用`django-admin`來建立第一個 Django project `mysite`:
 ```
 django-admin.py startproject mysite
 ```
@@ -25,9 +25,8 @@ mysite/
 ├── db.sqlite3
 └── manage.py
 ```
-(加上註解)
 
-[manage.py](https://docs.djangoproject.com/en/dev/ref/django-admin/) 是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
+`manage.py`是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
 ```
 python manage.py <command> [options]
 ```
@@ -65,7 +64,7 @@ Options:
   -h, --help            show this help message and exit
 
 ```
-[runserver](https://docs.djangoproject.com/en/dev/ref/django-admin/#runserver-port-or-address-port) 可以啟動一個簡單的 web server，以便於我們在`開發階段`使用:
+`runserver`可以啟動一個簡單的 web server，以便於我們在開發階段使用:
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py runserver
 ...
@@ -91,12 +90,13 @@ python manage.py startapp trips
 ```
 `startapp`會按照你的命名建立一個同名資料夾和 app 預設的檔案結構如下：
 ```
-- trips
-  - __init__.py
-  - models.py
-  - tests.py
-  - views.py
-  - admin.py
+trips
+├── __init__.py
+├── admin.py
+├── models.py
+├── tests.py
+└── views.py
+
 ```
 加上註解
 
@@ -105,17 +105,18 @@ python manage.py startapp trips
 最後，讓我們再來回顧一下整個 Django project 和建立一個 Django app 後的檔案結構：
 
 ```
-- mysite
-  - mysite
-    - __init__.py
-    - settings.py
-    - urls.py
-    - wsgi.py
-  - trips
-    - __init__.py
-    - models.py
-    - tests.py
-    - views.py
-    - admin.py
-  - manage.py
+mysite
+├── mysite
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── trips
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── db.sqlite3
+└── manage.py
 ```

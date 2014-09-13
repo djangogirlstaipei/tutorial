@@ -1,12 +1,8 @@
 # Templates
 
-在前一章，我們只是很簡單的顯示一行字串，沒有使用到網頁最基本的語言 HTML tags。
-這一章，我們會教你如何將後端產生的變數與前端的HTML檔案結合。
-
-
 ## 加上 HTML / CSS & 動態內容
 
-現在讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
+上一章的例子，只是很簡單的顯示一行字串。讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
 
 ```
 # trips/views.py
@@ -22,7 +18,7 @@ def hello_world(request):
             <head>
             </head>
             <body>
-                Hello World! {current_time}
+                Hello World! <em style="color:LightSeaGreen;">{current_time}</em>
             </body>
         </html>
     """.format(current_time=datetime.now())
@@ -35,37 +31,34 @@ def hello_world(request):
 
 如果你的 web server 沒有關閉，在瀏覽器輸入 [http://localhost:8000/hello/](http://localhost:8000/hello/) 後，會發現網頁不只變比較漂亮，還多了現在的時間。( 你可以重新載入同一個頁面試試 )
 
-HelloWorld Now screenshot
+![hello-world-html-string.png](./../images/hello-world-html-string.png)
 
 
 ## 建立 templates 資料夾
 
 雖然前一個例子，我們把 HTML/CSS 放在 View function 裡，但通常為了可讀性，以及分工方便，我們會把前端的程式碼切割出來，獨立於 templates 資料夾裡。
 
-在你的 Django project 底下 ( djangogirls/mysite/ ) 新建一個資料夾`templates`:
+`djangogirls/mysite/`
+
+( 如果不想關閉 web server，可以再開新一個新的終端機視窗 )
 
 ```
 mkdir templates
 ```
-( Tips: 如果不想關閉 web server，可以再開新一個新的終端機視窗。 )
 
-然後，在 templates 資料夾底下新增`hello_world.html`，Django porject 檔案結構如下:
 ```
-- mysite
-  - mysite
-  - templates
-    - hello_world.html
-  - trips
-  - manage.py
+├── mysite
+├── templates
+│   └── hello_world.html
+├── trips
+└── manage.py
 ```
 
-`hello_world.html`
+`index.html`
 
 `{{ current_time }}`
 
-## render to template
-
-最後，我們回到 View 把 HTML 的部分移除，並使用 [render](https://docs.djangoproject.com/en/1.7/topics/http/shortcuts/) 這個 Django shortcut function，幫助我們把`current_time`變數傳到指定的 template:
+## render
 
 ```
 # trips/views.py
@@ -80,4 +73,29 @@ def hello_world(request):
                   current_time=datetime.now())
 ```
 
-HelloWorld Now screenshot2
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>I come from template!!</title>
+    <style>
+        body {
+           background-color: lightyellow;
+        }
+        em {
+            color: LightSeaGreen;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <em>{{ current_time }}</em>
+</body>
+
+</html>
+
+```
+
+![HelloWorld From Template](./../images/hello-world-from-template.png)
