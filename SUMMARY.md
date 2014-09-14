@@ -20,5 +20,5 @@
    * [Advanced Templates](-_django/advanced_templates.md)
    * [Advanced Models](-_django/advanced_models.md)
    * [Forms](-_django/forms.md)
-   * [Deploy again!](-_django/deploy_again)
+   * [Deploy again!](-_django/deploy_again.md)
 

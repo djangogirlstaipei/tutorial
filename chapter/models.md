@@ -76,7 +76,12 @@ Django 在預設時已經幫你將幾個常用的 app 放入`INSTALLED_APPS`，�
 ## 同步資料庫
 
 ```
-python manage.py migrate
+(VENV) ~/djangogirls/mysite$ python manage.py migrate
+Creating tables ...
+Creating table trips_post
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
 ```
 
 [migrate](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。

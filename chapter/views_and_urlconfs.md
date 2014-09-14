@@ -4,13 +4,13 @@
 
 在前面的介紹，我們有提到 Django 的 MTV 架構。主要的過程如下：
 1. 瀏覽器送出 **Http Request**
-2. Django 依據 `URL Conf` 分配至對應的 View
+2. Django 依據 **URL Conf** 分配至對應的 View
 3. View 進行資料庫的操作或其他運算，並回傳 Http Response 物件
-4. 瀏覽器依據 Http Response，產生網頁畫面
+4. 瀏覽器依據 **Http Response**，顯示網頁畫面
 
 ---
 
-這一章，我們將透過 Hello World 範例練習 ，瞭解其中 Django 是如何處理一個 request。完成這個練習後，連到 `http://localhost:8000/hello/` 這個網址時，會看到 `Hello World!` 這個訊息。
+這一章，我們將透過 **Hello World** 範例 ，瞭解 Django 如何處理一個 request 的流程。
 
 ---
 
