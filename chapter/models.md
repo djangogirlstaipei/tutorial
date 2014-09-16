@@ -1,14 +1,22 @@
 # Models
 
-現今大多數的網站，都不再是靜態網頁，把要顯示的內容直接寫在 HTML 檔案裡，而是透過跟資料庫的溝通，將資料取出並呈現在網頁上。
+現今的網站，都不再只是僅單純展示網頁內容的靜態網頁。大多數網站，都會加上一些與使用者互動的功能，如留言版、討論區、投票...等。而這些使用者產出的資料，往往會儲存於資料庫中。
 
-這一章，你會學到如果利用 Django Models 定義資料庫的結構，並透過 Django 指令創建資料庫、資料表及欄位。
+---
+
+這一章，你會學到如何利用 Django Model 定義資料庫的結構 (Schema)，並透過 Django 指令創建資料庫、資料表及欄位。
+
+---
+
+## 使用 Django Model 的好處
+
+雖然資料庫的語法有其標準，但是各家資料庫還是或多或少有差異。使用 Django Model 的來操作資料庫的優點之一，就是**資料庫轉換相當方便**。
+
+在大部份情況下，不再需要為不同的資料庫，使用不同語法來撰寫程式。只要修改設定，就可以輕易地從 SQLite 轉換到 MySQL、PostgreSQL、或是 Oracle...等等。
 
 ## 設定資料庫
 
-使用 Django Models 的其中一個優點是資料庫轉換相當方便。不再需要為不同的資料庫寫不同的程式來操作，只要修改設定，就可以輕易地從 SQLite 轉換到 MySQL、PostgreSQL、或是 Oracle等等。
-
-在這裡，為了開發方便，我們使用 Django 預設的資料庫 `SQLite`:
+為了開發方便，我們使用 Django 預設的資料庫 `SQLite`:
 ```
 # mysite/settings.py
 
@@ -22,11 +30,12 @@ DATABASES = {
 }
 
 ```
-- ENGINE: 你要使用的資料庫引擎，例如：
- - `MySQL`: django.db.backends.mysql
+在這裡我們設定了資料庫連線的預設值：
+- **ENGINE ** -- 你要使用的資料庫引擎，例如：
+ - `MySQ`: django.db.backends.mysql
  - `SQLite`: django.db.backends.sqlite3
  - `PostgreSQL`: django.db.backends.postgresql_psycopg2
-- NAME: 你的資料庫名稱
+- **NAME ** -- 你的資料庫名稱
 
 
 ## Django Models
@@ -49,9 +58,11 @@ class Post(models.Model):
         return self.title
 ```
 
-##新增 app
+## 將新增的 Django app 加入設定檔
 
-雖然之前透過 Django 命令列工具建立了 app，但實際上我們還需要修改設定檔裡的 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)：
+在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+
+
 
 ```
 # mysite/settings.py
@@ -70,8 +81,14 @@ INSTALLED_APPS = (
     'trips',
 )
 ```
-Django 在預設時已經幫你將幾個常用的 app 放入`INSTALLED_APPS`，例如使用者認證`auth`、後台管理`admin`等等。
-請注意 app 之間有時候會有先後順序，我們將自訂的`trips`加在最後面。
+請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
+
+---
+**預設安裝的 Django app**
+
+Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用者認證)、`admin` (管理後台) ...等等，我們可依需求自行增減。
+
+---
 
 ## 同步資料庫
 
@@ -86,7 +103,7 @@ Installed 0 object(s) from 0 fixture(s)
 
 [migrate](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。
 
-如果是第一次同步資料庫，Django 會詢問你是否要創建 superuser，請回答`yes`，並輸入你的密碼，我們在後台管理 ( Django Admin ) 的章節會用到。
+如果是第一次同步資料庫，Django 會詢問你是否要創建 superuser，請回答`yes`，並設定管理者密碼。在後台管理 ( Django Admin ) 的章節會使用到。
 ```
 yes
 ```
