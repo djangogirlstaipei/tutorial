@@ -1,8 +1,18 @@
 # Project and apps
 
+每一個 Django project 裡面可以有一個至多個 Django app，我們通常會按照功能來切割成不同 app，這樣未來也比較好維護和再利用。
+
+例如，我們要做一個像 Facebook 這種比較複雜的網站時，我們可能會切割成 users (使用者管理)、friends (好友管理)、timeline (塗鴉牆管理)、feed (動態消息管理) 等等。而下一個網站想寫購物平台時，users app (使用者管理) 這一塊的設計就可以再被重複使用。
+
+---
+
+這一章，你會學到如何使用 Django 命令列工具建立 Django project 和一個 Django app。
+
+---
+
 ## 建立 Django project
 
-接下來，我們要利用`django-admin`來建立第一個 Django project `mysite`:
+首先，我們要利用`django-admin`來建立第一個 Django project `mysite`:
 ```
 django-admin.py startproject mysite
 ```
@@ -80,10 +90,6 @@ it works image
 
 ## 建立 Django application (app)
 
-每一個 Django project 裡面可以有一個至多個 Django app，我們通常會按照功能來切割成不同 app，這樣未來也比較好維護和再利用。
-
-例如，我們要做一個像 Facebook 這種比較複雜的網站時，我們可能會切割成 users (使用者管理)、friends (好友管理)、timeline (塗鴉牆管理)、feed (動態消息管理) 等等。而下一個網站想寫購物平台時，users app (使用者管理) 這一塊的設計就可以再被重複使用。
-
 現在，讓我們利用`startapp`建立第一個 Django app - `trips`:
 ```
 python manage.py startapp trips
@@ -117,6 +123,5 @@ mysite
 │   ├── models.py
 │   ├── tests.py
 │   └── views.py
-├── db.sqlite3
 └── manage.py
 ```
