@@ -1,11 +1,6 @@
 # Advanced Templates
 
-
-base.html, index.html, post.html
-
-{% extends %}
-
-{% block %}{% endblock %}
+## 動態 url
 
 ```
 # trips/views.py
@@ -30,5 +25,17 @@ urlpatterns = patterns('',
 )
 
 ```
+post.html
+
 
 post screenshot
+
+## Template extending
+
+繼承
+
+base.html, index.html, post.html
+
+{% extends %}
+
+{% block %}{% endblock %}

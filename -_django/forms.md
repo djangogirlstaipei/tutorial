@@ -1,5 +1,6 @@
 # Forms
 
+
 ```
 # trips/forms.py
 
@@ -12,18 +13,44 @@ class CommentForm(forms.Form):
                               label='留言內容')
 ```
 
-post.html
-```
-<form action="" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="送出">
-</form>
-```
+## form rendering
 
+https://docs.djangoproject.com/en/dev/topics/forms/#form-rendering-options
 
 ```
 # trips/views.py
+
+from...
+
+def post_detail(request, id):
+    post = Post.objects.get(id=id)
+    form = CommentForm(request.POST or None)
+
+    return render(request,
+                  'post.html',
+                  {'post': post, 'form': form})
+```
+
+
+post.html
+```
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="送出">
+</form>
+```
+csrf_token
+
+https://docs.djangoproject.com/en/dev/ref/contrib/csrf/
+
+## validate
+
+https://docs.djangoproject.com/en/dev/ref/forms/api/#using-forms-to-validate-data
+```
+# trips/views.py
+
+from...
 
 
 def post_detail(request, id):

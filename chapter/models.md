@@ -53,15 +53,17 @@ class Post(models.Model):
     photo = models.URLField()
     location = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
 ```
 
 ## 將新增的 Django app 加入設定檔
 
 在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
+待修改
+Model field
+https://docs.djangoproject.com/en/dev/ref/models/fields/
+
+##新增 app
 
 
 ```
