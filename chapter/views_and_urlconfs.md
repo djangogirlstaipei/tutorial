@@ -2,7 +2,7 @@
 
 ![](./../images/url-dispatch.png)
 
-在前面的介紹，我們有提到 Django 的 MTV 架構。主要的過程如下：
+在前面的介紹，我們有提到 Django 的 MTV 架構。其處理 request 的流程如下：
 1. 瀏覽器送出 **Http Request**
 2. Django 依據 **URL Conf** 分配至對應的 View
 3. View 進行資料庫的操作或其他運算，並回傳 Http Response 物件
@@ -16,16 +16,21 @@
 
 ## Django Views
 
-- Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 View function (`hello_world`)。
+Django View 其實是一個 Function，**處理 HttpRequest
+ 物件，並回傳 HttpResponse 物件**，大致說明如下：
 
-- 在 Django 的 View 中，需要回傳 [HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#httpresponse-objects) 物件
-    - HttpResponse 物件裡面包含：
-        - `HttpResponse.content`
-        - `HttpResponse.status_code` ...等
+- **會收到 `HttpRequest 物件` 參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 View function，也就是 `hello_world()`。
 
+- **需要回傳 [`HttpResponse`](https://docs.djangoproject.com/en/dev/ref/request-response/#httpresponse-objects)物件：**
+HttpResponse 物件裡面包含：
+    - `HttpResponse.content`
+    - `HttpResponse.status_code` ...等
 
+### 建立第一個 View
 
-首先，在`views.py`輸入下列程式碼：
+首先建立一個名為 hello_world 的 View。
+
+在`views.py`輸入下列程式碼：
 
 ```
 # trips/views.py
