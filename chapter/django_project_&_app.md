@@ -1,8 +1,14 @@
 # Project and apps
 
-每一個 Django project 裡面可以有一個至多個 Django app，我們通常會按照功能來切割成不同 app，這樣未來也比較好維護和再利用。
+每一個 Django project 裡面可以有多個 Django app，可以想成是類似模組的概念。在實務上，**通常會依功能分成不同 app**，方便未來的維護和重複使用。
 
-例如，我們要做一個像 Facebook 這種比較複雜的網站時，我們可能會切割成 users (使用者管理)、friends (好友管理)、timeline (塗鴉牆管理)、feed (動態消息管理) 等等。而下一個網站想寫購物平台時，users app (使用者管理) 這一塊的設計就可以再被重複使用。
+例如，我們要做一個類似 Facebook 這種網站時，依功能可能會有以下 App：
+- 使用者管理 -- users
+- 好友管理 -- friends
+- 塗鴉牆管理 -- timeline
+- 動態消息管理 -- feeds
+
+若未來我們需要寫個購物網站，而需要會員功能時，`users app` (使用者管理) 就可以被重複使用。
 
 ---
 
@@ -12,18 +18,20 @@
 
 ## 建立 Django project
 
-首先，我們要利用`django-admin`來建立第一個 Django project `mysite`:
+### 建立專案資料夾 -- startproject
+首先，使用`django-admin`來建立第一個 Django project `mysite`:
 ```
 django-admin.py startproject mysite
 ```
 
-在指令完成以後，我們切換到`mysite`專案資料夾內部:
+此時會多了一個 **mysite** 資料夾，我們切換進去
 ```
 cd mysite
 ```
-此時，用`ls`或`dir` ( Windows ) 檢視檔案結構，你會發現資料夾裡面已經自動創建了`manage.py`這個檔案，以及另一個跟 project 同名的資料夾`mysite`。
 
-整個 project 的檔案結構如下:
+`startproject` 這個 django 指令除了建立專案資料夾，也預設會建立一些常用檔案，你可以使用 `ls` 或 `dir` ( win ) 檢視檔案結構。
+
+目前 project 的檔案結構如下:
 
 ```
 mysite/
@@ -36,6 +44,8 @@ mysite/
 └── manage.py
 ```
 
+
+### 瞭解 Django Command
 `manage.py`是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下:
 ```
 python manage.py <command> [options]
@@ -73,8 +83,11 @@ Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
 
+
 ```
-`runserver`可以啟動一個簡單的 web server，以便於我們在開發階段使用:
+### 啟動開發伺服器 -- runserver
+
+從說明中可以知道，`runserver`會啟動一個簡單的 web server，方便於在開發階段使用：
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py runserver
 ...
@@ -82,15 +95,15 @@ Django version 1.7, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
-打開瀏覽器輸入 [http://127.0.0.1:8000/](http://127.0.0.1:8000/) 或是 [http://localhost:8000/](http://localhost:8000/) ，你應該會看到 "It worked!" 的頁面，這就表示你已經成功建立你的第一個網頁，並且用 web server 啟動它。
+現在打開瀏覽器輸入 [http://127.0.0.1:8000/](http://127.0.0.1:8000/) 或是 [http://localhost:8000/](http://localhost:8000/) 會看到你的 django 專案已成功在 web server 上執行
 
-it works image
+![Django startproject success](./../images/django-startproject-success.png)
 
-如果想要關閉 web server，可以使用`CTRL+C`回到命令列。
+最後我們可以按下 `CTRL+C` ，關閉 web server 回到命令列。
 
 ## 建立 Django application (app)
 
-現在，讓我們利用`startapp`建立第一個 Django app - `trips`:
+現在，讓我們利用 `startapp` 建立第一個 Django app -- **trips**:
 ```
 python manage.py startapp trips
 ```
@@ -104,12 +117,11 @@ trips
 └── views.py
 
 ```
-加上註解
 
-## Django project layout
+## 小結
 
-最後，讓我們再來回顧一下整個 Django project 和建立一個 Django app 後的檔案結構：
-
+目前為止，我們使用 `startproject` 建立了一個名為 **mysite** 的 django 專案，和一個名為 ** trips**
+ 的 django app
 ```
 mysite
 ├── mysite
@@ -125,3 +137,16 @@ mysite
 │   └── views.py
 └── manage.py
 ```
+
+---
+
+最後，我們回顧一下本章學到的指令
+
+| 指令 | 說明 |
+| -- | -- |
+| django-admin.py **startproject** Project_Name | 建立 django 專案 |
+| python manage.py **-h** CommandName | 查看 django command 的使用方法 |
+| python manage.py **runserver** | 啟動開發伺服器 |
+| python manage.py **startapp** App_Name | 新增 django app |
+---
+
