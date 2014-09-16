@@ -30,7 +30,7 @@ def home(request):
 ```
 記得先 import 你需要使用到的 Model，我們透過`Post.objects.all()`從資料庫取得全部的 post 並回傳至新的 template - `home.html`。
 
-為了讓瀏覽器可以對應到 View function，我們修改 **urls.py** ，將首頁( 正規表達式`^$` ) 指向 home：
+接下來，我們修改 **urls.py** ，將首頁( 正規表達式`^$` ) 指向 home View function：
 
 ```
 # mysite/urls.py
@@ -43,7 +43,7 @@ urlpatterns = patterns('',
 
 ## Template tags
 
-為了瞭解如何應用 template tags，我們先不加入任何 HTML/CSS，直接在`home.html`輸入：
+為了瞭解如何應用 template tags，我們先不加入任何 HTML/CSS，直接在 templates 資料夾底下新增 `home.html` 輸入：
 ```
 {{ post_list }}
 ```
@@ -81,24 +81,28 @@ many post screenshot
 {% endif %}
 ```
 
+需要範例
+
 ## Template filter
 
-除了 template tags ，Django 在內建也提供許多好用的 [template filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#built-in-filter-reference)，它會在變數顯示之前幫你做計算、設定預設值，置中等等。
+除了 template tags ，Django 在內建也提供許多好用的 [template filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#built-in-filter-reference)，它會在變數顯示之前幫你做計算、設定預設值，置中等等，使用方法如下:
 
-在這裡，我們只練習其中一種很常用的 filter - [date filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date)：
+    {{ <變數>|<filter 名稱>:<傳入 filter 的參數> }}
+
+
+在這裡，我們只練習其中一種很常用的 filter - [date filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date)，它可以將 datetime 型別的值轉成我們指定的 Date Format，如下：
 
 ```
 {% for post in post_list %}
     {{ post.created_at|date:"Y / m / d h:i:s" }}
 {% endfor %}
 ```
-- Django filter 接在變數後面，使用`|`作為間隔
-- 如果 filter 需要輸入參數時，會再使用`:`作為參數傳遞。我們傳入 Date format `"Y / m / d h:i:s"`
+重新載入後，你會發現日期及時間的顯示方式改變了：
 
 many post screenshot - format date
 
 
-最後
+最後，我們使用上述的 template tags 和 template filter，並加上 HTML/CSS，完整的`home.html`如下：
 ```
 {% load static %}
 <!DOCTYPE html>
@@ -139,3 +143,11 @@ many post screenshot - format date
     </body>
 </html>
 ```
+! 移除 read more 和 連到 post-detail 的url
+! 加上 if no photo else...
+! 移除 static
+! 替換 url 'index'
+
+最後的裝飾完成了，重新整理你的瀏覽器吧！
+
+完整版 screenshot
