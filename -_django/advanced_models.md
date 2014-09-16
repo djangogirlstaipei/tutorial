@@ -2,6 +2,7 @@
 
 foreign key 的概念
 
+
 ```
 # trips/models.py
 
@@ -14,6 +15,11 @@ class Comment(models.Model):
     def __str__(self):
         return str(self.id)
 ```
+`ForeignKey`
+https://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey
+
+`__str__`
+https://docs.djangoproject.com/en/dev/ref/models/instances/#str
 
 ## 同步資料庫
 

@@ -44,10 +44,11 @@ class Post(models.Model):
     photo = models.URLField()
     location = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
 ```
+
+待修改
+Model field
+https://docs.djangoproject.com/en/dev/ref/models/fields/
 
 ##新增 app
 
