@@ -19,12 +19,12 @@
 Django View 其實是一個 Function，**處理 HttpRequest
  物件，並回傳 HttpResponse 物件**，大致說明如下：
 
-- **會收到 `HttpRequest 物件` 參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 View function，也就是 `hello_world()`。
+- **會收到`HttpRequest 物件`參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 View function，也就是 `hello_world()`。
 
-- **需要回傳 [`HttpResponse`](https://docs.djangoproject.com/en/dev/ref/request-response/#httpresponse-objects)物件：**
-HttpResponse 物件裡面包含：
-    - `HttpResponse.content`
-    - `HttpResponse.status_code` ...等
+- **需要回傳`HttpResponse物件`：**
+[HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#httpresponse-objects) 物件裡面包含：
+    - HttpResponse.content
+    - HttpResponse.status_code ...等
 
 ### 建立第一個 View
 

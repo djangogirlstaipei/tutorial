@@ -102,7 +102,7 @@ mkdir templates
 
 ---
 
-`{{ variable_name }}` 是在 Django Template 中顯示變數的語法。
+`{{`*`<variable_name>`*`}}` 是在 Django Template 中顯示變數的語法。
 
 ---
 

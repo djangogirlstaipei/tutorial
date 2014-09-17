@@ -87,10 +87,13 @@ many post screenshot
 
 除了 template tags ，Django 在內建也提供許多好用的 [template filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#built-in-filter-reference)，它會在變數顯示之前幫你做計算、設定預設值，置中等等，使用方法如下:
 
-    {{ <變數>|<filter 名稱>:<傳入 filter 的參數> }}
+`{{`*`<variable_name>`*`|`*`<filter_name>`*`:`*`<filter_arguments>`*`}}`
 
+- **< variable_name > ** -- 變數名稱
+- **< filter_name > ** -- filter 名稱，例如`add`, `cut`等等
+- **< filter_arguments > ** -- 要傳入 filter 的參數
 
-在這裡，我們只練習其中一種很常用的 filter - [date filter](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date)，它可以將 datetime 型別的值轉成我們指定的 Date Format，如下：
+在這裡，我們只練習其中一種很常用的 filter - [date](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date)，它可以將`datetime`型別的物件轉成我們指定的 Date Format ( 例如：`Y / m / d h:i:s` )，並輸出成字串 ( String ) ，如下：
 
 ```
 {% for post in post_list %}
@@ -101,8 +104,8 @@ many post screenshot
 
 many post screenshot - format date
 
-
-最後，我們使用上述的 template tags 和 template filter，並加上 HTML/CSS，完整的`home.html`如下：
+---
+最後，結合我們這一章教過的 template tags 和 template filter，並加上 HTML/CSS，完整的`home.html`如下：
 ```
 {% load static %}
 <!DOCTYPE html>
@@ -144,8 +147,11 @@ many post screenshot - format date
 </html>
 ```
 ! 移除 read more 和 連到 post-detail 的url
+
 ! 加上 if no photo else...
+
 ! 移除 static
+
 ! 替換 url 'index'
 
 最後的裝飾完成了，重新整理你的瀏覽器吧！

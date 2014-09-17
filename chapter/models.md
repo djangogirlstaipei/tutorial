@@ -50,21 +50,28 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(null=True, blank=True)
-    photo = models.URLField()
+    photo = models.URLField(null=True, blank=True)
     location = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
 ```
-
-## 將新增的 Django app 加入設定檔
-
-在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
-
 待修改
 Model field
 https://docs.djangoproject.com/en/dev/ref/models/fields/
 
+`__str__`
+https://docs.djangoproject.com/en/dev/ref/models/instances/#str
+
+
+## 將新增的 Django app 加入設定檔
+
+在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
+
 ##新增 app
 
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
 ```
 # mysite/settings.py
@@ -96,18 +103,21 @@ Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用
 
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py migrate
-Creating tables ...
-Creating table trips_post
-Installing custom SQL ...
-Installing indexes ...
-Installed 0 object(s) from 0 fixture(s)
+Operations to perform:
+  Synchronize unmigrated apps: trips
+  Apply all migrations: contenttypes, sessions, admin, auth
+Synchronizing apps without migrations:
+  Creating tables...
+    Creating table trips_post
+    Creating table trips_comment
+  Installing custom SQL...
+  Installing indexes...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying sessions.0001_initial... OK
 ```
 
 [migrate](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。
-
-如果是第一次同步資料庫，Django 會詢問你是否要創建 superuser，請回答`yes`，並設定管理者密碼。在後台管理 ( Django Admin ) 的章節會使用到。
-```
-yes
-```
-
 

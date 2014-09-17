@@ -1,6 +1,6 @@
 # Admin
 
-雖然在前一章，透過 Django Shell 和 QuerySet API，你可以新增、修改及刪除你的 Post，但其實 Django 提供了其他輕量型 Web Framework 沒有的強大功能 [Django Admin](https://docs.djangoproject.com/en/dev/ref/contrib/admin/) - 後台管理介面，讓你可以直接透過它進行資料庫操作。
+雖然在前一章，透過 Django Shell 和 QuerySet API，你可以新增、修改及刪除你的 Post，但其實 Django 提供了其他輕量型 Web Framework 沒有的強大功能 [Django Admin](https://docs.djangoproject.com/en/dev/ref/contrib/admin/) - 後台管理平台，讓你可以直接透過它進行資料庫操作。
 
 ## 後台管理設定
 
@@ -15,7 +15,7 @@ INSTALLED_APPS = (
 )
 ```
 
-為了讓你可以從瀏覽器連接到後台管理介面，Django 在預設指定 `/admin/` 對應到其相關的 urls：
+為了讓你可以從瀏覽器連接到後台管理平台，Django 在預設指定 `/admin/` 對應到其相關的 urls：
 
 ```
 # mysite/urls.py
@@ -28,6 +28,21 @@ urlpatterns = pattern('',
     url(r'^admin/', include(admin.site.urls)),
 )
 ```
+## 建立 superuser
+
+Django 的後台管理平台跟認證系統 ( django.contrib.auth ) 結合，在登入時必須輸入管理者帳號密碼，我們利用命令列指令 [createsuperuser](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-createsuperuser) 建立一個 superuser：
+
+```
+(VENV) ~/djangogirls/mysite$ python manage.py createsuperuser
+Username (leave blank to use 'YOUR_NAME'):
+Email address: your_name@yourmail.com
+Password:
+Password (again):
+Superuser created successfully.
+
+```
+請自行命名你的 Username，Email 和 Password，我們待會會用到。
+
 
 ## 註冊 Model class
 
@@ -42,15 +57,14 @@ from trips.models import Post
 admin.site.register(Post)
 
 ```
-現在，讓我們在瀏覽器輸入 [http://localhost:8000/admin](http://localhost:8000/admin)，你會看到後台管理的登入頁面：
+現在，讓我們在瀏覽器輸入 [http://localhost:8000/admin](http://localhost:8000/admin)，你會看到後台管理平台的登入頁面：
 
 ![](./../images/django-admin-login.png)
 
-請輸入你在第一次同步資料庫時創造的 superuser 帳號密碼，進入後台管理首頁 ：
+請輸入你剛剛創造的 superuser 帳號密碼，進入後台管理平台的首頁 ：
 
-管理介面首頁 screenshot
 ![](./../images/django-admin-main-screen.png)
 
-除了剛剛註冊的 Model，預設你還可以在這裡管理使用者 ( User ) 和 群組 ( Group ) ，你可以試著利用後台管理介面新增一筆 Post：
+除了剛剛註冊的 Model，預設你還可以在這裡管理使用者 ( User ) 和 群組 ( Group ) ，請試著利用後台管理平台新增一筆 Post：
 
 ![](./../images/django-admin-create.png)

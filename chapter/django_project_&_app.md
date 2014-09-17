@@ -144,9 +144,9 @@ mysite
 
 | 指令 | 說明 |
 | -- | -- |
-| django-admin.py **startproject** Project_Name | 建立 django 專案 |
-| python manage.py **-h** CommandName | 查看 django command 的使用方法 |
+| django-admin.py **startproject** *`<project_name>`* | 建立 django 專案 |
+| python manage.py **-h** *`<command_name>`* | 查看 django command 的使用方法 |
 | python manage.py **runserver** | 啟動開發伺服器 |
-| python manage.py **startapp** App_Name | 新增 django app |
+| python manage.py **startapp** *`<app_name>`*  | 新增 django app |
 ---
 
