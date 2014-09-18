@@ -61,7 +61,7 @@ Linux 或 OS X 需要使用`python3`來建立虛擬環境，指令如下：
     ~/djangogirls$ source VENV/bin/activate
 如果無法使用`source`的話，可以用下列指令替代:
 
-    ~/djangogirls$ . myvenv/bin/activate
+    ~/djangogirls$ . VENV/bin/activate
 
 
 ### 目前的虛擬環境

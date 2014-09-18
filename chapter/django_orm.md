@@ -59,7 +59,6 @@ python manage.py shell
 
 >>> Post.objects.filter(id__gt=1)
 [<Post: My Second Trip>, <Post: Django 大冒險>]
-List example
 
 ```
 - [**get**](https://docs.djangoproject.com/en/dev/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。 ( *注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception )
