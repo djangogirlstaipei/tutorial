@@ -1,27 +1,27 @@
 # Deploy
 
-目前為止，我們所有的工作都是在本機端 ( localhost ) 完成，你可以在自己電腦上的瀏覽器看到成果。但是，一個網站必須放在穩定的 Server 上部屬 ( Deploy ) ，才能讓其他使用者隨時瀏覽觀看。
+目前為止，我們所有的工作都是在本機端 ( localhost ) 完成，你可以在自己電腦上的瀏覽器看到成果。但是，一個網站必須放在穩定的 Server 上部署 ( Deploy ) ，才能讓其他使用者隨時瀏覽觀看。
 
 ---
 
 在眾多服務提供者中，我們選擇 [Heroku](https://www.heroku.com/) 作為這次的範例， 它的免費額度足夠經營一個小型網站，並擁有完善的開發者教學資源。
 
-這一章，我們會根據 [官方教學 - "Getting Started with Django on Heroku"](https://devcenter.heroku.com/articles/getting-started-with-django) 稍作調整，教你如何準備部屬，並在 Heroku 上發佈你的網站。
+這一章，我們會根據 [官方教學 - "Getting Started with Django on Heroku"](https://devcenter.heroku.com/articles/getting-started-with-django) 稍作調整，教你如何準備部署，並在 Heroku 上發佈你的網站。
 
 ---
 
-## 安裝部屬工具
+## 安裝部署工具
 
-首先，利用`pip`安裝一些部屬時需要用到的套件：
+首先，利用`pip`安裝一些部署時需要用到的套件：
 
 ```
 (VENV) ~/djangogirls$ pip install dj-database-url gunicorn dj-static
 ```
 當終端機顯示 *Successfully installed...* 時，表示必要的套件都已經安裝好了。
 
-## 部屬準備
+## 部署準備
 
-為了讓 Server 了解部屬時所需要的安裝環境，我們需要調整和準備一些設定檔案。
+為了讓 Server 了解部署時所需要的安裝環境，我們需要調整和準備一些設定檔案。
 
 
 ### requirements.txt
@@ -51,7 +51,7 @@ from dj_static import Cling
 
 application = Cling(get_wsgi_application())
 ```
-import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部屬 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
+import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
 
 
 ### Procfile
@@ -77,7 +77,8 @@ python-3.4.1
 ```
 
 ### local_settings.py
-`mysite/mysite/local_settings.py`
+
+前面的章節，我們透過修改`settings.py`來調整 Django project 的設定，但是通常正式上線 ( production ) 的環境會和開發/本機 ( development / local ) 環境有所不同，我們在`mysite/mysite/`底下新建`local_settings.py`，用來存放本機的設定：
 
 ```
 # mysite/local_settings.py
@@ -91,12 +92,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-DEBUG = True
 ```
 
-`mysite/mysite/settings.py`
-
+然後，修改同一個資料夾裡的`settings.py`，將部署後所需要用到的設定加在最後面：
 ```
 # mysite/settings.py
 
@@ -151,10 +149,9 @@ db.sqlite3
 
 ## Deploy to Heroku
 
-在開始 Deploy 之前，請先確定你已經：
+在開始部署 ( Deploy ) 之前，請先確定你已經：
 1. 註冊 Heroku 帳號：https://id.heroku.com/signup
 2. 安裝 Heroku 工具箱：https://toolbelt.heroku.com/
-
 
 
 ### Step 1: 登入 Heroku
@@ -216,11 +213,10 @@ To git@heroku.com:djangogirlstrips.git
 Permission denied (publickey).
 fatal: The remote end hung up unexpectedly
 ```
-請透過下列指令新增 public key ( 一種安全性機制 )
+請透過下列指令新增 public key，然後再重新`git push`。
 ```
 $ heroku keys:add
 ```
-然後再重新`git push`。
 
 ### Step 5: 啟動 web process
 

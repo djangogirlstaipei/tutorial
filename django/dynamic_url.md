@@ -1,8 +1,6 @@
-# Advanced Templates
+# Dynamic URL
 
-## 動態 url
 
-```
 # trips/views.py
 
 from django.shortcuts import render
@@ -29,13 +27,3 @@ post.html
 
 
 post screenshot
-
-## Template extending
-
-繼承
-
-base.html, index.html, post.html
-
-{% extends %}
-
-{% block %}{% endblock %}
