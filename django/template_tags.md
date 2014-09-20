@@ -14,7 +14,7 @@
 
 現在讓我們來建立一個新的 View function - `home`：
 ```
-# trips\views.py
+# trips/views.py
 
 from django.shortcuts import render
 from trips.models import Post

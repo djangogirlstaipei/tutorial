@@ -28,6 +28,9 @@
 ```
 python manage.py shell
 ```
+
+這個 shell 和我們之前輸入 `python` 執行的 shell 長得一樣，只是它會預先為我們設定 Django 需要的環境，方便我們執行 Django 相關的程式。
+
 ## QuerySet API
 ### Create
 
@@ -35,6 +38,8 @@ python manage.py shell
 
 ```
 >>> from trips.models import Post
+>>> Post.objects.create(title='My First Trip', content='??',  location='???')
+>>> Post.objects.create(title='My Second Trip', content='??',  location='???')
 >>> Post.objects.create(title='Django 大冒險', content='從靜態到動態',  location='台北市大安區復興南路一段293號')
 ```
 
@@ -114,4 +119,3 @@ python manage.py shell
 >>> Post.objects.all()
 [<Post: Django 大冒險>]
 ```
-

@@ -1,6 +1,6 @@
 # Dynamic URL
 
-
+```
 # trips/views.py
 
 from django.shortcuts import render

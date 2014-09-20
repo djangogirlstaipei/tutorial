@@ -16,7 +16,8 @@
 
 ## 設定資料庫
 
-為了開發方便，我們使用 Django 預設的資料庫 `SQLite`:
+為了開發方便，我們使用 Django 預設的資料庫 `SQLite`。打開 `mysite/settings.py`，看看 `DATABASES` 的設定。它應該長得像下面這樣：
+
 ```
 # mysite/settings.py
 
@@ -30,12 +31,15 @@ DATABASES = {
 }
 
 ```
+
 在這裡我們設定了資料庫連線的預設值：
-- **ENGINE ** -- 你要使用的資料庫引擎，例如：
- - `MySQ`: django.db.backends.mysql
- - `SQLite`: django.db.backends.sqlite3
+- **ENGINE** -- 你要使用的資料庫引擎，例如：
+ - `MySQL`: django.db.backends.mysql
+ - `SQLite 3`: django.db.backends.sqlite3
  - `PostgreSQL`: django.db.backends.postgresql_psycopg2
-- **NAME ** -- 你的資料庫名稱
+- **NAME** -- 你的資料庫名稱
+
+如果你使用 MySQL 或 PostgreSQL 等等資料庫的話，可能還要設定它的位置、名稱、使用者等等。不過我們這裡使用的 SQLite 3 不需要這些性質，所以可以省略。
 
 
 ## Django Models
