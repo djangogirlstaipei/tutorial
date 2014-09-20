@@ -15,8 +15,6 @@
 ### 將 Django admin 加入 INSTALLED_APPS
 後台管理的功能 Django 已預設開啟。因此，設定檔中 的 `INSTALLED_APPS`裡，已經有 `django.contrib.admin` 這個 app ：
 
-當你在同步資料庫時，也會建立需要的資料表及欄位：
-
 ```
 # mysite/settings.py
 
@@ -26,20 +24,15 @@ INSTALLED_APPS = (
 )
 ```
 
+當你在同步資料庫時，也會建立需要的資料表及欄位。
+
 ### 設定管理後台的 URL
 為了讓你可以從瀏覽器進入管理後台，我們需要設定對應的 urls 。
 
-我們將管理後台的網址設定為 `/admin/` ：
+我們將管理後台的網址設定為 `/admin/`。確認 `mysite/urls.py` 中的 `urlpatterns` 包含下面這行：
+
 ```
-# mysite/urls.py
-
-from django.contrib import admin
-admin.autodiscover()
-
-urlpatterns = pattern('',
-    ...
-    url(r'^admin/', include(admin.site.urls)),
-)
+url(r'^admin/', include(admin.site.urls)),
 ```
 
 ## 建立 superuser
@@ -105,6 +98,6 @@ admin.site.register(Post)
 本章新學到的指令
 
 | 指令| 說明 |
-| -- | -- |
+| ---|--- |
 | python manage.py **createuser** | 新增 Django 使用者 |
 

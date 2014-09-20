@@ -28,10 +28,10 @@ def hello_world(request):
 
 1. **多行字串：**
 
-    `"""..."""` 或是 `'''...'''` (三個單引號或三個雙引號) 是字串的多行寫法，這裡我們使用它表達 HTML，並維持原有的縮排。
-2. ** 顯示目前時間：**
+    `"""..."""` 或是 `'''...'''` (三個雙引號或三個單引號) 是字串的多行寫法，這裡我們使用它表達 HTML，並維持原有的縮排。
+2. **顯示目前時間：**
 
-    為了顯示動態內容，我們 import [datetime](https://docs.python.org/3.1/library/datetime.html) 時間模組，並用`datetime.now()`取得現在的時間。
+    為了顯示動態內容，我們 import [datetime](https://docs.python.org/3/library/datetime.html) 時間模組，並用`datetime.now()`取得現在的時間。
 
 3. **字串格式化：**
 
@@ -123,14 +123,14 @@ from django.shortcuts import render
 def hello_world(request):
     return render(request,
                   'hello_world.html',
-                  current_time=datetime.now())
+                  {'current_time': datetime.now()})
 ```
 
 我們改成用 `render` 這個 function 產生要回傳的 HttpResponse 物件。
 
 這次傳入的參數有：
 
- - **request ** --  HttpRequest 物件
+ - **request** --  HttpRequest 物件
  - **template_name** -- 要使用的 Template
  - **dictionary** -- 包含要新增至 Template 的變數
 
