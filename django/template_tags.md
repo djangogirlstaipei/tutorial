@@ -1,7 +1,5 @@
 # Template tags
 
-因為瀏覽器只看得懂 HTML，CSS 和 JavaScript ，其實我們不能在 HTML 檔案使用 Python 程式語法。
-
 在先前的 Templates 章節中，我們已經學會基礎的 Django Template 用法 (在 Template 裡呈現變數內容)。但為了產生完整的網頁，我們會需要能在 Template 裡執行一些簡單的 Python 語法，例如：
 - **邏輯判斷** (if else)  -- 若使用者己經登入，則顯示使用者的暱稱；若未登入，則顯示登入按鈕
 - **重覆 HTML 片段** (for loop) -- 列出所有好友的ID 和顯示圖片
