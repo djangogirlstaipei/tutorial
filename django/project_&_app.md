@@ -3,6 +3,7 @@
 每一個 Django project 裡面可以有多個 Django app，可以想成是類似模組的概念。在實務上，**通常會依功能分成不同 app**，方便未來的維護和重複使用。
 
 例如，我們要做一個類似 Facebook 這種網站時，依功能可能會有以下 App：
+
 - 使用者管理 -- users
 - 好友管理 -- friends
 - 塗鴉牆管理 -- timeline
@@ -19,7 +20,7 @@
 ## 建立 Django project
 
 ### 建立專案資料夾 -- startproject
-首先，使用`django-admin`來建立第一個 Django project `mysite`:
+首先，使用 `django-admin.py` 來建立第一個 Django project `mysite`:
 ```
 django-admin.py startproject mysite
 ```
@@ -29,7 +30,7 @@ django-admin.py startproject mysite
 cd mysite
 ```
 
-`startproject` 這個 django 指令除了建立專案資料夾，也預設會建立一些常用檔案，你可以使用 `ls` 或 `dir` ( win ) 檢視檔案結構。
+`startproject` 這個 Django 指令除了建立專案資料夾，也預設會建立一些常用檔案，你可以使用 `ls` 或 `dir /w` (Windows) 檢視檔案結構。
 
 目前 project 的檔案結構如下:
 
@@ -143,10 +144,11 @@ mysite
 最後，我們回顧一下本章學到的指令
 
 | 指令 | 說明 |
-| -- | -- |
+| ---|--- |
 | django-admin.py **startproject** *`<project_name>`* | 建立 django 專案 |
 | python manage.py **-h** *`<command_name>`* | 查看 django command 的使用方法 |
 | python manage.py **runserver** | 啟動開發伺服器 |
 | python manage.py **startapp** *`<app_name>`*  | 新增 django app |
+
 ---
 
