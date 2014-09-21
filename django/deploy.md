@@ -46,9 +46,11 @@ psycopg2==2.5.4
 ```
 ## mysite/wsgi.py
 
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
 from django.core.wsgi import get_wsgi_application
 from dj_static import Cling
-
 application = Cling(get_wsgi_application())
 ```
 import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
@@ -59,14 +61,14 @@ import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 st
 建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，它告訴 Herok 要執行什麼指令來啟動我們的應用：
 
 ```
-web:gunicorn --pythonpath mysite mysite.wsgi
+web: gunicorn --pythonpath mysite mysite.wsgi
 
 ```
 這一行
 *`<process_type>: <command>`*表示：
 
-- **< process_type > ** -- 啟用`web`應用
-- **< command > ** -- [Gunicorn ](http://gunicorn.org/) 是原生支援 Django 的 Python WSGI Server，我們透過指令下列指令來啟動網站：
+- **< process_type >** -- 啟用`web`應用
+- **< command >** -- [Gunicorn ](http://gunicorn.org/) 是原生支援 Django 的 Python WSGI Server，我們透過指令下列指令來啟動網站：
     - `gunicorn --pythonpath`*`<directory_path> <project_name>.wsgi`*
 
 ### runtime.txt
@@ -101,7 +103,9 @@ DATABASES = {
 ...
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    'default': dj_database_url.config()
+}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -118,8 +122,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# Close DEBUG mode
+# Turn off DEBUG mode
 DEBUG = False
+
+TEMPLATE_DEBUG = False
 
 # Import all of local settings if the file exists
 try:
