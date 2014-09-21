@@ -92,6 +92,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+DEBUG = True
 ```
 
 然後，修改同一個資料夾裡的`settings.py`，將部署後所需要用到的設定加在最後面：
@@ -236,7 +238,7 @@ heroku run python mysite/manage.py migrate
 $ heroku run python mysite/manage.py createsuperuser
 ```
 
-### Step 7: 開始瀏覽器觀看你的網站
+### Step 7: 開啟瀏覽器觀看你的網站
 最後，透過`open`指令會自動在瀏覽器打開你的網站：
 
 ```

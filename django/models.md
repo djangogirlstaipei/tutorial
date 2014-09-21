@@ -40,6 +40,7 @@ DATABASES = {
 
 ## Django Models
 
+在 `models.py`，我們需要告訴 Django 建立什麼樣的資料表，以及定義裡面有什麼欄位：
 
 ```
 # trips/models.py
@@ -57,9 +58,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 ```
-待修改
-Model field
-https://docs.djangoproject.com/en/dev/ref/models/fields/
+
+透過 [Model field](https://docs.djangoproject.com/en/dev/ref/models/fields/) 幫助我們定義不同型態的欄位:
+
 
 `__str__`
 https://docs.djangoproject.com/en/dev/ref/models/instances/#str
