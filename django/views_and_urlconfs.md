@@ -19,10 +19,10 @@
 
 Django view 其實是一個 function，**處理 HttpRequest 物件，並回傳 HttpResponse 物件**，大致說明如下：
 
-- **會收到`HttpRequest 物件`參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/dev/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 view function。
+- **會收到`HttpRequest 物件`參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/1.7/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 view function。
 
 - **需要回傳`HttpResponse物件`：**
-[HttpResponse](https://docs.djangoproject.com/en/dev/ref/request-response/#httpresponse-objects) 物件裡面包含：
+[HttpResponse](https://docs.djangoproject.com/en/1.7/ref/request-response/#httpresponse-objects) 物件裡面包含：
     - HttpResponse.content
     - HttpResponse.status_code ...等
 
@@ -53,7 +53,7 @@ def hello_world(request):
 
 例如：
 
-有人瀏覽 http://localhost:8000/hello/ ，`hello_world()` 這個 view function 需要被執行。
+有人瀏覽 http://127.0.0.1:8000/hello/ ，`hello_world()` 這個 view function 需要被執行。
 
 而這個對應關係就是 `URL conf` (URL configuration)。
 
@@ -108,6 +108,6 @@ urlpatterns = patterns('',
 ```
 python manage.py runserver
 ```
-在瀏覽器輸入 [http://localhost:8000/hello/](http://localhost:8000/hello/)，你會看到網頁顯示我們在 HttpResponse 傳入的文字`Hello World!`。
+在瀏覽器輸入 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/)，你會看到網頁顯示我們在 HttpResponse 傳入的文字`Hello World!`。
 
 ![](./../images/hello-world-plaintext.png)
