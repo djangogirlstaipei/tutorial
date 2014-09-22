@@ -43,11 +43,11 @@ urlpatterns = patterns('',
 
 URL       | 符合結果
 ----------|------------------------
-posts/    | 不符合，因為前面不是 **post/** 開頭。
-post/     | 不符合，因為後面抓不到數字。
-post/1/   | 符合，抓到的 id 是 1。
-post/1234/| 符合，抓到的 id 是 1234。
-post/12ab/| 不符合，因為後面有不是數字的東西。
+http://127.0.0.1/**posts/**    | 不符合，因為前面不是 **post/** 開頭。
+http://127.0.0.1/**post/**     | 不符合，因為後面抓不到數字。
+http://127.0.0.1/**post/1/**   | 符合，抓到的 id 是 1。
+http://127.0.0.1/**post/1234/**| 符合，抓到的 id 是 1234。
+http://127.0.0.1/**post/12ab/**| 不符合，因為後面有不是數字的東西。
 
 Django 抓出 `id` 後，會把這個值傳入 view function。所以我們可以把 function 寫成這樣：
 
@@ -61,7 +61,7 @@ def post_detail(request, id):
 
 Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個值取出合適的 post，再用 `render` 把它與 template 結合。
 
-舉例而言：當 URL 是 **posts/1/**，`post_detail` 的 id 會是 1。所以我們會把 id 是 1 的 post 抓出來，傳入 `render`。
+舉例而言：當 URL 是 http://127.0.0.1/**posts/1/**，`post_detail` 的 id 會是 1。所以我們會把 id 是 1 的 post 抓出來，傳入 `render`。
 
 接著我們要為 `render` 寫出 `post.html`：
 
