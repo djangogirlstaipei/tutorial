@@ -82,7 +82,7 @@ Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個�
 
 ```html
 <!-- home.html -->
-<h2 class="title"><a href="{% url 'trip_detail' post.id %}">{{ post.title }}</a></h2>
+<h2 class="title"><a href="{% url 'trip_detail' id=post.id %}">{{ post.title }}</a></h2>
 ```
 
 再找到
@@ -94,7 +94,7 @@ Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個�
 改成
 
 ```html
-<a class="read-more" href="{% url 'trip_detail' post.id %}">Read More <span class="icon-forward"></span></a>
+<a class="read-more" href="{% url 'trip_detail' id=post.id %}">Read More <span class="icon-forward"></span></a>
 ```
 
 現在再去 <http://127.0.0.1:8000/> 看看。現在只要你點擊各個方塊的標題或 **Read more**，就會顯示那篇 post 的內容！
