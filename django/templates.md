@@ -60,6 +60,19 @@ def hello_world(request):
 mkdir templates
 ```
 
+### 設定 Templates 資料夾的位置
+
+建立好資料夾以後，我們需要修改`mysite/settings.py`，加上`TEMPLATE_DIRS`：
+
+```python
+# mysite/settings.py
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
+)
+```
+
+
 ### 建立第一個 Template
 新增檔案 `templates/hello_world.html` ，並將之前寫在 View function 中的 HTML 複製到 `hello_world.html`
 ```
