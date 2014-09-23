@@ -99,5 +99,5 @@ admin.site.register(Post)
 
 | 指令| 說明 |
 | ---|--- |
-| python manage.py **createuser** | 新增 Django 使用者 |
+| python manage.py **createsuperuser** | 新增 Django 管理者帳號 |
 

@@ -41,7 +41,6 @@ mysite/
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── db.sqlite3
 └── manage.py
 ```
 
@@ -113,6 +112,7 @@ python manage.py startapp trips
 trips
 ├── __init__.py
 ├── admin.py
+├── migrations
 ├── models.py
 ├── tests.py
 └── views.py
@@ -133,6 +133,7 @@ mysite
 ├── trips
 │   ├── __init__.py
 │   ├── admin.py
+│   ├── migrations
 │   ├── models.py
 │   ├── tests.py
 │   └── views.py

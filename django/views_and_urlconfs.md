@@ -30,7 +30,7 @@ Django view 其實是一個 function，**處理 HttpRequest 物件，並回傳 H
 
 首先建立一個名為 hello_world 的 View。
 
-在`views.py`輸入下列程式碼：
+在`trips/views.py`輸入下列程式碼：
 
 ```
 # trips/views.py
@@ -75,7 +75,7 @@ def hello_world(request):
 url(r'^hello/$', 'trips.views.hello_world'),
 ```
 
-現在 `urls.py` 的內容應該會像下面這樣：
+現在 `mysite/urls.py` 的內容應該會像下面這樣：
 
 ```
 # mysite/urls.py
