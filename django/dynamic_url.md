@@ -43,11 +43,11 @@ urlpatterns = patterns('',
 
 URL       | 符合結果
 ----------|------------------------
-http://127.0.0.1/**posts/**    | 不符合，因為前面不是 **post/** 開頭。
-http://127.0.0.1/**post/**     | 不符合，因為後面抓不到數字。
-http://127.0.0.1/**post/1/**   | 符合，抓到的 id 是 1。
-http://127.0.0.1/**post/1234/**| 符合，抓到的 id 是 1234。
-http://127.0.0.1/**post/12ab/**| 不符合，因為後面有不是數字的東西。
+http://127.0.0.1/<strong>posts/</strong>    | 不符合，因為前面不是 **post/** 開頭。
+http://127.0.0.1/<strong>post/</strong>     | 不符合，因為後面抓不到數字。
+http://127.0.0.1/<strong>post/1/</strong>   | 符合，抓到的 id 是 1。
+http://127.0.0.1/<strong>post/1234/</strong>| 符合，抓到的 id 是 1234。
+http://127.0.0.1/<strong>post/12ab/</strong>| 不符合，因為後面有不是數字的東西。
 
 Django 抓出 `id` 後，會把這個值傳入 view function。所以我們可以把 function 寫成這樣：
 
