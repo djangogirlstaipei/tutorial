@@ -133,3 +133,13 @@ Running migrations:
 
 [migrate](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。
 
+---
+
+如果你不是第一次執行`migrate`，在此之前需要先執行 [makemigrations](https://docs.djangoproject.com/en/1.7/ref/django-admin/#django-admin-makemigrations)：
+
+```
+(VENV) ~/djangogirls/mysite$ python manage.py makemigrations
+```
+這個指令會根據你對 Model 的修改刪除建立一個新的 [migration 檔案](https://docs.djangoproject.com/en/1.7/topics/migrations/#migration-files)，讓`migrate`指令執行時，可以照著這份紀錄更新資料庫。
+
+---

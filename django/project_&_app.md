@@ -99,7 +99,18 @@ Quit the server with CTRL-BREAK.
 
 ![Django startproject success](./../images/django-startproject-success.png)
 
+
 最後我們可以按下 `CTRL+C` ，關閉 web server 回到命令列。
+
+---
+
+如果無法看到成功畫面，並且命令列上顯示錯誤訊息 - " *django.db.utils.OperationalError: no such table: django_session*"，請輸入：
+```
+(VENV) ~/djangogirls/mysite$ python manage.py migrate
+```
+然後再次`runserver`啟動你的 web server，我們會在 **Django Models** 解釋`migrate`的作用。
+
+---
 
 ## 建立 Django application (app)
 
