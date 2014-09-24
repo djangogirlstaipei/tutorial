@@ -4,12 +4,12 @@
 
 例如，我們要做一個類似 Facebook 這種網站時，依功能可能會有以下 App：
 
-- 使用者管理 -- users
-- 好友管理 -- friends
+- 使用者管理 -- account
+- 好友管理 -- friend
 - 塗鴉牆管理 -- timeline
-- 動態消息管理 -- feeds
+- 動態消息管理 -- feed
 
-若未來我們需要寫個購物網站，而需要會員功能時，`users app` (使用者管理) 就可以被重複使用。
+若未來我們需要寫個購物網站，而需要會員功能時，`account app` (使用者管理) 就可以被重複使用。
 
 ---
 
@@ -114,13 +114,13 @@ Quit the server with CTRL-BREAK.
 
 ## 建立 Django application (app)
 
-現在，讓我們利用 `startapp` 建立第一個 Django app -- **trips**:
+現在，讓我們利用 `startapp` 建立第一個 Django app -- **trip**:
 ```
-python manage.py startapp trips
+python manage.py startapp trip
 ```
 `startapp`會按照你的命名建立一個同名資料夾和 app 預設的檔案結構如下：
 ```
-trips
+trip
 ├── __init__.py
 ├── admin.py
 ├── migrations
@@ -132,7 +132,7 @@ trips
 
 ## 小結
 
-目前為止，我們使用 `startproject` 建立了一個名為 **mysite** 的 django 專案，和一個名為 ** trips**
+目前為止，我們使用 `startproject` 建立了一個名為 **mysite** 的 django 專案，和一個名為 ** trip**
  的 django app
 ```
 mysite
@@ -141,7 +141,7 @@ mysite
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── trips
+├── trip
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── migrations

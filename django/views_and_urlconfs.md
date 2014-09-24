@@ -30,10 +30,10 @@ Django view 其實是一個 function，**處理 HttpRequest 物件，並回傳 H
 
 首先建立一個名為 hello_world 的 View。
 
-在`trips/views.py`輸入下列程式碼：
+在`trip/views.py`輸入下列程式碼：
 
 ```
-# trips/views.py
+# trip/views.py
 
 from django.http import HttpResponse
 
@@ -72,7 +72,7 @@ def hello_world(request):
 打開 startproject 時自動產生的`urls.py`，在 `urlpatterns` 中加入下面這行：
 
 ```
-url(r'^hello/$', 'trips.views.hello_world'),
+url(r'^hello/$', 'trip.views.hello_world'),
 ```
 
 現在 `mysite/urls.py` 的內容應該會像下面這樣：
@@ -88,7 +88,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'refproj.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', 'trips.views.hello_world'),
+    url(r'^hello/$', 'trip.views.hello_world'),
 )
 ```
 以上程式透過 [url()](https://docs.djangoproject.com/en/1.7/ref/urls/#django.conf.urls.url) function 傳入兩個參數 `regex`, `view`：
@@ -100,7 +100,7 @@ urlpatterns = patterns('',
   -  *r'^hello/$'* 代表的是 `/hello/` 這種 URL
 - **view** -- 對應的 view function
   - 指的是 `hello_world()` 這個 view
-  - *'trips.views.hello_world'* -- `trips` 裡的 `views.py` 中的 `hello_world()` function
+  - *'trip.views.hello_world'* -- `trip` 裡的 `views.py` 中的 `hello_world()` function
 
 
 ## 測試 Hello World

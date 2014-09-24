@@ -44,10 +44,10 @@ DATABASES = {
 
 ## Django Models
 
-我們在 *trips/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
+我們在 *trip/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
 
 ```
-# trips/models.py
+# trip/models.py
 
 from django.db import models
 
@@ -62,24 +62,39 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 ```
-1. Django 預設會在每一個 Model 加上一個會自動增加數字且控制其為唯一值 (auto-incrementing primary key) 的欄位`id`，我們會在下個章節使用到它
-2. 透過 [Model fields](https://docs.djangoproject.com/en/1.7/ref/models/fields/) ，我們可以定義不同型態的欄位:
-    - [CharField](https://docs.djangoproject.com/en/1.7/ref/models/fields/#charfield) -- 字串欄位，適合像 title、location 這種有長度限制的字串。
-        - [max_length](https://docs.djangoproject.com/en/1.7/ref/models/fields/#django.db.models.CharField.max_length) -- 字串的最大長度，例如這裡我們設定不可以超過 100 個字元。
-    - [TextField](https://docs.djangoproject.com/en/1.7/ref/models/fields/#textfield) -- 適合放大量文字的欄位
-        - [blank=True](https://docs.djangoproject.com/en/1.7/ref/models/fields/#blank) -- 這個選項是為了在表單驗證時使用，`Flase`表示為必填欄位，`True`則表示非必填
-    - [URLField](https://docs.djangoproject.com/en/1.7/ref/models/fields/#urlfield) --　專為 URL 設計的欄位，預設`max_length=200`
-    - [DateTimeField](https://docs.djangoproject.com/en/1.7/ref/models/fields/#datetimefield) -- 同時儲存日期與時間的欄位，使用時會轉成 Python`datetime`型別
-        - [auto_add_now=True](https://docs.djangoproject.com/en/1.7/ref/models/fields/#django.db.models.DateField.auto_now_add) -- 新建立一個物件時，會自動儲存此刻的日期及時間，因此只會儲存一次。如果想在每一次修改時，都自動更新此刻的日期時間，則使用 [auto_now=True](https://docs.djangoproject.com/en/1.7/ref/models/fields/#django.db.models.DateField.auto_now)
+- Django 預設會為每一個 Model 加上 `id` 欄位 (型態為 auto-incrementing primary key)，並且 **每一筆資料的 id 都會是獨一無二的**。
 
-3. Django 通常以`<Post: Post object>`來顯示一個 Post 物件，可是這種顯示方式會讓人看不懂到底是哪一個 Post。
-於是，在這邊我們利用 [def `__str__`](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str) 重新定義它顯示 *Post.title*。
+- 為 Post 定義以下屬性：
 
+| 屬性 | 資料型態 | 說明 |參數|
+| -----------|-----------| -------  |--------------------------------------------|
+| title      | CharField | 標題     |`max_length=100` -- 標題不可以超過 100 個字元|
+| content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用）。 |
+| photo      | URLField  | 照片網址 | 同上，非必填|
+| location   | CharField | 地點     | 同標題 |
+| created_at | DateTime  | 建立時間 | `auto_add_now=True` -- 物件新增的時間<br>p.s. 若想設成物件修改時間，則用 `auto_now=True`|
 
+- **透過 [def \_\_str__](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str)  更改 Post 的表示方式**
+    - Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。**我們可以用  `def __str__`重新定義，讓 Post 顯示標題**，如 `<Post: Your_Post_Title>`。
+
+---
+ [**Model fields**](https://docs.djangoproject.com/en/1.7/ref/models/fields/) ：可為 Django Model 定義不同型態的屬性。
+
+- **CharField** -- **字串欄位**，適合像 title、location 這種有長度限制的字串。
+
+- **TextField** -- **合放大量文字的欄位**
+
+- **URLField** -- **URL 設計的欄位**
+
+- **DateTimeField** -- **日期與時間的欄位**，使用時會轉成 Python`datetime`型別
+
+更多 Model Field 與其參數，請參考 [Django 文件 ](https://docs.djangoproject.com/en/1.7/ref/models/fields/)
+
+---
 
 ## 將新增的 Django app 加入設定檔
 
-在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
+在前幾章，我們透過 Django 命令列工具建立了 **trip** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
 
 ##新增 app
 
@@ -99,10 +114,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'trips',
+    'trip',
 )
 ```
-請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
+請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trip`加在最後面。
 
 ---
 **預設安裝的 Django app**
@@ -116,12 +131,12 @@ Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py migrate
 Operations to perform:
-  Synchronize unmigrated apps: trips
+  Synchronize unmigrated apps: trip
   Apply all migrations: contenttypes, sessions, admin, auth
 Synchronizing apps without migrations:
   Creating tables...
-    Creating table trips_post
-    Creating table trips_comment
+    Creating table trip_post
+    Creating table trip_comment
   Installing custom SQL...
   Installing indexes...
 Running migrations:
