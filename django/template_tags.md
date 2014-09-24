@@ -28,10 +28,10 @@
 首先，我們先建立一個新的 View function - `home()`：
 
 ```
-# trips/views.py
+# trip/views.py
 
 from django.shortcuts import render
-from trips.models import Post
+from trip.models import Post
 
 
 def home(request):
@@ -54,7 +54,7 @@ def home(request):
 
 urlpatterns = patterns('',
     ...
-    url(r'^$', 'trips.views.home'),
+    url(r'^$', 'trip.views.home'),
 )
 ```
 
@@ -72,7 +72,7 @@ urlpatterns = patterns('',
 
 
 
-打開瀏覽器進入首頁 [http://localhost:8000/](http://localhost:8000/)，可以看到 *post_list* 已呈現至網頁上了。
+打開瀏覽器進入首頁 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)，可以看到 *post_list* 已呈現至網頁上了。
 
 
 ![Plain post_list in Template](./../images/plain-post-list-in-template.png)

@@ -44,10 +44,10 @@ DATABASES = {
 
 ## Django Models
 
-我們在 *trips/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
+我們在 *trip/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
 
 ```
-# trips/models.py
+# trip/models.py
 
 from django.db import models
 
@@ -94,7 +94,7 @@ class Post(models.Model):
 
 ## 將新增的 Django app 加入設定檔
 
-在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
+在前幾章，我們透過 Django 命令列工具建立了 **trip** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
 
 ##新增 app
 
@@ -114,10 +114,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'trips',
+    'trip',
 )
 ```
-請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
+請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trip`加在最後面。
 
 ---
 **預設安裝的 Django app**
@@ -131,12 +131,12 @@ Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py migrate
 Operations to perform:
-  Synchronize unmigrated apps: trips
+  Synchronize unmigrated apps: trip
   Apply all migrations: contenttypes, sessions, admin, auth
 Synchronizing apps without migrations:
   Creating tables...
-    Creating table trips_post
-    Creating table trips_comment
+    Creating table trip_post
+    Creating table trip_comment
   Installing custom SQL...
   Installing indexes...
 Running migrations:

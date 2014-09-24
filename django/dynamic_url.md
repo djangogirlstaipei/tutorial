@@ -16,7 +16,7 @@ Django 可以在讀取 URL 時，為我們抓出 URL 的其中某個部分，並
 
 urlpatterns = patterns('',
     ...
-    url(r'^post/(?P<id>\d+)/$', 'trips.views.post_detail',
+    url(r'^post/(?P<id>\d+)/$', 'trip.views.post_detail',
         name='trip_detail'),
 )
 ```
@@ -52,7 +52,7 @@ http://127.0.0.1/<strong>post/12ab/</strong>| 不符合，因為後面有不是�
 Django 抓出 `id` 後，會把這個值傳入 view function。所以我們可以把 function 寫成這樣：
 
 ```python
-# trips/views.py
+# trip/views.py
 
 def post_detail(request, id):
     posts = Post.objects.get(id=id)
