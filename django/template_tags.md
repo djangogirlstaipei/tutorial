@@ -171,10 +171,6 @@ urlpatterns = patterns('',
 ```html
 {{ post.created_at|date:"Y / m / d" }}
 ```
-重新載入後，你會發現時間的格式改變了：
-
-many post screenshot - format date
-
 ---
 
 ### 完整的 HTML 與 CSS
@@ -182,19 +178,20 @@ many post screenshot - format date
 
 ### 最終版 *home.html* 程式碼如下：
 ```html
+<!-- home.html -->
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>A Django Girl's Advanture</title>
     <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
-    <link rel=stylesheet href="{% static 'css/style.css' %}">
+    <link rel=stylesheet href="http://djangogirlstaipei.github.io/assets/css/style.css">
 </head>
-
 <body>
     <div class="header">
         <h1 class="site-title text-center">
-            <a href="#">A Django Girl's Advanture</a>
+            <a href="/">A Django Girl's Advanture</a>
         </h1>
     </div>
     <div class="container">
@@ -202,7 +199,8 @@ many post screenshot - format date
         <div class="post-wrapper">
             <div class="post">
                 <div class="post-heading">
-                    <h2 class="title"><a href="#">{{ post.title }}</a>
+                    <h2 class="title">
+                        <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
                     </h2>
                     <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
                 </div>
@@ -217,7 +215,7 @@ many post screenshot - format date
                     {{ post.content }}
                 </div>
                 <div class="post-footer">
-                    <a class="read-more" href="#">Read More <span class="icon-forward"></span></a>
+                    <a class="read-more" href="{% url 'post-detail' post.id %}">Read More <span class="icon-forward"></span> </a>
                 </div>
             </div>
         </div>
@@ -225,15 +223,8 @@ many post screenshot - format date
     </div>
 </body>
 </html>
+
 ```
-
-! 移除 static
-
-旅遊日記首頁：
-
-screen shot
-
-
 
 ## 小結
 最後，我們複習一下本章學到的 **Template Tag** 與 **Template Filter**：
