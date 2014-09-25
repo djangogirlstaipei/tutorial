@@ -200,7 +200,7 @@ urlpatterns = patterns('',
             <div class="post">
                 <div class="post-heading">
                     <h2 class="title">
-                        <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+                        <a href="#">{{ post.title }}</a>
                     </h2>
                     <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
                 </div>
@@ -215,7 +215,7 @@ urlpatterns = patterns('',
                     {{ post.content }}
                 </div>
                 <div class="post-footer">
-                    <a class="read-more" href="{% url 'post-detail' post.id %}">Read More <span class="icon-forward"></span> </a>
+                    <a class="read-more" href="#">Read More <span class="icon-forward"></span> </a>
                 </div>
             </div>
         </div>
