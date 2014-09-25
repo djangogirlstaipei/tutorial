@@ -1,12 +1,48 @@
 # Dynamic URL
 
-現在我們要來為我們的每次旅行建立一個頁面。我們前面學到，可以用 `get` 來抓出一筆資料：
+
+除了在首頁顯示文章的概要外，通常也希望每篇文章能有自己的獨立網址。例如，我們可能會希望 `http://127.0.0.1/post/5` 能夠是 **id=5 **那篇文章的網址。
+
+---
+
+在這個章節，我們會學到如何設定動態網址的 URLConf。讓每篇旅遊日記，擁有獨一無二的網址。
+
+---
+
+## 新增單頁的 View
+
+首先我們要先建立旅遊日記獨立頁面的 View。在 *trips/views.py* 中新增 **post_detail** 這個 View 如下：
 
 ```python
-post = Post.objects.get(id=id)
+# trips/views.py
+
+def post_detail(request, id):
+    posts = Post.objects.get(id=id)
+    return render(request, 'post.html', {'post': post})
 ```
 
+我們以訪客瀏覽 `http://127.0.0.1/post/5` 的例子，來解釋以上程式：
+
+- ** 目前瀏覽文章的 id 會傳入 View 中：** 當訪客瀏覽 `http://127.0.0.1/post/5` 時，傳入 View 的 id 會是 5。
+
+    - URL 與 id 的對應，會在稍後設定。這裡只需知道 View 中傳入的是當前瀏覽文章 id 即可。
+
+- ** 取得傳入 id 的那篇 Post 資料：** 當傳入的 id=5，代表訪客想看到 id=5 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該 Post：
+
+    ```python
+    post = Post.objects.get(id=id) # 此時 id = 5
+    ```
+- ** 回傳 HttpResponse：** 將取得的 post *( id=5 )* 傳入 Template *( post.html )*，並呈現 Render 後的結果。
+
+## 設定獨立網址
+
+## 設定動態網址的對應
+
+### 解釋 regex
+
 所以我們只要知道 `id`，就可以取出對應的 `Post` 物件。可是 `id` 要從哪裡來？
+
+例如我們可能會希望 `http://127.0.0.1/post/5` ，會是
 
 Django 可以在讀取 URL 時，為我們抓出 URL 的其中某個部分，並傳入 view 函式給我們使用。所以我們可以在 `mysite/urls.py` 中，加入以下的內容：
 
