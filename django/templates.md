@@ -5,7 +5,7 @@
 上一章的例子，只是很簡單的顯示一行字串。讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
 
 ```
-# trips/views.py
+# trip/views.py
 
 from datetime import datetime
 from django.http import HttpResponse
@@ -39,7 +39,7 @@ def hello_world(request):
 
 ---
 
-現在啟動 web server ，連至 [http://localhost:8000/hello/](http://localhost:8000/hello/) 後，會發現網頁不再是純文字。除了加上了一些樣式外，也會顯示當下的時間。
+現在啟動 web server ，連至 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/) 後，會發現網頁不再是純文字。除了加上了一些樣式外，也會顯示當下的時間。
 
 *你可以重新整理網頁，試試看時間有沒有改變*
 
@@ -60,13 +60,26 @@ def hello_world(request):
 mkdir templates
 ```
 
+### 設定 Templates 資料夾的位置
+
+建立好資料夾以後，我們需要修改`mysite/settings.py`，加上`TEMPLATE_DIRS`：
+
+```python
+# mysite/settings.py
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
+)
+```
+
+
 ### 建立第一個 Template
 新增檔案 `templates/hello_world.html` ，並將之前寫在 View function 中的 HTML 複製到 `hello_world.html`
 ```
 ├── mysite
 ├── templates
 │   └── hello_world.html
-├── trips
+├── trip
 └── manage.py
 ```
 
@@ -114,7 +127,7 @@ mkdir templates
 最後，將 **hello_world** 修改如下：
 
 ```
-# trips/views.py
+# trip/views.py
 
 from datetime import datetime
 from django.shortcuts import render
@@ -147,7 +160,7 @@ def hello_world(request):
 
 HTML 程式碼獨立成 Template 後，程式也變得簡潔許多了。
 
-重新載入 [http://localhost:8000/hello/](http://localhost:8000/hello/)，你會發現畫面有了小小的改變：
+重新載入 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/)，你會發現畫面有了小小的改變：
 
 ![HelloWorld From Template](./../images/hello-world-from-template.png)
 

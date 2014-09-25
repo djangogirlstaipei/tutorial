@@ -195,6 +195,8 @@ $ heroku create djangogirlstrips
 - Heroku app 是不能重名的，所以如果你也輸入`djangogirlstrips`，會得到` !    Name is already taken`的警告。
 - Heroku app 名稱會顯示在 deploy 成功後的網址上，例如：http://djangogirlstrips.herokuapp.com
 
+如果你已經創造過
+
 ### Step 4: 利用 git push 上傳到 Heroku
 
 使用`git push`指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：

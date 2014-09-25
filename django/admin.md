@@ -57,13 +57,13 @@ Superuser created successfully.
 
 最後，我們需要在讓 Django 知道，有哪些 Model 需要管理後台。
 
-修改 **trips app** 裡的 admin.py，並註冊 **Post** 這個 Model：
+修改 **trip app** 裡的 admin.py，並註冊 **Post** 這個 Model：
 
 ```
-# trips/admin.py
+# trip/admin.py
 
 from django.contrib import admin
-from trips.models import Post
+from trip.models import Post
 
 admin.site.register(Post)
 
@@ -71,17 +71,17 @@ admin.site.register(Post)
 
 ## 使用管理後台
 ### 進入管理後台
-連至 [http://localhost:8000/admin](http://localhost:8000/admin)，可以看到管理後台的登入頁面
+連至 [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)，可以看到管理後台的登入頁面
 
 ![](./../images/django-admin-login.png)
 
 請輸入你剛創立的 superuser 帳號密碼，進入管理後台：
 
-第一個區塊 **Authentication and Authorization** ，可以管理使用者 ( User ) 和 群組 ( Group )  ； 第二個 **Trips** 區塊裡，則可以看到剛剛設定的 ** Post Model**。在這裡可以執行 Post 的新增、修改、刪除...等。
+第一個區塊 **Authentication and Authorization** ，可以管理使用者 ( User ) 和 群組 ( Group )  ； 第二個 **trip** 區塊裡，則可以看到剛剛設定的 ** Post Model**。在這裡可以執行 Post 的新增、修改、刪除...等。
 
 ![](./../images/django-admin-main-screen.png)
 
-第一個區塊 **Authentication and Authorization** ，可以管理使用者 ( User ) 和 群組 ( Group )  使用者管理功能； 第二個 **Trips** 區塊裡，則可以看到剛剛設定完成的 ** Post Model**。在這裡可以執行 Post 的新增、修改、刪除...等。
+第一個區塊 **Authentication and Authorization** ，可以管理使用者 ( User ) 和 群組 ( Group )  使用者管理功能； 第二個 **Trip** 區塊裡，則可以看到剛剛設定完成的 ** Post Model**。在這裡可以執行 Post 的新增、修改、刪除...等。
 
 ### 新增一個 Post
 現在試著建立一個新的 Post 看看
