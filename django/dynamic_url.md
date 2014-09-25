@@ -1,17 +1,17 @@
 # Dynamic URL
 
 
-除了在首頁顯示文章的概要外，通常也希望每篇文章能有自己的獨立網址。例如，我們可能會希望 `http://127.0.0.1/post/5` 能夠是 **id=5 **那篇文章的網址。
+除了在首頁顯示文章的摘要外，通常也會希望每篇文章能有獨立的網址與頁面。例如，我們可能會希望 `http://127.0.0.1/post/5` 能夠是 **id=5 **那篇文章的網址，而頁面內容則是此篇日記的詳細資訊，而非摘要。
 
 ---
 
-在這個章節，我們會學到如何設定動態網址的 URLConf。讓每篇旅遊日記，擁有獨一無二的網址。
+在這個章節，我們會學到如何設定動態網址的 URLConf。讓每篇旅遊日記，擁有獨一無二的網址與頁面。
 
 ---
 
-## 新增單頁的 View
+## 建立單篇文章的 View
 
-首先我們要先建立旅遊日記獨立頁面的 View。在 *trips/views.py* 中新增 **post_detail** 這個 View 如下：
+首先建立單篇文章所使用的 View Function。在 *trips/views.py* 中新增 **post_detail** 這個 View 如下：
 
 ```python
 # trips/views.py
@@ -21,31 +21,24 @@ def post_detail(request, id):
     return render(request, 'post.html', {'post': post})
 ```
 
-我們以訪客瀏覽 `http://127.0.0.1/post/5` 的例子，來解釋以上程式：
+
+> 我們以訪客瀏覽 `http://127.0.0.1:8000/post/5` 的例子，來解釋以上程式：
+
 
 - ** 目前瀏覽文章的 id 會傳入 View 中：** 當訪客瀏覽 `http://127.0.0.1/post/5` 時，傳入 View 的 id 會是 5。
 
-    - URL 與 id 的對應，會在稍後設定。這裡只需知道 View 中傳入的是當前瀏覽文章 id 即可。
+    - URL 與 id 的對應，會在稍後設定。這裡只需知道 View 中傳入的，會是當前瀏覽文章 id 即可。
 
-- ** 取得傳入 id 的那篇 Post 資料：** 當傳入的 id=5，代表訪客想看到 id=5 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該 Post：
+- ** 取得傳入 id 的那篇 Post 資料：** 當傳入的 id=5，代表訪客想看到 id=5 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該篇日記的 **Post** 物件：
 
-```python
-post = Post.objects.get(id=id) # 此時 id = 5
-```
-- ** 回傳 HttpResponse：** 將取得的 post *( id=5 )* 傳入 Template *( post.html )*，並呈現 Render 後的結果。
-
-## 設定獨立網址
+    ```python
+    post = Post.objects.get(id=id) # 此時 id = 5
+    ```
+- ** 回傳 HttpResponse：** 將取得的 post ( *id=5* ) 傳入 Template *( post.html )*，並呈現 Render 後的結果。
 
 ## 設定動態網址的對應
 
-### 解釋 regex
-
-所以我們只要知道 `id`，就可以取出對應的 `Post` 物件。可是 `id` 要從哪裡來？
-
-例如我們可能會希望 `http://127.0.0.1/post/5` ，會是
-
-Django 可以在讀取 URL 時，為我們抓出 URL 的其中某個部分，並傳入 view 函式給我們使用。所以我們可以在 `mysite/urls.py` 中，加入以下的內容：
-
+日記單頁的 View Function 完成後，我們來設定網址與 View 的對應。修改 *mysite/urls.py* ，加入以下內容：
 
 ```python
 # mysite/urls.py
@@ -57,13 +50,16 @@ urlpatterns = patterns('',
 )
 ```
 
-這個 URL 似乎有些特別。我們在第一個參數中不是輸入一個普通的字串，而是包含了一個奇怪的東西：
+上面的修改完成後，只要連至`http://127.0.0.1/post/5` 就會對應到  `post_detail()` 這個 View，並且**傳入的 id = 5** 。
+
+---
+### 使用 Regex 提取部份 URL 為參數
+
+我們前面提過，Django 的 URL 是一個 *Regular Expression (Regex)*。Regular expression 可用來描述一個字串的樣式。 除了可以表示固定字串之外，還可以用來表示不確定的內容。我們一步一步解釋文章單頁所使用的 Url 設定：
 
 ```
 (?P<id>\d+)
 ```
-
-我們前面提過，Django 的 URL 是一個 *regular expression*。Regular expression 除了可以表示字串之外，還可以用來表示不確定的內容。我們一步一步解釋上面這串的意思：
 
 1. `\d` 代表一個阿拉伯數字。
 
@@ -84,25 +80,19 @@ http://127.0.0.1/<strong>post/</strong>     | 不符合，因為後面抓不到�
 http://127.0.0.1/<strong>post/1/</strong>   | 符合，抓到的 id 是 1。
 http://127.0.0.1/<strong>post/1234/</strong>| 符合，抓到的 id 是 1234。
 http://127.0.0.1/<strong>post/12ab/</strong>| 不符合，因為後面有不是數字的東西。
+---
 
-Django 抓出 `id` 後，會把這個值傳入 view function。所以我們可以把 function 寫成這樣：
+## 建立單篇日記頁的 Template
 
+回顧一下之前寫的 View Function ( *post_detail* ) 的內容
 ```python
-# trip/views.py
-
-def post_detail(request, id):
-    posts = Post.objects.get(id=id)
-    return render(request, 'post.html', {'post': post})
+return render(request, 'post.html', {'post': post})
 ```
+我們取得所需 post 物件後，傳入 `post.html` 這個 template 中 render，現在我們就來完成這個 Template。建立 *post.html* 如下：
 
-Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個值取出合適的 post，再用 `render` 把它與 template 結合。
-
-舉例而言：當 URL 是 http://127.0.0.1/**posts/1/**，`post_detail` 的 id 會是 1。所以我們會把 id 是 1 的 post 抓出來，傳入 `render`。
-
-接著我們要為 `render` 寫出 `post.html`：
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! 重貼 code
 ```html
-<!-- post.html -->
+<!-- templates/post.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,9 +128,47 @@ Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個�
 </html>
 ```
 
-和前面類似，我們用 `{{ post }}` 取出 `render` 裡面的 post 物件，將它顯示在 HTML 中。
+**說明：**
 
-現在我們的 post 可以被顯示了。但是我們還需要在首頁加上 `<a>` 連結，才有辦法進去這些頁面。打開 `home.html`，找到下面的內容：
+- 將 post 物件的屬性 (e.g. 標題、內文、時間......等)，利用 `{{ var }}` 與 Template Filter 顯示並格式化於 HTML 中
+
+- 若資料庫裡有 id=5 的 Post，現在連至 http://127.0.0.1:8000/post/5 即可看到此日記的單頁
+
+## 加入到單篇日記頁的連結
+
+最後，我們還需在首頁加上單篇日記的連結。我們可以使用 `{% url %}`這個 Template Tag 達成，需要加入的地方有：
+1. 每篇日記的標題
+2. 每篇日記的 Read More 按鈕
+
+---
+
+##### {% url %}
+
+連結到特定 View 的 Template Tag
+
+使用方法：
+
+| 語法 | 說明 |
+| -- | -- |
+| {% url '`path.to.some_view`' %} | 使用 View 的路徑 |
+| {% url '`<view_name>`' %} | 使用在 urls.py 中設定的 name  |
+
+也可以傳入參數，如：
+```
+{% url 'path.to.some_view' arg1=<var1> arg2=<var2> ...%}
+{% url '<view_name>' arg1=<var1> arg2=<var2> ...%}
+```
+
+其餘用法可參考 [Template Tag:  **url**](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#url)
+
+---
+
+現在我們開始加入詳細頁的連結，需要加入的地方有
+1. 每篇日記
+2. 每篇日記的 Read More 按鈕
+
+#### 設定標題連結
+打開 *home.html*，找到下面的內容：
 
 ```html
 <!-- home.html -->
@@ -152,18 +180,23 @@ Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個�
 ```html
 <!-- home.html -->
 <h2 class="title"><a href="{% url 'trip_detail' id=post.id %}">{{ post.title }}</a></h2>
-```
+````
 
-再找到
+#### 設定 Read More 按鈕的連結
+
+
+在 *home.html* 中找到以下內容
 
 ```html
 <a class="read-more" href="#">Read More <span class="icon-forward"></span></a>
 ```
 
-改成
+修改如下
 
 ```html
 <a class="read-more" href="{% url 'trip_detail' id=post.id %}">Read More <span class="icon-forward"></span></a>
 ```
 
-現在再去 <http://127.0.0.1:8000/> 看看。現在只要你點擊各個方塊的標題或 **Read more**，就會顯示那篇 post 的內容！
+### 驗收成果
+
+連至 http://127.0.0.1:8000/ ，現在只要點擊各個日記的標題或 **Read more** 按鈕，就會顯示那該篇日記的詳細頁面。
