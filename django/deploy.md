@@ -36,6 +36,7 @@ Django==1.7
 dj-database-url==0.3.0
 dj-static==0.0.6
 gunicorn==19.1.1
+static3==0.5.1
 psycopg2==2.5.4
 ```
 
@@ -43,7 +44,7 @@ psycopg2==2.5.4
 
 [WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial)，簡單來說，它是 Python 定義網頁程式和伺服器溝通的介面，修改`mysite/mysite/wsgi.py`如下：
 
-```
+```python
 ## mysite/wsgi.py
 
 import os
@@ -82,7 +83,7 @@ python-3.4.1
 
 前面的章節，我們透過修改`settings.py`來調整 Django project 的設定，但是通常正式上線 ( production ) 的環境會和開發/本機 ( development / local ) 環境有所不同，我們在`mysite/mysite/`底下新建`local_settings.py`，用來存放本機的設定：
 
-```
+```python
 # mysite/local_settings.py
 
 import os
@@ -99,7 +100,7 @@ DEBUG = True
 ```
 
 然後，修改同一個資料夾裡的`settings.py`，將部署後所需要用到的設定加在最後面：
-```
+```python
 # mysite/settings.py
 
 ...
@@ -116,13 +117,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 # Turn off DEBUG mode
 DEBUG = False
@@ -150,8 +145,25 @@ db.sqlite3
 
 ### 小結
 
+最後的檔案結構如下：
+
 ```
-檔案結構
+djangogirls
+├──mysite
+│   ├── mysite
+│       ├── __init__.py
+│       ├── local_settings.py
+│       ├── settings.py
+│       ├── urls.py
+│       └── wsgi.py
+│   ├── templates
+│   ├── trip
+│   └── manage.py
+├── VENV
+├── .gitignore
+├── Procfile
+├── requirements.txt
+└── runtime.txt
 ```
 
 

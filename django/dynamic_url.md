@@ -29,9 +29,9 @@ def post_detail(request, id):
 
 - ** 取得傳入 id 的那篇 Post 資料：** 當傳入的 id=5，代表訪客想看到 id=5 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該 Post：
 
-    ```python
-    post = Post.objects.get(id=id) # 此時 id = 5
-    ```
+```python
+post = Post.objects.get(id=id) # 此時 id = 5
+```
 - ** 回傳 HttpResponse：** 將取得的 post *( id=5 )* 傳入 Template *( post.html )*，並呈現 Render 後的結果。
 
 ## 設定獨立網址
@@ -103,6 +103,39 @@ Django 負責把 id 從 URL 抓出來，傳入 `post_detail`。我們用這個�
 
 ```html
 <!-- post.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My Trips</title>
+    <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-title text-center">
+            <a href="/">A Django Girl's Advanture</a>
+        </h1>
+    </div>
+    <div class="container post post-detail">
+        <div class="post-heading">
+            <h1 class="title"><a href="{% url 'trip_detail' id=post.id %}">{{ post.title }}</a>
+            </h1>
+            <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
+        </div>
+        <div class="location">
+            <span class="icon-map-marker"></span>
+            <span id="location">{{ post.location }}</span>
+        </div>
+        <div id="map-canvas" class="map"></div>
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+        <hr class="fancy-line">
+        <img class="photo" src="{{ post.photo }}" alt="">
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+</body>
+</html>
 ```
 
 和前面類似，我們用 `{{ post }}` 取出 `render` 裡面的 post 物件，將它顯示在 HTML 中。

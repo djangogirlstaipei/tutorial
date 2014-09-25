@@ -4,7 +4,7 @@
 
 上一章的例子，只是很簡單的顯示一行字串。讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
 
-```
+```python
 # trip/views.py
 
 from datetime import datetime
@@ -76,6 +76,7 @@ TEMPLATE_DIRS = (
 ### 建立第一個 Template
 新增檔案 `templates/hello_world.html` ，並將之前寫在 View function 中的 HTML 複製到 `hello_world.html`
 ```
+mysite
 ├── mysite
 ├── templates
 │   └── hello_world.html
@@ -84,7 +85,7 @@ TEMPLATE_DIRS = (
 ```
 
 為了區別，我們做了一些樣式上的調整：
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -126,7 +127,7 @@ TEMPLATE_DIRS = (
 
 最後，將 **hello_world** 修改如下：
 
-```
+```python
 # trip/views.py
 
 from datetime import datetime

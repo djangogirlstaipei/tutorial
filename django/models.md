@@ -18,7 +18,7 @@
 
 為了開發方便，我們使用 Django 預設的資料庫 `SQLite`。打開 `mysite/settings.py`，看看 `DATABASES` 的設定。它應該長得像下面這樣：
 
-```
+```python
 # mysite/settings.py
 
 ...
@@ -46,7 +46,7 @@ DATABASES = {
 
 我們在 *trip/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
 
-```
+```python
 # trip/models.py
 
 from django.db import models
@@ -154,6 +154,9 @@ Running migrations:
 
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py makemigrations
+Migrations for 'trip':
+  0001_initial.py:
+    - Create model Post
 ```
 這個指令會根據你對 Model 的修改刪除建立一個新的 [migration 檔案](https://docs.djangoproject.com/en/1.7/topics/migrations/#migration-files)，讓`migrate`指令執行時，可以照著這份紀錄更新資料庫。
 

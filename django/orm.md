@@ -38,9 +38,15 @@ python manage.py shell
 
 ```
 >>> from trip.models import Post
+
 >>> Post.objects.create(title='My First Trip', content='肚子好餓，吃什麼好呢?',  location='台北火車站')
+<Post: My First Trip>
+
 >>> Post.objects.create(title='My Second Trip', content='去散散步吧',  location='台北火車站')
+<Post: My Second Trip>
+
 >>> Post.objects.create(title='Django 大冒險', content='從靜態到動態',  location='台北市大安區復興南路一段293號')
+<Post: Django 大冒險>
 ```
 
 ### Read
@@ -60,7 +66,6 @@ python manage.py shell
 ```
 >>> Post.objects.get(id=1)
 <Post: My First Trip>
-
 
 >>> Post.objects.filter(id__gt=1)
 [<Post: My Second Trip>, <Post: Django 大冒險>]
@@ -88,6 +93,7 @@ python manage.py shell
 ```
 >>> posts[0].location
 '台北火車站'
+
 >>> posts[1].location
 '台北火車站'
 >>>
@@ -101,6 +107,7 @@ python manage.py shell
 ```
 >>> posts[0].location
 '捷運大安站'
+
 >>> posts[1].location
 '捷運大安站'
 ```

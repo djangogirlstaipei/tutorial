@@ -32,7 +32,7 @@ Django view 其實是一個 function，**處理 HttpRequest 物件，並回傳 H
 
 在`trip/views.py`輸入下列程式碼：
 
-```
+```python
 # trip/views.py
 
 from django.http import HttpResponse
@@ -77,7 +77,7 @@ url(r'^hello/$', 'trip.views.hello_world'),
 
 現在 `mysite/urls.py` 的內容應該會像下面這樣：
 
-```
+```python
 # mysite/urls.py
 
 from django.conf.urls import patterns, include, url
@@ -87,6 +87,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'refproj.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/$', 'trip.views.hello_world'),
 )

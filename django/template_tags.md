@@ -27,7 +27,7 @@
 ### 建立首頁的 View
 首先，我們先建立一個新的 View function - `home()`：
 
-```
+```python
 # trip/views.py
 
 from django.shortcuts import render
@@ -49,7 +49,7 @@ def home(request):
 ### 設定首頁的 Url
 接下來，我們修改 **urls.py** ，將首頁 ( 正規表達式`^$` ) 指向 **home()** 這個 View function：
 
-```
+```python
 # mysite/urls.py
 
 urlpatterns = patterns('',
@@ -64,8 +64,8 @@ urlpatterns = patterns('',
 
 首先，在 templates 資料夾底下新增 `home.html`：
 
-```
-# templates/home.html
+```html
+<!-- home.html -->
 
 {{ post_list }}
 ```
@@ -102,7 +102,9 @@ urlpatterns = patterns('',
 
 瞭解了 **for** 的用法後，我們試著印出首頁所需的資訊。修改`home.html`如下：
 
-```
+```html
+<!-- home.html -->
+
 {% for post in post_list %}
     <div>
     {{ post.title }}
@@ -123,19 +125,19 @@ urlpatterns = patterns('',
 ### 顯示照片
 
 現在網頁已經有照片網址，我們稍微修改 Template ，讓照片以圖片方式呈現
-
-    <div class="thumbnail">
-        <img src="{{ post.photo }}" alt="">
-    </div>
-
+```html
+<div class="photo">
+    <img src="{{ post.photo }}" alt="">
+</div>
+```
 ### 處理沒有照片的遊記
 
 #### if...else
 
 另一個常用的 template tags 是 [if](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#if) 判斷式，用法如下：
 
-```
-{% if photo %}
+```html
+{% if post.photo %}
     <div class="photo">
         <img src="{{ post.photo }}" alt="">
     </div>
@@ -143,8 +145,12 @@ urlpatterns = patterns('',
     <div class="photo photo-default"></div>
 {% endif %}
 ```
+- 符合條件所想要顯示的 HTML 放在 `{% if `*`<condition>`*` %}` 區塊裡
+- 不符合的則放在`{% else %}`區塊裡面
+- 最後跟 **for** 一樣，要加上`{% endif %}`作為判斷式結尾。
 
-需要範例
+在這裡，我們判斷如果 *post.photo* 有值就顯示照片，沒有就多加上一個 CSS class `photo-default`另外處理。
+
 
 ## Template filter
 
@@ -162,10 +168,8 @@ urlpatterns = patterns('',
 
 我們試著將 `created_at` 時間，以 `年 / 月 / 日` 的形式顯示：
 
-```
-{% for post in post_list %}
-    {{ post.created_at|date:"Y / m / d" }}
-{% endfor %}
+```html
+{{ post.created_at|date:"Y / m / d" }}
 ```
 重新載入後，你會發現時間的格式改變了：
 
@@ -174,13 +178,10 @@ many post screenshot - format date
 ---
 
 ### 完整的 HTML 與 CSS
-接著，補上完整的 HTML 標籤，並加上 CSS 樣式後就大功告成了! 重新整理你的瀏覽器看看
+接著，補上完整的 HTML 標籤，並加上 CSS 樣式後，旅遊日記首頁就完成了!
 
-!完整版 screenshot
-
-
-### 最後的 *home.html* 程式碼如下：
-```
+### 最終版 *home.html* 程式碼如下：
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -228,9 +229,11 @@ many post screenshot - format date
 
 ! 移除 static
 
+旅遊日記首頁：
+
+screen shot
 
 
-完整版 screenshot
 
 ## 小結
 最後，我們複習一下本章學到的 **Template Tag** 與 **Template Filter**：
@@ -247,7 +250,7 @@ many post screenshot - format date
 
 <table>
 <tr><th>語法</th><th>說明</th></tr>
-<tr><td>{{ value **|date:** *`<date_format>`* }}</td><td>2</td></tr>
+<tr><td>{{ value **|date:** *`<date_format>`* }}</td><td>可以將`datetime`型別的物件，以指定的時間格式 Date Format 輸出</td></tr>
 </table>
 
 
