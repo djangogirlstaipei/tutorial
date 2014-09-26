@@ -74,7 +74,6 @@ urlpatterns = patterns('',
 
 打開瀏覽器進入首頁 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)，可以看到 *post_list* 已呈現至網頁上了。
 
-
 ![Plain post_list in Template](./../images/plain-post-list-in-template.png)
 
 
@@ -93,11 +92,11 @@ urlpatterns = patterns('',
 **for**
 
 在 Template 中使用類似 Python 的 for 迴圈，使用方法如下：
-
-    {% for <element> in <list> %}
-        ...
-    {% endfor %}
-
+```html
+{% for <element> in <list> %}
+    ...
+{% endfor %}
+```
 ---
 
 瞭解了 **for** 的用法後，我們試著印出首頁所需的資訊。修改`home.html`如下：
@@ -126,7 +125,7 @@ urlpatterns = patterns('',
 
 現在網頁已經有照片網址，我們稍微修改 Template ，讓照片以圖片方式呈現
 ```html
-<div class="photo">
+<div class="thumbnail">
     <img src="{{ post.photo }}" alt="">
 </div>
 ```
@@ -138,11 +137,11 @@ urlpatterns = patterns('',
 
 ```html
 {% if post.photo %}
-    <div class="photo">
+    <div class="thumbnail">
         <img src="{{ post.photo }}" alt="">
     </div>
 {% else %}
-    <div class="photo photo-default"></div>
+    <div class="thumbnail thumbnail-default"></div>
 {% endif %}
 ```
 - 符合條件所想要顯示的 HTML 放在 `{% if `*`<condition>`*` %}` 區塊裡
@@ -186,7 +185,8 @@ urlpatterns = patterns('',
     <meta charset="utf-8">
     <title>A Django Girl's Advanture</title>
     <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
-    <link rel=stylesheet href="http://djangogirlstaipei.github.io/assets/css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
 </head>
 <body>
     <div class="header">
@@ -215,7 +215,9 @@ urlpatterns = patterns('',
                     {{ post.content }}
                 </div>
                 <div class="post-footer">
-                    <a class="read-more" href="#">Read More <span class="icon-forward"></span> </a>
+                    <a class="read-more" href="#">
+                        Read More <i class="fa fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@
 # trips/views.py
 
 def post_detail(request, id):
-    posts = Post.objects.get(id=id)
+    post = Post.objects.get(id=id)
     return render(request, 'post.html', {'post': post})
 ```
 
@@ -46,7 +46,7 @@ def post_detail(request, id):
 urlpatterns = patterns('',
     ...
     url(r'^post/(?P<id>\d+)/$', 'trip.views.post_detail',
-        name='trip_detail'),
+        name='post_detail'),
 )
 ```
 
@@ -90,15 +90,17 @@ return render(request, 'post.html', {'post': post})
 ```
 我們取得所需 post 物件後，傳入 `post.html` 這個 template 中 render，現在我們就來完成這個 Template。建立 *post.html* 如下：
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!! 重貼 code
 ```html
 <!-- templates/post.html -->
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>My Trips</title>
+    <title>A Django Girl's Advanture</title>
     <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
 </head>
 <body>
     <div class="header">
@@ -108,13 +110,13 @@ return render(request, 'post.html', {'post': post})
     </div>
     <div class="container post post-detail">
         <div class="post-heading">
-            <h1 class="title"><a href="{% url 'trip_detail' id=post.id %}">{{ post.title }}</a>
+            <h1 class="title"><a href="{% url 'post_detail' id=post.id %}">{{ post.title }}</a>
             </h1>
             <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
         </div>
         <div class="location">
-            <span class="icon-map-marker"></span>
-            <span id="location">{{ post.location }}</span>
+            <i class="fa fa-map-marker"></i>
+            <span id="location-content">{{ post.location }}</span>
         </div>
         <div id="map-canvas" class="map"></div>
         <div class="post-content">
@@ -124,6 +126,7 @@ return render(request, 'post.html', {'post': post})
         <img class="photo" src="{{ post.photo }}" alt="">
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://djangogirlstaipei.github.io/assets/js/map.js"></script>
 </body>
 </html>
 ```
@@ -172,29 +175,43 @@ return render(request, 'post.html', {'post': post})
 
 ```html
 <!-- home.html -->
-<h2 class="title"><a href="#">{{ post.title }}</a></h2>
+
+<h2 class="title">
+    <a href="#">{{ post.title }}</a>
+</h2>
 ```
 
 將它改成
 
 ```html
 <!-- home.html -->
-<h2 class="title"><a href="{% url 'trip_detail' id=post.id %}">{{ post.title }}</a></h2>
-````
+
+<h2 class="title">
+    <a href="{% url 'post_detail' id=post.id %}">{{ post.title }}</a>
+</h2>
+```
 
 #### 設定 Read More 按鈕的連結
 
 
-在 *home.html* 中找到以下內容
+在 *home.html* 中找到以下內容：
 
 ```html
-<a class="read-more" href="#">Read More <span class="icon-forward"></span></a>
+<!-- home.html -->
+
+<a class="read-more" href="#">
+    Read More <i class="fa fa-arrow-right"></i>
+</a>
 ```
 
-修改如下
+修改如下：
 
 ```html
-<a class="read-more" href="{% url 'trip_detail' id=post.id %}">Read More <span class="icon-forward"></span></a>
+<!-- home.html -->
+
+<a class="read-more" href="{% url 'post_detail' id=post.id %}">
+    Read More <i class="fa fa-arrow-right"></i>
+</a>
 ```
 
 ### 驗收成果

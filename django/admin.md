@@ -71,7 +71,7 @@ admin.site.register(Post)
 
 ## 使用管理後台
 ### 進入管理後台
-連至 [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)，可以看到管理後台的登入頁面
+連至 [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)，可以看到管理後台的登入頁面：
 
 ![](./../images/django-admin-login.png)
 
@@ -84,9 +84,11 @@ admin.site.register(Post)
 第一個區塊 **Authentication and Authorization** ，可以管理使用者 ( User ) 和 群組 ( Group )  使用者管理功能； 第二個 **Trip** 區塊裡，則可以看到剛剛設定完成的 **Post Model**。在這裡可以執行 Post 的新增、修改、刪除...等。
 
 ### 新增一個 Post
-現在試著建立一個新的 Post 看看
+現在試著建立一個新的 Post 看看：
 
 ![](./../images/django-admin-create.png)
+
+*( 建議可以多新增幾筆 Post ，在接下來的章節會用到。 )*
 
 ## 小結
 你應該己經學會：
