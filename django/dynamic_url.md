@@ -217,3 +217,5 @@ return render(request, 'post.html', {'post': post})
 ### 驗收成果
 
 連至 http://127.0.0.1:8000/ ，現在只要點擊各個日記的標題或 **Read more** 按鈕，就會顯示那該篇日記的詳細頁面。
+
+![Django Girls Trips - Post page](./../images/djangogirlstrips-post.png)

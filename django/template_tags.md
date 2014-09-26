@@ -225,8 +225,10 @@ urlpatterns = patterns('',
 </body>
 </html>
 ```
+
 打開 http://127.0.0.1:8000/ 看一下你的成果吧！
 
+![Django Girls Trips - Home page](./../images/djangogirlstrips-home.png)
 
 ## 小結
 最後，我們複習一下本章學到的 **Template Tag** 與 **Template Filter**：
