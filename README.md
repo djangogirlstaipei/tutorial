@@ -20,8 +20,8 @@
 
 ### 旅遊日記首頁
 
-![Django Girls Trips - Home page](./../images/djangogirlstrips-home.png)
+![Django Girls Trips - Home page](./images/djangogirlstrips-home.png)
 
 ### 旅遊日記 - 單篇日記頁面
 
-![Django Girls Trips - Post page](./../images/djangogirlstrips-post.png)
+![Django Girls Trips - Post page](./images/djangogirlstrips-post.png)
