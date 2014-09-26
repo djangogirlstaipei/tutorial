@@ -3,7 +3,7 @@
 * [Django Girls 學習指南](README.md)
 * [Django 介紹](django/introduction.md)
 * [安裝 Django](django/installation.md)
-* [Project and apps](django/project_&_app.md)
+* [Project and apps](django/project_and_app.md)
 * [Views and URLconfs](django/views_and_urlconfs.md)
 * [Templates](django/templates.md)
 * [Models](django/models.md)
