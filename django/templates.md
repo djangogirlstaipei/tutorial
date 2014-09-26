@@ -79,7 +79,7 @@ TEMPLATE_DIRS = (
 mysite
 ├── mysite
 ├── templates
-│   └── hello_world.html
+│   └── hello_world.html
 ├── trips
 └── manage.py
 ```
@@ -112,7 +112,7 @@ mysite
 #### 在 Template 中顯示變數
 以上 Template 中，有個地方要特別注意：
 
-    <em>{{ current_time }}<em>
+    <em>{{ current_time }}</em>
 
 仔細比較，可以發現變數 **current_time** 的使用方式與之前不同，在這裡用的是兩個大括號。
 

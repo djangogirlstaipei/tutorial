@@ -27,10 +27,13 @@
 ### requirements.txt
 
 在`djangogirls`專案目錄底下，利用`pip freeze`將此虛擬環境裡的 Python 套件全部條列出來，除了套件名稱還會包含版本資訊，儲存於 **requirements.txt**：
+
 ```
 (VENV) ~/djangogirls$ pip freeze > requirements.txt
 ```
-由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 編譯器 ) ，檔案內容範例如下：
+
+由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 模組 ) ，檔案內容範例如下：
+
 ```
 Django==1.7
 dj-database-url==0.3.0
