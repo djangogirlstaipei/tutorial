@@ -30,7 +30,7 @@
 ```
 (VENV) ~/djangogirls$ pip freeze > requirements.txt
 ```
-由於 Heroku 使用 [Postgres](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 編譯器 ) ，檔案內容範例如下：
+由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 編譯器 ) ，檔案內容範例如下：
 ```
 Django==1.7
 dj-database-url==0.3.0
@@ -207,8 +207,6 @@ $ heroku create djangogirlstrips
 - Heroku app 是不能重名的，所以如果你也輸入`djangogirlstrips`，會得到` !    Name is already taken`的警告。
 - Heroku app 名稱會顯示在 deploy 成功後的網址上，例如：http://djangogirlstrips.herokuapp.com
 
-如果你已經創造過
-
 ### Step 4: 利用 git push 上傳到 Heroku
 
 使用`git push`指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
@@ -251,7 +249,7 @@ $ heroku ps:scale web=1
 Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令：
 
 ```
-heroku run python mysite/manage.py migrate
+$ heroku run python mysite/manage.py migrate
 ```
 以及重新建立一個 superuser：
 ```

@@ -98,7 +98,7 @@ class Post(models.Model):
 
 ##新增 app
 
-打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
 ```
 # mysite/settings.py
@@ -145,7 +145,7 @@ Running migrations:
   Applying sessions.0001_initial... OK
 ```
 
-[migrate](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。
+[migrate](https://docs.djangoproject.com/en/1.7/ref/django-admin/#django-admin-migrate) 指令會根據`INSTALLED_APPS`的設定，按照 app 順序建立或更新資料表，將你在 models.py 裡的更新跟資料庫同步。
 
 ---
 

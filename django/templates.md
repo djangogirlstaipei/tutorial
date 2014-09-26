@@ -153,7 +153,7 @@ def hello_world(request):
 ---
 **Render** ：產生 HttpResponse 物件。
 
-[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#render)
+[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.7/topics/http/shortcuts/#render)
 
 ---
 

@@ -23,7 +23,7 @@
 
 ---
 
-使用 [shell](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
+使用 [shell](https://docs.djangoproject.com/en/1.7/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
 
 ```
 python manage.py shell
@@ -52,7 +52,7 @@ python manage.py shell
 ### Read
 
 若想顯示所有的 Post ，可以使用
-[all()](https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.all)：
+[all()](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#django.db.models.query.QuerySet.all)：
 
 ```
 >>> Post.objects.all()
@@ -71,13 +71,13 @@ python manage.py shell
 [<Post: My Second Trip>, <Post: Django 大冒險>]
 
 ```
-- [**get**](https://docs.djangoproject.com/en/dev/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。 ( *注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception )
+- [**get**](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。 ( *注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception )
 
-- [**filter**](https://docs.djangoproject.com/en/dev/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
+- [**filter**](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
 
 ### Update
 
-當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
+當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
 首先，先取得欲更新的 Post。這裡使用 `id < 3` 的條件篩選
 ```
@@ -114,7 +114,7 @@ python manage.py shell
 
 ### Delete
 
-當然，也可以使用 [delete](https://docs.djangoproject.com/en/dev/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除一筆或多筆資料：
+當然，也可以使用 [delete](https://docs.djangoproject.com/en/1.7/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除一筆或多筆資料：
 
 我們試著使用 `delete`，將剛剛的那兩筆 Post 刪除。
 ```

@@ -2,7 +2,7 @@
 
 大部份網站都設計有管理後台，讓管理者方便新增或異動網站內容。
 
-而這樣的管理後台，Django 也有內建一個 App -- [**Django Admin**](https://docs.djangoproject.com/en/dev/ref/contrib/admin/) 。只需要稍微設定，網站就能擁有管理後台功能。
+而這樣的管理後台，Django 也有內建一個 App -- [**Django Admin**](https://docs.djangoproject.com/en/1.7/ref/contrib/admin/) 。只需要稍微設定，網站就能擁有管理後台功能。
 
 前一章，我們學會如何使用 Django Shell 和 QuerySet API ，對 Post 新增、修改及刪除。而現在，我們要利用 **Django Admin** ，來達成類似的資料庫操作。
 
@@ -39,7 +39,7 @@ url(r'^admin/', include(admin.site.urls)),
 
 要使用 Django 的管理後台，需要一個管理員帳號。
 
-使用 [createsuperuser](https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-createsuperuser) 這個指令，建立一個 superuser：
+使用 [createsuperuser](https://docs.djangoproject.com/en/1.7/ref/django-admin/#django-admin-createsuperuser) 這個指令，建立一個 superuser：
 
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py createsuperuser
