@@ -62,7 +62,7 @@ import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 st
 
 ### Procfile
 
-建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，它告訴 Herok 要執行什麼指令來啟動我們的應用：
+建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，它告訴 Heroku 要執行什麼指令來啟動我們的應用：
 
 ```
 web: gunicorn --pythonpath mysite mysite.wsgi
