@@ -158,5 +158,12 @@ Migrations for 'trips':
     - Create model Post
 ```
 這個指令會根據你對 Model 的修改刪除建立一個新的 [migration 檔案](https://docs.djangoproject.com/en/1.7/topics/migrations/#migration-files)，讓`migrate`指令執行時，可以照著這份紀錄更新資料庫。
-
+```
+(VENV) ~/djangogirls/mysite$ python manage.py migrate
+python manage.py migrate
+Operations to perform:
+  Apply all migrations: auth, admin, contenttypes, sessions, trips
+Running migrations:
+  Applying trips.0001_initial... OK
+```
 ---

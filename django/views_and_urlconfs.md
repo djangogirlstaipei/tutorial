@@ -71,7 +71,7 @@ def hello_world(request):
 
 打開 startproject 時自動產生的`urls.py`，在 `urlpatterns` 中加入下面這行：
 
-```
+```python
 url(r'^hello/$', 'trips.views.hello_world'),
 ```
 

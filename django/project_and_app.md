@@ -9,7 +9,7 @@
 - 塗鴉牆管理 -- timeline
 - 動態消息管理 -- news
 
-若未來我們需要寫個購物網站，而需要會員功能時，`account app` (使用者管理) 就可以被重複使用。
+若未來我們需要寫個購物網站，而需要會員功能時，`accounts app` (使用者管理) 就可以被重複使用。
 
 ---
 
@@ -104,7 +104,7 @@ Quit the server with CTRL-BREAK.
 
 ---
 
-如果無法看到成功畫面，並且命令列上顯示錯誤訊息 - " *django.db.utils.OperationalError: no such table: django_session*"，請輸入：
+如果無法看到成功畫面，瀏覽器上顯示錯誤訊息 - "*A server error occurred.  Please contact the administrator.*"，請輸入：
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py migrate
 ```

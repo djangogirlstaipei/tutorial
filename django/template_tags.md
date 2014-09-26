@@ -37,7 +37,6 @@ from trips.models import Post
 def home(request):
     # get all the posts
     post_list = Post.objects.all()
-
     return render(request,
                   'home.html',
                   {'post_list': post_list})
@@ -173,7 +172,7 @@ urlpatterns = patterns('',
 ---
 
 ### 完整的 HTML 與 CSS
-接著，補上完整的 HTML 標籤，並加上 CSS 樣式後，旅遊日記首頁就完成了!
+接著，補上完整的 HTML 標籤，並加上 CSS 樣式後，旅遊日記首頁就完成了。
 
 ### 最終版 *home.html* 程式碼如下：
 ```html
@@ -225,8 +224,9 @@ urlpatterns = patterns('',
     </div>
 </body>
 </html>
-
 ```
+打開 http://127.0.0.1:8000/ 看一下你的成果吧！
+
 
 ## 小結
 最後，我們複習一下本章學到的 **Template Tag** 與 **Template Filter**：
