@@ -80,10 +80,11 @@ Linux 或 OS X 需要使用`python3`來建立虛擬環境，指令如下：
 ## 安裝 Django 1.7 最新版本
 
 ### 開始安裝
-我們使用 `pip`這個強大的套件管理工具來安裝 Django：
 
-    pip install "django<1.8"
-
+Python 3.4 預先安裝了`pip`這個強大的套件管理工具，我們將使用它來安裝 Django：
+```
+pip install "django<1.8"
+```
 這裡需要特別注意，我們使用的指令是`"django`**`<1.8`**`"`。這樣一來才可以**確保我們安裝的是 Django 1.7 的最新版本**
 
 輸入了應該會看到如下的訊息，表示安裝成功
@@ -96,7 +97,6 @@ Cleaning up...
 ```
 
 註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.8"` 試試看。
-
 
 ### 確認安裝成功
 最後，讓我們最後來測試一下。

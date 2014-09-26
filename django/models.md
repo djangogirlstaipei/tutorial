@@ -44,10 +44,10 @@ DATABASES = {
 
 ## Django Models
 
-我們在 *trip/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
+我們在 *trips/models.py* 宣告一個`Post`物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
 
 ```python
-# trip/models.py
+# trips/models.py
 
 from django.db import models
 
@@ -70,8 +70,8 @@ class Post(models.Model):
 | -----------|-----------| -------  |--------------------------------------------|
 | title      | CharField | 標題     |`max_length=100` -- 標題不可以超過 100 個字元|
 | content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用）。 |
-| photo      | URLField  | 照片網址 | 同上，非必填|
-| location   | CharField | 地點     | 同標題 |
+| photo      | URLField  | 照片網址 | 同 content，非必填欄位|
+| location   | CharField | 地點     | 同 title |
 | created_at | DateTime  | 建立時間 | `auto_add_now=True` -- 物件新增的時間<br>p.s. 若想設成物件修改時間，則用 `auto_now=True`|
 
 - **透過 [def \_\_str__](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str)  更改 Post 的表示方式**
@@ -94,7 +94,7 @@ class Post(models.Model):
 
 ## 將新增的 Django app 加入設定檔
 
-在前幾章，我們透過 Django 命令列工具建立了 **trip** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
+在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
 
 ##新增 app
 
@@ -114,10 +114,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'trip',
+    'trips',
 )
 ```
-請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trip`加在最後面。
+請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
 
 ---
 **預設安裝的 Django app**
@@ -131,12 +131,11 @@ Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py migrate
 Operations to perform:
-  Synchronize unmigrated apps: trip
+  Synchronize unmigrated apps: trips
   Apply all migrations: contenttypes, sessions, admin, auth
 Synchronizing apps without migrations:
   Creating tables...
-    Creating table trip_post
-    Creating table trip_comment
+    Creating table trips_post
   Installing custom SQL...
   Installing indexes...
 Running migrations:
@@ -154,7 +153,7 @@ Running migrations:
 
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py makemigrations
-Migrations for 'trip':
+Migrations for 'trips':
   0001_initial.py:
     - Create model Post
 ```

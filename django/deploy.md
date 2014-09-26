@@ -157,7 +157,7 @@ djangogirls
 │       ├── urls.py
 │       └── wsgi.py
 │   ├── templates
-│   ├── trip
+│   ├── trips
 │   └── manage.py
 ├── VENV
 ├── .gitignore

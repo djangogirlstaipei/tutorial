@@ -45,7 +45,7 @@ def post_detail(request, id):
 
 urlpatterns = patterns('',
     ...
-    url(r'^post/(?P<id>\d+)/$', 'trip.views.post_detail',
+    url(r'^post/(?P<id>\d+)/$', 'trips.views.post_detail',
         name='post_detail'),
 )
 ```

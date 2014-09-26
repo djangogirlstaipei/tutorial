@@ -28,10 +28,10 @@
 首先，我們先建立一個新的 View function - `home()`：
 
 ```python
-# trip/views.py
+# trips/views.py
 
 from django.shortcuts import render
-from trip.models import Post
+from trips.models import Post
 
 
 def home(request):
@@ -54,7 +54,7 @@ def home(request):
 
 urlpatterns = patterns('',
     ...
-    url(r'^$', 'trip.views.home'),
+    url(r'^$', 'trips.views.home'),
 )
 ```
 

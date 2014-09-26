@@ -5,7 +5,7 @@
 上一章的例子，只是很簡單的顯示一行字串。讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間:
 
 ```python
-# trip/views.py
+# trips/views.py
 
 from datetime import datetime
 from django.http import HttpResponse
@@ -80,7 +80,7 @@ mysite
 ├── mysite
 ├── templates
 │   └── hello_world.html
-├── trip
+├── trips
 └── manage.py
 ```
 
@@ -130,7 +130,7 @@ mysite
 最後，將 **hello_world** 修改如下：
 
 ```python
-# trip/views.py
+# trips/views.py
 
 from datetime import datetime
 from django.shortcuts import render

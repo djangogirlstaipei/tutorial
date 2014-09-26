@@ -37,7 +37,7 @@ python manage.py shell
 首先，讓我們來試著新增幾筆資料：
 
 ```
->>> from trip.models import Post
+>>> from trips.models import Post
 
 >>> Post.objects.create(title='My First Trip', content='肚子好餓，吃什麼好呢?',  location='台北火車站')
 <Post: My First Trip>
