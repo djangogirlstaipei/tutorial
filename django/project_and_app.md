@@ -37,10 +37,10 @@ cd mysite
 ```
 mysite/
 ├── mysite
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 └── manage.py
 ```
 
@@ -137,17 +137,17 @@ trips
 ```
 mysite
 ├── mysite
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 ├── trips
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── migrations
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── migrations
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
 └── manage.py
 ```
 

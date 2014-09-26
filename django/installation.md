@@ -96,7 +96,7 @@ Successfully installed django
 Cleaning up...
 ```
 
-註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.8"` 試試看。
+註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.8"` 試試看。之後如果在使用 `pip` 時遇到類似問題，也可以試著在前面加上 `python -m`。
 
 ### 確認安裝成功
 最後，讓我們最後來測試一下。
