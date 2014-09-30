@@ -97,7 +97,7 @@ return render(request, 'post.html', {'post': post})
 <html>
 <head>
     <meta charset="utf-8">
-    <title>A Django Girl's Advanture</title>
+    <title>A Django Girl's Adventure</title>
     <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
@@ -105,7 +105,7 @@ return render(request, 'post.html', {'post': post})
 <body>
     <div class="header">
         <h1 class="site-title text-center">
-            <a href="/">A Django Girl's Advanture</a>
+            <a href="/">A Django Girl's Adventure</a>
         </h1>
     </div>
     <div class="container post post-detail">
