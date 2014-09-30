@@ -269,3 +269,13 @@ $ heroku open
 
 你可以分享網址給任何人：
 http://djangogirlstrips.herokuapp.com ( 記得前面要替換成你自己的 Heroku app 名稱 )
+
+---
+
+未來如果對網站進行任何修改並想更新到 Heroku，只要先確定 **git commit** 完成後再 push 到 Heroku 即可。
+
+```
+$ git push heroku master
+```
+
+---

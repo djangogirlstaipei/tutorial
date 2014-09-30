@@ -57,7 +57,7 @@ class Post(models.Model):
     content = models.TextField(blank=True)
     photo = models.URLField(blank=True)
     location = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -72,7 +72,7 @@ class Post(models.Model):
 | content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用）。 |
 | photo      | URLField  | 照片網址 | 同 content，非必填欄位|
 | location   | CharField | 地點     | 同 title |
-| created_at | DateTime  | 建立時間 | `auto_add_now=True` -- 物件新增的時間<br>p.s. 若想設成物件修改時間，則用 `auto_now=True`|
+| created_at | DateTime  | 建立時間 | `auto_now_add=True` -- 物件新增的時間<br>p.s. 若想設成物件修改時間，則用 `auto_now=True`|
 
 - **透過 [def \_\_str__](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str)  更改 Post 的表示方式**
     - Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。**我們可以用  `def __str__`重新定義，讓 Post 顯示標題**，如 `<Post: Your_Post_Title>`。

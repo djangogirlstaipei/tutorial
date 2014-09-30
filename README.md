@@ -5,7 +5,7 @@
 - Web 的初步認識
 - 了解如何使用 Command Line
 - 略懂 Python 基礎語法
-- 看得懂簡單的 HTML/CSS
+- 看得懂簡單的 HTML / CSS
 
 
 ## 學習前準備
