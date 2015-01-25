@@ -154,11 +154,11 @@ db.sqlite3
 djangogirls
 ├──mysite
 │   ├── mysite
-│       ├── __init__.py
-│       ├── local_settings.py
-│       ├── settings.py
-│       ├── urls.py
-│       └── wsgi.py
+│   │   ├── __init__.py
+│   │   ├── local_settings.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
 │   ├── templates
 │   ├── trips
 │   └── manage.py
