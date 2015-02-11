@@ -183,9 +183,9 @@ urlpatterns = patterns('',
 <head>
     <meta charset="utf-8">
     <title>A Django Girl's Adventure</title>
-    <link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
+    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
 </head>
 <body>
     <div class="header">
