@@ -225,9 +225,9 @@ Total 0 (delta 0), reused 0 (delta 0)
 ...
 -----> Compressing... done, 40.0MB
 -----> Launching... done, v5
-       http://djangogirlstrips.herokuapp.com/ deployed to Heroku
+       https://djangogirlstrips.herokuapp.com/ deployed to Heroku
 
-To git@heroku.com:djangogirlstrips.git
+To https://git@heroku.com:djangogirlstrips.git
  * [new branch]      master -> master
 ```
 
