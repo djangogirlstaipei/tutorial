@@ -125,8 +125,8 @@ return render(request, 'post.html', {'post': post})
         <hr class="fancy-line">
         <img class="photo" src="{{ post.photo }}" alt="">
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
-    <script src="http://djangogirlstaipei.github.io/assets/js/map.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
+    <script src="//djangogirlstaipei.github.io/assets/js/map.js"></script>
 </body>
 </html>
 ```

@@ -200,11 +200,11 @@ $ heroku login
 
 接下來，我們需要新增一個可以上傳 repository 的地方：
 ```
-$ heroku create
+~/djangogirls$ heroku create
 ```
 預設`create`後面不放名字時，會自動產生隨機名稱的 Heroku app，如果想要命名自己的 app，如下：
 ```
-$ heroku create djangogirlstrips
+~/djangogirls$ heroku create djangogirlstrips
 ```
 注意：
 - Heroku app 是不能重名的，所以如果你也輸入`djangogirlstrips`，會得到` !    Name is already taken`的警告。
@@ -215,7 +215,7 @@ $ heroku create djangogirlstrips
 使用`git push`指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
 
 ```
-$ git push heroku master
+~/djangogirls$ git push heroku master
 Initializing repository, done.
 Total 0 (delta 0), reused 0 (delta 0)
 
@@ -238,32 +238,32 @@ fatal: The remote end hung up unexpectedly
 ```
 請透過下列指令新增 public key，然後再重新`git push`。
 ```
-$ heroku keys:add
+~/djangogirls$ heroku keys:add
 ```
 
 ### Step 5: 啟動 web process
 
 先前建立了 **Procfile** 檔案告訴 Heroku 啟動時要執行的指令，現在我們使用指令啟動 web process，並指定只需要`1`個 instance：
 ```
-$ heroku ps:scale web=1
+~/djangogirls$ heroku ps:scale web=1
 ```
 ### Step 6: Django project 初始化
 
 Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令：
 
 ```
-$ heroku run python mysite/manage.py migrate
+~/djangogirls$ heroku run python mysite/manage.py migrate
 ```
 以及重新建立一個 superuser：
 ```
-$ heroku run python mysite/manage.py createsuperuser
+~/djangogirls$ heroku run python mysite/manage.py createsuperuser
 ```
 
 ### Step 7: 開啟瀏覽器觀看你的網站
 最後，透過`open`指令會自動在瀏覽器打開你的網站：
 
 ```
-$ heroku open
+~/djangogirls$ heroku open
 ```
 恭喜你成功地把網站發佈到網路上了！
 
