@@ -196,19 +196,41 @@ $ heroku login
 ~/djangogirls$ git add .
 ~/djangogirls$ git commit -m "my djangogirls app"
 ```
-### Step 3: 新增 Heroku app
+### Step 3-1: 新增新的 Heroku app
 
-接下來，我們需要新增一個可以上傳 repository 的地方：
+接下來，我們需要新增一個可以上傳 repository 的地方，如果你之前已經新增過 app，請跳到 **Step 3-2**：
 ```
 ~/djangogirls$ heroku create
 ```
 預設`create`後面不放名字時，會自動產生隨機名稱的 Heroku app，如果想要命名自己的 app，如下：
 ```
-~/djangogirls$ heroku create djangogirlstrips
+~/djangogirls$ heroku create djangogirlsdiary
 ```
 注意：
-- Heroku app 是不能重名的，所以如果你也輸入`djangogirlstrips`，會得到` !    Name is already taken`的警告。
-- Heroku app 名稱會顯示在 deploy 成功後的網址上，例如：http://djangogirlstrips.herokuapp.com
+- Heroku app 是不能重名的，所以如果你也輸入`djangogirlsdiary`，會得到` !    Name is already taken`的警告。
+- Heroku app 名稱會顯示在 deploy 成功後的網址上，例如：https://djangogirlsdiary.herokuapp.com
+
+### Step 3-2: 指定已經存在的 app
+
+如果你之前已經新增過 app ，並且想發佈在已經存在的 app 上時，可以先用指令`heroku apps`查看 app 的名稱：
+
+```
+$ heroku apps
+=== My Apps
+djangogirlsdiary
+```
+然後設定成你想要上傳的 app：
+
+```
+$  heroku git:remote -a djangogirlsdiary
+Git remote heroku added.
+```
+最後透過`git remote -v`檢查一下是否設定到正確的位置：
+```
+$ git remote -v
+heroku	https://git.heroku.com/djangogirlsdiary.git (fetch)
+heroku	https://git.heroku.com/djangogirlsdiary.git (push)
+```
 
 ### Step 4: 利用 git push 上傳到 Heroku
 
@@ -216,18 +238,20 @@ $ heroku login
 
 ```
 ~/djangogirls$ git push heroku master
-Initializing repository, done.
-Total 0 (delta 0), reused 0 (delta 0)
-
------> Python app detected
------> Installing runtime (python-3.4.1)
------> Installing dependencies with pip
 ...
------> Compressing... done, 40.0MB
------> Launching... done, v5
-       https://djangogirlstrips.herokuapp.com/ deployed to Heroku
-
-To https://git@heroku.com:djangogirlstrips.git
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Python app detected
+remote: -----> Installing runtime (python-3.4.1)
+remote: -----> Installing dependencies with pip
+...
+remote: -----> Compressing... done, 50.8MB
+remote: -----> Launching... done, v5
+remote:        https://djangogirlsdiary.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/djangogirlsdiary.git
  * [new branch]      master -> master
 ```
 
@@ -266,9 +290,10 @@ Django 已經成功啟動了，但是我們還需要進行資料庫初始化，�
 ~/djangogirls$ heroku open
 ```
 恭喜你成功地把網站發佈到網路上了！
+因為資料庫是不同的，之前在本機端的日記都需要再重新輸入喔。
 
 你可以分享網址給任何人：
-http://djangogirlstrips.herokuapp.com ( 記得前面要替換成你自己的 Heroku app 名稱 )
+https://djangogirlsdiary.herokuapp.com/ ( 記得前面要替換成你自己的 Heroku app 名稱 )
 
 ---
 
