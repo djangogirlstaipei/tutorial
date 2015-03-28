@@ -26,19 +26,19 @@
 
 ### requirements.txt
 
-在`djangogirls`專案目錄底下，利用`pip freeze`將此虛擬環境裡的 Python 套件全部條列出來，除了套件名稱還會包含版本資訊，儲存於 **requirements.txt**：
+在`djangogirls`專案目錄底下，利用`pip freeze`將此虛擬環境裡的 Python 套件全部條列出來，除了套件名稱還會包含版本資訊，儲存於 [requirements.txt](https://devcenter.heroku.com/articles/python-pip#the-basics)：
 
 ```
 (VENV) ~/djangogirls$ pip freeze > requirements.txt
 ```
 
-由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 模組 ) ，檔案內容範例如下：
+由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫， 我們在最後加上`psycopg2==2.5.4` ( Python 的 PostgreSQL 模組 ) ，檔案內容範例如下，版本可能會稍有不同：
 
 ```
-Django==1.7
+Django==1.7.7
 dj-database-url==0.3.0
 dj-static==0.0.6
-gunicorn==19.1.1
+gunicorn==19.3.0
 static3==0.5.1
 psycopg2==2.5.4
 ```
@@ -172,7 +172,7 @@ djangogirls
 
 ## Deploy to Heroku
 
-在開始部署 ( Deploy ) 之前，請先確定你已經：
+在開始部署 ( Deploy ) 之前，請先確定你已經按照[教學手冊](http://djangogirlstaipei.herokuapp.com/tutorials/setting-up-heroku/)：
 1. 註冊 Heroku 帳號：https://id.heroku.com/signup
 2. 安裝 Heroku 工具箱：https://toolbelt.heroku.com/
 
