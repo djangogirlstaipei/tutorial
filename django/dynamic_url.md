@@ -98,9 +98,9 @@ return render(request, 'post.html', {'post': post})
 <head>
     <meta charset="utf-8">
     <title>A Django Girl's Adventure</title>
-    <link href='//fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel=stylesheet>
+    <link href="//fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="header">
