@@ -1,0 +1,10 @@
+{
+    "gitbook": ">=2.0.0",
+    "plugins": [],
+    "links": {
+        "sidebar": {
+            "Contact us / Support": "mailto:taipei@djangogirls.org"
+        }
+    },
+    "pluginsConfig": {}
+}
