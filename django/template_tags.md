@@ -5,7 +5,7 @@
 - **重覆 HTML 片段** (for loop) -- 列出所有好友的ID 和顯示圖片
 - **格式化 Template 中的變數** -- 例如日期的格式化
 
-因為我們[Django template tags](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取 View 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+因為我們 [Django template tags](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取 View 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
 
 ---
 
