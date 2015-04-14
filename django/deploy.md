@@ -43,23 +43,6 @@ static3==0.5.1
 psycopg2==2.5.4
 ```
 
-### wsgi.py
-
-[WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial)，簡單來說，它是 Python 定義網頁程式和伺服器溝通的介面，修改`mysite/mysite/wsgi.py`如下：
-
-```python
-## mysite/wsgi.py
-
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-
-from django.core.wsgi import get_wsgi_application
-from dj_static import Cling
-application = Cling(get_wsgi_application())
-```
-import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
-
-
 ### Procfile
 
 建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，它告訴 Heroku 要執行什麼指令來啟動我們的應用：
@@ -119,6 +102,25 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 ```
+
+### wsgi.py
+
+[WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial)，簡單來說，它是 Python 定義網頁程式和伺服器溝通的介面，修改`mysite/mysite/wsgi.py`如下：
+
+```python
+## mysite/wsgi.py
+
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.production_settings")
+
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+application = Cling(get_wsgi_application())
+```
+在 DJANGO_SETTINGS_MODULE 這邊要指向剛剛建立的部署專用設定 `mysite.production_settings`
+
+而 import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
+
 
 ### .gitignore
 有一些檔案或資料夾在新增 git repository 時，不想被加入進入。建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案將我們的虛擬環境，本機資料庫等等放進去：
