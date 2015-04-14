@@ -82,32 +82,26 @@ web: gunicorn --pythonpath mysite mysite.wsgi
 python-3.4.1
 ```
 
-### local_settings.py
+### production_settings.py
 
-前面的章節，我們透過修改`settings.py`來調整 Django project 的設定，但是通常正式上線 ( production ) 的環境會和開發/本機 ( development / local ) 環境有所不同，我們在`mysite/mysite/`底下新建`local_settings.py`，用來存放本機的設定：
+前面的章節，我們透過修改`settings.py`來調整 Django project 的設定，但是通常正式上線 ( production ) 的環境會和開發/本機 ( development / local ) 環境有所不同。
 
-```python
-# mysite/local_settings.py
-
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-DEBUG = True
-```
-
-然後，修改同一個資料夾裡的`settings.py`，將部署後所需要用到的設定加在最後面：
+首先，Django 在部署時會將所有 [靜態檔案](https://devcenter.heroku.com/articles/django-assets) (ex: css, javascript, image...) ，都匯集在同一個資料夾，所以在`settings.py`加上 STATIC_ROOT 的設定：
 ```python
 # mysite/settings.py
 
 ...
-# Parse database configuration from $DATABASE_URL
+
+# Static asset configuration
+STATIC_ROOT = 'staticfiles'
+
+```
+然後在同一個資料夾，也就是 mysite/mysite/ 底下新建 `production_settings.py`，專門放部署時所需要的設定：
+
+```python
+# import all default settings
+from .settings import *
+
 import dj_database_url
 DATABASES = {
     'default': dj_database_url.config()
@@ -119,29 +113,20 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
-STATIC_ROOT = 'staticfiles'
-
 # Turn off DEBUG mode
 DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-# Import all of local settings if the file exists
-try:
-    from .local_settings import *
-except ImportError:
-    pass
 ```
 
 ### .gitignore
-有一些檔案或資料夾在新增 git repository 時，不想被加入進入。建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案將我們的本機設定，虛擬環境，資料庫等等放進去：
+有一些檔案或資料夾在新增 git repository 時，不想被加入進入。建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案將我們的虛擬環境，本機資料庫等等放進去：
 ```
 VENV
 *.pyc
 __pycache__
 staticfiles
-local_settings.py
 db.sqlite3
 ```
 
@@ -155,7 +140,7 @@ djangogirls
 ├──mysite
 │   ├── mysite
 │   │   ├── __init__.py
-│   │   ├── local_settings.py
+│   │   ├── production_settings.py
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
