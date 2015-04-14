@@ -117,7 +117,7 @@ from django.core.wsgi import get_wsgi_application
 from dj_static import Cling
 application = Cling(get_wsgi_application())
 ```
-在 DJANGO_SETTINGS_MODULE 這邊要指向剛剛建立的部署專用設定 `mysite.production_settings`
+在 DJANGO_SETTINGS_MODULE 這邊要指向剛剛所建立的部署專用設定 `mysite.production_settings`
 
 而 import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
 
@@ -260,12 +260,13 @@ fatal: The remote end hung up unexpectedly
 ```
 ### Step 6: Django project 初始化
 
-Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令：
+Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令。
 
+migrate 時需要指定使用部署專用設定檔 mysite.production-settings：
 ```
-~/djangogirls$ heroku run python mysite/manage.py migrate
+~/djangogirls$ heroku run python mysite/manage.py migrate --settings=mysite.production-settings
 ```
-以及重新建立一個 superuser：
+並為新資料庫建立一個 superuser：
 ```
 ~/djangogirls$ heroku run python mysite/manage.py createsuperuser
 ```
