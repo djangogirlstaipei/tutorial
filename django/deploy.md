@@ -69,17 +69,7 @@ python-3.4.1
 
 前面的章節，我們透過修改`settings.py`來調整 Django project 的設定，但是通常正式上線 ( production ) 的環境會和開發/本機 ( development / local ) 環境有所不同。
 
-首先，Django 在部署時會將所有 [靜態檔案](https://devcenter.heroku.com/articles/django-assets) (ex: css, javascript, image...) ，都匯集在同一個資料夾，所以在`settings.py`加上 STATIC_ROOT 的設定：
-```python
-# mysite/settings.py
-
-...
-
-# Static asset configuration
-STATIC_ROOT = 'staticfiles'
-
-```
-然後在同一個資料夾，也就是 mysite/mysite/ 底下新建 `production_settings.py`，專門放部署時所需要的設定：
+所以我們在`mysite/mysite/`底下新建一個 `production_settings.py`，專門放部署時所需要的設定：
 
 ```python
 # import all default settings
@@ -89,6 +79,9 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config()
 }
+
+# Static asset configuration
+STATIC_ROOT = 'staticfiles'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -111,15 +104,14 @@ TEMPLATE_DEBUG = False
 ## mysite/wsgi.py
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.production_settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 from django.core.wsgi import get_wsgi_application
+
 from dj_static import Cling
 application = Cling(get_wsgi_application())
 ```
-在 DJANGO_SETTINGS_MODULE 這邊要指向剛剛所建立的部署專用設定 `mysite.production_settings`
-
-而 import [dj_static](https://github.com/kennethreitz/dj-static) 幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
+加上 import [dj_static](https://github.com/kennethreitz/dj-static) 的部分，幫我們部署 static 檔案 ( 例如圖片，CSS 和 JavaScript 檔案等等 )
 
 
 ### .gitignore
@@ -219,7 +211,14 @@ heroku	https://git.heroku.com/djangogirlsdiary.git (fetch)
 heroku	https://git.heroku.com/djangogirlsdiary.git (push)
 ```
 
-### Step 4: 利用 git push 上傳到 Heroku
+### Step 4: 設定環境變數
+
+我們利用`heroku config:set`指令設置 [環境變數](https://devcenter.heroku.com/articles/config-vars)，以確保未來在 Heroku 執行任何指令時，都是使用到部署專用的設定檔：
+```
+$ heroku config:set DJANGO_SETTINGS_MODULE=mysite.production_settings
+```
+
+### Step 5: 利用 git push 上傳到 Heroku
 
 使用`git push`指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
 
@@ -252,26 +251,25 @@ fatal: The remote end hung up unexpectedly
 ~/djangogirls$ heroku keys:add
 ```
 
-### Step 5: 啟動 web process
+### Step 6: 啟動 web process
 
 先前建立了 **Procfile** 檔案告訴 Heroku 啟動時要執行的指令，現在我們使用指令啟動 web process，並指定只需要`1`個 instance：
 ```
 ~/djangogirls$ heroku ps:scale web=1
 ```
-### Step 6: Django project 初始化
+### Step 7: Django project 初始化
 
-Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令。
+Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用`heroku run`可以在 Heroku 執行指令：
 
-migrate 時需要指定使用部署專用設定檔 mysite.production-settings：
 ```
-~/djangogirls$ heroku run python mysite/manage.py migrate --settings=mysite.production-settings
+~/djangogirls$ heroku run python mysite/manage.py migrate
 ```
 並為新資料庫建立一個 superuser：
 ```
 ~/djangogirls$ heroku run python mysite/manage.py createsuperuser
 ```
 
-### Step 7: 開啟瀏覽器觀看你的網站
+### Step 8: 開啟瀏覽器觀看你的網站
 最後，透過`open`指令會自動在瀏覽器打開你的網站：
 
 ```
