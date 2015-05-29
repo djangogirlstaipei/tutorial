@@ -109,7 +109,7 @@ Cleaning up...
 ```
 >>> import django
 >>> django.VERSION
-(1, 7, 0, 'final, 0')
+(1, 7, 8, 'final, 0')
 ```
 
-如果看見如上的訊息，就代表安裝成功囉！
+如果看見類似上面的訊息，就代表安裝成功囉！
