@@ -58,9 +58,6 @@ class Post(models.Model):
     photo = models.URLField(blank=True)
     location = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
 ```
 - Django 預設會為每一個 Model 加上 `id` 欄位 (型態為 auto-incrementing primary key)，並且 **每一筆資料的 id 都會是獨一無二的**。
 
@@ -69,13 +66,10 @@ class Post(models.Model):
 | 屬性 | 資料型態 | 說明 |參數|
 | -----------|-----------| -------  |--------------------------------------------|
 | title      | CharField | 標題     |`max_length=100` -- 標題不可以超過 100 個字元|
-| content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用）。 |
+| content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用），預設所有欄位都是 `blank=False` |
 | photo      | URLField  | 照片網址 | 同 content，非必填欄位|
 | location   | CharField | 地點     | 同 title |
 | created_at | DateTime  | 建立時間 | `auto_now_add=True` -- 物件新增的時間<br>p.s. 若想設成物件修改時間，則用 `auto_now=True`|
-
-- **透過 [def \_\_str__](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str)  更改 Post 的表示方式**
-    - Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。**我們可以用  `def __str__`重新定義，讓 Post 顯示標題**，如 `<Post: Your_Post_Title>`。
 
 ---
  [**Model fields**](https://docs.djangoproject.com/en/1.7/ref/models/fields/) ：可為 Django Model 定義不同型態的屬性。
@@ -89,40 +83,6 @@ class Post(models.Model):
 - **DateTimeField** -- **日期與時間的欄位**，使用時會轉成 Python`datetime`型別
 
 更多 Model Field 與其參數，請參考 [Django 文件 ](https://docs.djangoproject.com/en/1.7/ref/models/fields/)
-
----
-
-## 將新增的 Django app 加入設定檔
-
-在前幾章，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
-
-##新增 app
-
-打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
-
-```
-# mysite/settings.py
-
-...
-
-# Application definition
-
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'trips',
-)
-```
-請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
-
----
-**預設安裝的 Django app**
-
-Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用者認證)、`admin` (管理後台) ...等等，我們可依需求自行增減。
 
 ---
 
