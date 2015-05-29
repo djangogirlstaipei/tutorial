@@ -129,6 +129,39 @@ trips
 └── views.py
 
 ```
+## 將新增的 Django app 加入設定檔
+
+在前一個指令，我們透過 Django 命令列工具建立了 **trips** 這個 app。但若要讓 Django 知道要管理哪些 app，還需再調整設定檔。
+
+##新增 app
+
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+
+```
+# mysite/settings.py
+
+...
+
+# Application definition
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'trips',
+)
+```
+請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的`trips`加在最後面。
+
+---
+**預設安裝的 Django app**
+
+Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用者認證)、`admin` (管理後台) ...等等，我們可依需求自行增減。
+
+---
 
 ## 小結
 
