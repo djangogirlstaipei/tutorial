@@ -69,10 +69,10 @@ def hello_world(request):
 
 現在我們來設定，Hello World 範例的 URL Conf：
 
-打開 startproject 時自動產生的`urls.py`，在 `urlpatterns` 中加入下面這行：
+打開 startproject 時自動產生的`urls.py`，先 import 剛剛寫的 view function，然後在 `urlpatterns` 中加入下面這行：
 
 ```python
-url(r'^hello/$', 'trips.views.hello_world'),
+url(r'^hello/$', hello_world),
 ```
 
 現在 `mysite/urls.py` 的內容應該會像下面這樣：
@@ -82,14 +82,16 @@ url(r'^hello/$', 'trips.views.hello_world'),
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+# import view functions from trips app
+from trips.views import hello_world
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'refproj.views.home', name='home'),
+    # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', 'trips.views.hello_world'),
+    url(r'^hello/$', hello_world),
 )
 ```
 以上程式透過 [url()](https://docs.djangoproject.com/en/1.7/ref/urls/#django.conf.urls.url) function 傳入兩個參數 `regex`, `view`：
@@ -98,7 +100,7 @@ urlpatterns = patterns('',
 
 - **regex** -- 定義的 URL 規則
   - 規則以 regular expression 來表達
-  -  *r'^hello/$'* 代表的是 `/hello/` 這種 URL
+  -  *r'^hello/$'* 代表的是 `hello/` 這種 URL
 - **view** -- 對應的 view function
   - 指的是 `hello_world()` 這個 view
   - *'trips.views.hello_world'* -- `trips` 裡的 `views.py` 中的 `hello_world()` function
