@@ -1,7 +1,7 @@
 # Dynamic URL
 
 
-除了在首頁顯示文章的摘要外，通常也會希望每篇文章能有獨立的網址與頁面。例如，我們可能會希望 `http://127.0.0.1/post/5` 能夠是 **id=5 **那篇文章的網址，而頁面內容則是此篇日記的詳細資訊，而非摘要。
+除了在首頁顯示文章的摘要外，通常也會希望每篇文章能有獨立的網址與頁面。例如，我們可能會希望 `http://127.0.0.1/post/5/` 能夠是 **id=5 **那篇文章的網址，而頁面內容則是此篇日記的詳細資訊，而非摘要。
 
 ---
 
@@ -22,10 +22,10 @@ def post_detail(request, id):
 ```
 
 
-> 我們以訪客瀏覽 `http://127.0.0.1:8000/post/5` 的例子，來解釋以上程式：
+> 我們以訪客瀏覽 `http://127.0.0.1:8000/post/5/` 的例子，來解釋以上程式：
 
 
-- ** 目前瀏覽文章的 id 會傳入 View 中：** 當訪客瀏覽 `http://127.0.0.1/post/5` 時，傳入 View 的 id 會是 5。
+- ** 目前瀏覽文章的 id 會傳入 View 中：** 當訪客瀏覽 `http://127.0.0.1/post/5/` 時，傳入 View 的 id 會是 5。
 
     - URL 與 id 的對應，會在稍後設定。這裡只需知道 View 中傳入的，會是當前瀏覽文章 id 即可。
 
@@ -42,20 +42,20 @@ def post_detail(request, id):
 
 ```python
 # mysite/urls.py
+from trips.views import hello_world, home, post_detail
 
 urlpatterns = patterns('',
     ...
-    url(r'^post/(?P<id>\d+)/$', 'trips.views.post_detail',
-        name='post_detail'),
+    url(r'^post/(?P<id>\d+)/$', post_detail, name='post_detail'),
 )
 ```
 
-上面的修改完成後，只要連至`http://127.0.0.1/post/5` 就會對應到  `post_detail()` 這個 View，並且**傳入的 id = 5** 。
+上面的修改完成後，只要連至`http://127.0.0.1/post/5/` 就會對應到  `post_detail()` 這個 View，並且**傳入的 id = 5** 。
 
 ---
 ### 使用 Regex 提取部份 URL 為參數
 
-我們前面提過，Django 的 URL 是一個 *Regular Expression (Regex)*。Regular expression 可用來描述一個字串的樣式。 除了可以表示固定字串之外，還可以用來表示不確定的內容。我們一步一步解釋文章單頁所使用的 Url 設定：
+我們前面提過，Django 的 URL 是一個 *Regular Expression (Regex)*。Regular expression 可用來描述一個字串的樣式。 除了可以表示固定字串之外，還可以用來表示不確定的內容。我們一步一步解釋文章單頁所使用的 URL 設定：
 
 ```
 (?P<id>\d+)
@@ -135,7 +135,7 @@ return render(request, 'post.html', {'post': post})
 
 - 將 post 物件的屬性 (e.g. 標題、內文、時間......等)，利用 `{{ var }}` 與 Template Filter 顯示並格式化於 HTML 中
 
-- 若資料庫裡有 id=5 的 Post，現在連至 http://127.0.0.1:8000/post/5 即可看到此日記的單頁
+- 若資料庫裡有 id=5 的 Post，現在連至 http://127.0.0.1:8000/post/5/ 即可看到此日記的單頁
 
 ## 加入到單篇日記頁的連結
 
@@ -153,12 +153,10 @@ return render(request, 'post.html', {'post': post})
 
 | 語法 | 說明 |
 | -- | -- |
-| {% url '`path.to.some_view`' %} | 使用 View 的路徑 |
 | {% url '`<view_name>`' %} | 使用在 urls.py 中設定的 name  |
 
 也可以傳入參數，如：
 ```
-{% url 'path.to.some_view' arg1=<var1> arg2=<var2> ...%}
 {% url '<view_name>' arg1=<var1> arg2=<var2> ...%}
 ```
 

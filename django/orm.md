@@ -40,13 +40,13 @@ python manage.py shell
 >>> from trips.models import Post
 
 >>> Post.objects.create(title='My First Trip', content='肚子好餓，吃什麼好呢?',  location='台北火車站')
-<Post: My First Trip>
+<Post: Post object>
 
 >>> Post.objects.create(title='My Second Trip', content='去散散步吧',  location='台北火車站')
-<Post: My Second Trip>
+<Post: Post object>
 
 >>> Post.objects.create(title='Django 大冒險', content='從靜態到動態',  location='台北市大安區復興南路一段293號')
-<Post: Django 大冒險>
+<Post: Post object>
 ```
 
 ### Read
@@ -56,11 +56,36 @@ python manage.py shell
 
 ```
 >>> Post.objects.all()
+[<Post: Post object>, <Post: Post object>, <Post: Post object>]
+
+```
+---
+
+Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [def \_\_str__](https://docs.djangoproject.com/en/1.7/ref/models/instances/#str)  更改 Post 的表示方式，修改 trips/models.py：
+
+```python
+# trips/models.py
+
+from django.db import models
+
+
+class Post(models.Model):
+    ...
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+```
+
+退出 Django Shell 後再重新進入，Post 已經被重新定義成顯示標題，如 `<Post: Your_Post_Title>`。
+
+```
+>>> Post.objects.all()
 [<Post: My First Trip>, <Post: My Second Trip>, <Post: Django 大冒險>]
 
 ```
 
-
+---
 
 而只想顯示部分資料時，則可以使用 `get` 或 `filter`：
 ```

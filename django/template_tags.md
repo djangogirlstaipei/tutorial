@@ -50,10 +50,11 @@ def home(request):
 
 ```python
 # mysite/urls.py
+from trips.views import hello_world, home
 
 urlpatterns = patterns('',
     ...
-    url(r'^$', 'trips.views.home'),
+    url(r'^$', home),
 )
 ```
 
