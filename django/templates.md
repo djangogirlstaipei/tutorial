@@ -7,7 +7,7 @@
 ```python
 # trips/views.py
 
-from datetime import datetime
+import datetime
 from django.http import HttpResponse
 
 
@@ -21,7 +21,7 @@ def hello_world(request):
                 Hello World! <em style="color:LightSeaGreen;">{current_time}</em>
             </body>
         </html>
-    """.format(current_time=datetime.now())
+    """.format(current_time=datetime.datetime.now())
 
     return HttpResponse(output)
 ```
@@ -29,6 +29,7 @@ def hello_world(request):
 1. **多行字串：**
 
     `"""..."""` 或是 `'''...'''` (三個雙引號或三個單引號) 是字串的多行寫法，這裡我們使用它表達 HTML，並維持原有的縮排。
+
 2. **顯示目前時間：**
 
     為了顯示動態內容，我們 import [datetime](https://docs.python.org/3/library/datetime.html) 時間模組，並用`datetime.now()`取得現在的時間。
@@ -62,19 +63,41 @@ mkdir templates
 
 ### 設定 Templates 資料夾的位置
 
-建立好資料夾以後，我們需要修改`mysite/settings.py`，加上`TEMPLATE_DIRS`：
+建立好資料夾以後，我們需要修改 `mysite/settings.py` 中的 `TEMPLATES` 設定：
 
 ```python
 # mysite/settings.py
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 ```
+
+我們將 `'DIRS'` 項目修改成
+
+```python
+[os.path.join(BASE_DIR, 'templates').replace('\\', '/')]
+```
+
+好讓 Django 找得到剛剛建立的 `templates` 目錄。
 
 
 ### 建立第一個 Template
-新增檔案 `templates/hello_world.html` ，並將之前寫在 View function 中的 HTML 複製到 `hello_world.html`
+
+新增檔案 `templates/hello_world.html` ，並將之前寫在 view function 中的 HTML 複製到 `hello_world.html`
+
 ```
 mysite
 ├── mysite
@@ -85,6 +108,7 @@ mysite
 ```
 
 為了區別，我們做了一些樣式上的調整：
+
 ```html
 <!-- hello_world.html -->
 
@@ -106,54 +130,55 @@ mysite
         <em>{{ current_time }}</em>
     </body>
 </html>
-
 ```
 
 #### 在 Template 中顯示變數
-以上 Template 中，有個地方要特別注意：
+
+以上 template 中，有個地方要特別注意：
 
     <em>{{ current_time }}</em>
 
-仔細比較，可以發現變數 **current_time** 的使用方式與之前不同，在這裡用的是兩個大括號。
+仔細比較，可以發現變數 `current_time` 的使用方式與之前不同，在這裡用的是兩個大括號。
 
 ---
 
 `{{`*`<variable_name>`*`}}` 是在 Django Template 中顯示變數的語法。
 
+其它 Django Template 語法，我們會在後面的章節陸續練習到。
+
 ---
 
-*其它 Django Template 語法，我們會在後面的章節陸續練習到*。
 
+## `render`
 
-## render
-
-最後，將 **hello_world** 修改如下：
+最後，將 view function `hello_world` 修改如下：
 
 ```python
 # trips/views.py
 
-from datetime import datetime
+import datetime
 from django.shortcuts import render
 
 
 def hello_world(request):
-    return render(request,
-                  'hello_world.html',
-                  {'current_time': datetime.now()})
+    return render(request, 'hello_world.html', {
+        'current_time': datetime.datetime.now(),
+    })
 ```
 
-我們改成用 `render` 這個 function 產生要回傳的 HttpResponse 物件。
+我們改成用 `render` 這個 function 產生要回傳的 `HttpResponse` 物件。
 
 這次傳入的參數有：
 
- - **request** --  HttpRequest 物件
- - **template_name** -- 要使用的 Template
- - **dictionary** -- 包含要新增至 Template 的變數
+ - **request** --  `HttpRequest` 物件
+ - **template_name** -- 要使用的 template
+ - **dictionary** -- 包含要新增至 template 的變數
 
 ---
-**Render** ：產生 HttpResponse 物件。
 
-[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.7/topics/http/shortcuts/#render)
+`render`：產生 HttpResponse 物件。
+
+[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.8/topics/http/shortcuts/#render)
 
 ---
 
@@ -161,7 +186,7 @@ def hello_world(request):
 
 #### 大功告成
 
-HTML 程式碼獨立成 Template 後，程式也變得簡潔許多了。
+HTML 程式碼獨立成 template 後，程式也變得簡潔許多了。
 
 重新載入 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/)，你會發現畫面有了小小的改變：
 
