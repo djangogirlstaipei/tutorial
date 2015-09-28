@@ -1,23 +1,27 @@
 # Template tags
 
 在先前的 Templates 章節中，我們已經學會基礎的 Django Template 用法 (在 Template 裡呈現變數內容)。但為了產生完整的網頁，我們會需要能在 Template 裡執行一些簡單的 Python 語法，例如：
-- **邏輯判斷** (if else)  -- 若使用者己經登入，則顯示使用者的暱稱；若未登入，則顯示登入按鈕
-- **重覆 HTML 片段** (for loop) -- 列出所有好友的ID 和顯示圖片
-- **格式化 Template 中的變數** -- 例如日期的格式化
 
-因為我們 [Django template tags](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取 View 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+- **邏輯判斷** (if-else)  -- 若使用者己經登入，則顯示使用者的暱稱；若未登入，則顯示登入按鈕
+- **重覆 HTML 片段** (for loop) -- 列出所有好友的帳號和顯示圖片
+- **格式化 Template 中的變數** -- 日期的格式化等等
+
+[Django template tags](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+
+---
+
+在這一章，我們將使用 Django ORM 存取資料庫，撈出旅遊日記全部的 posts 傳入 template，並使用 Django 的 template tags 與 filters，一步步產生旅遊日記的首頁。
 
 ---
 
-在這一章，我們將到使用 Django ORM 存取資料庫 ，撈出旅遊日記全部的 Post 傳入 Template。並使用 Django 的 Template Tag 、Template Filter 一步步產生旅遊日記的首頁。
-
----
 ## 建立旅遊日記的首頁
 
 ### 確認首頁需求
+
 在開始動工之前，我們先確認需求。
 
 旅遊日記的首頁應該會有：
+
 1. 標題
 2. 照片
 3. 發佈日期
@@ -25,42 +29,42 @@
 
 
 ### 建立首頁的 View
-首先，我們先建立一個新的 View function - `home()`：
+
+首先我們建立一個新的 view function - `home()`：
 
 ```python
 # trips/views.py
 
 from django.shortcuts import render
-from trips.models import Post
-
+from .models import Post
 
 def home(request):
-    # get all the posts
     post_list = Post.objects.all()
-    return render(request,
-                  'home.html',
-                  {'post_list': post_list})
+    return render(request, 'home.html', {
+        'post_list': post_list,
+    })
 ```
 
-- **匯入所需的 Model** -- 記得 import 需要用到的 Model `Post`
-- **取得所有Post** -- 透過`Post.objects.all()`，從資料庫取得全部的 post ，並回傳至 `home.html` 這個 template。
+- **匯入所需的 model** -- 記得 import 需要用到的 Model `Post`
+- **取得所有 posts** -- 透過 `Post.objects.all()` 從資料庫取得全部的 posts，並傳入 `home.html` 這個 template。
 
-### 設定首頁的 Url
-接下來，我們修改 **urls.py** ，將首頁 ( 正規表達式`^$` ) 指向 **home()** 這個 View function：
+### 設定首頁的 URL
+
+接下來，我們修改 **urls.py** ，將首頁（正規表達式 `^$`）指向 **home()** 這個 view function：
 
 ```python
 # mysite/urls.py
 from trips.views import hello_world, home
 
-urlpatterns = patterns('',
+urlpatterns = [
     ...
     url(r'^$', home),
-)
+]
 ```
 
-## Template tags
+## Template Tags
 
-### 建立首頁的 Template 並印出 post_list
+### 建立首頁的 Template 並印出 `post_list`
 
 首先，在 templates 資料夾底下新增 `home.html`：
 
@@ -70,36 +74,36 @@ urlpatterns = patterns('',
 {{ post_list }}
 ```
 
-
-
 打開瀏覽器進入首頁 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)，可以看到 *post_list* 已呈現至網頁上了。
 
 ![Plain post_list in Template](./../images/plain-post-list-in-template.png)
 
 
+### 顯示 Post 中的資料
 
-### 顯示 Post中的資料
+仔細觀察印出的 `post_list`，會發現是以 list 的形式顯示。但我們希望的則是：**存取每個 Post 中的資料，並印出來**。
 
-仔細觀察印出的 *post_list*，會發現是以 List 的形式顯示。但我們希望的則是：**存取這個 Post List 中每個元素的資料，並印出來**。
+為了達成這個功能，我們會用到 `for` 這個 template tag。
 
-為了達成這個功能，我們會用到 `for` 這個 Template tag。
+#### `for` 迴圈
 
-#### for loop
-
-在寫 Python 時，若想存取 List 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% for %}](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#for)。
+在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% for %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for)。
 
 ---
-**for**
 
-在 Template 中使用類似 Python 的 for 迴圈，使用方法如下：
+**{% for %}**
+
+在 template 中使用類似 Python 的 for 迴圈，使用方法如下：
+
 ```html
 {% for <element> in <list> %}
     ...
 {% endfor %}
 ```
+
 ---
 
-瞭解了 **for** 的用法後，我們試著印出首頁所需的資訊。修改`home.html`如下：
+瞭解了 **for** 的用法後，我們試著印出首頁所需的資訊。修改 `home.html` 如下：
 
 ```html
 <!-- home.html -->
@@ -114,8 +118,8 @@ urlpatterns = patterns('',
 {% endfor %}
 ```
 - 開始標籤為 `{% for %}` 開始；結束標籤為 `{% endfor %}`
-- *post_list* 中有 3 個元素，所以 for 區塊中的內容會執行 3 次
-- 迴圈中，使用標籤`{{ var }}`，反覆印出每個 post 中的標題、建立時間、照片網址和文章內容
+- `post_list` 中有 3 個元素，所以 for 區塊中的內容會執行 3 次
+- 迴圈中，使用標籤 `{{ var }}`，反覆印出每個 post 中的標題、建立時間、照片網址和文章內容
 
 重新整理瀏覽器，網頁上會有首頁所需的 post 資訊：
 
@@ -123,49 +127,60 @@ urlpatterns = patterns('',
 
 ### 顯示照片
 
-現在網頁已經有照片網址，我們稍微修改 Template ，讓照片以圖片方式呈現
+現在網頁已經有照片網址，我們稍微修改 template ，讓照片以圖片方式呈現。
+
+把 `home.html` 的下面這一行：
+
+```html
+{{ post.photo }}
+```
+
+換成下面這樣：
+
 ```html
 <div class="thumbnail">
     <img src="{{ post.photo }}" alt="">
 </div>
 ```
+
 ### 處理沒有照片的遊記
 
-#### if...else
+#### `if`…`else`
 
-另一個常用的 template tags 是 [if](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#if) 判斷式，用法如下：
+另一個常用的 template tags 是 [{% if %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#if) 判斷式，用法如下：
 
 ```html
 {% if post.photo %}
-    <div class="thumbnail">
-        <img src="{{ post.photo }}" alt="">
-    </div>
+<div class="thumbnail">
+    <img src="{{ post.photo }}" alt="">
+</div>
 {% else %}
-    <div class="thumbnail thumbnail-default"></div>
+<div class="thumbnail thumbnail-default"></div>
 {% endif %}
 ```
+
 - 符合條件所想要顯示的 HTML 放在 `{% if `*`<condition>`*` %}` 區塊裡
-- 不符合的則放在`{% else %}`區塊裡面
-- 最後跟 **for** 一樣，要加上`{% endif %}`作為判斷式結尾。
+- 不符合的則放在 `{% else %}` 區塊裡面
+- 最後跟 **for** 一樣，要加上 `{% endif %}` 作為判斷式結尾。
 
-在這裡，我們判斷如果 *post.photo* 有值就顯示照片，沒有就多加上一個 CSS class `photo-default`另外處理。
+在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則就多加上一個 CSS class `photo-default` 另外處理。
 
 
-## Template filter
+## Template Filter
 
-除了 template tags ，Django 也內建也許多好用的 [template filter](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容......等等。使用方法如下:
+除了 template tags ，Django 也內建也許多好用的 [template filters](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容等等。使用方法如下:
 
-`{{`*`<variable_name>`*`|`*`<filter_name>`*`:`*`<filter_arguments>`*`}}`
+`{{<variable_name>|<filter_name>:<filter_arguments>}}`
 
-- **< variable_name > ** -- 變數名稱
-- **< filter_name > ** -- filter 名稱，例如`add`, `cut`等等
-- **< filter_arguments > ** -- 要傳入 filter 的參數
+- `<variable_name>` -- 變數名稱
+- `<filter_name>` -- filter 名稱，例如 `add`、`cut` 等等
+- `<filter_arguments>` -- 要傳入 filter 的參數
 
 #### 變更時間的顯示格式
 
-在這裡，我們只練習一種很常用的 filter - **[date](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#date)**。它可以將`datetime`型別的物件，以指定的時間格式 Date Format ( 例如：`Y / m / d` )輸出。
+在這裡，我們只練習一種很常用的 filter [date](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#date)。它可以將 `datetime` 型別的物件，以指定的時間格式輸出。
 
-我們試著將 `created_at` 時間，以 `年 / 月 / 日` 的形式顯示：
+我們試著將 `created_at` 時間顯示成**年 / 月 / 日**：
 
 ```html
 {{ post.created_at|date:"Y / m / d" }}
@@ -173,9 +188,11 @@ urlpatterns = patterns('',
 ---
 
 ### 完整的 HTML 與 CSS
+
 接著，補上完整的 HTML 標籤，並加上 CSS 樣式後，旅遊日記首頁就完成了。
 
-### 最終版 *home.html* 程式碼如下：
+最終版 `home.html` 程式碼如下：
+
 ```html
 <!-- home.html -->
 
@@ -191,7 +208,7 @@ urlpatterns = patterns('',
 <body>
     <div class="header">
         <h1 class="site-title text-center">
-            <a href="/">A Django Girl's Adventure</a>
+            <a href="/">A Django Girl’s Adventure</a>
         </h1>
     </div>
     <div class="container">
@@ -227,27 +244,26 @@ urlpatterns = patterns('',
 </html>
 ```
 
-打開 http://127.0.0.1:8000/ 看一下你的成果吧！
+打開 <http://127.0.0.1:8000/> 看看你的成果吧！
 
 ![Django Girls Trips - Home page](./../images/djangogirlstrips-home.png)
 
 ## 小結
 最後，我們複習一下本章學到的 **Template Tag** 與 **Template Filter**：
 
-** Template Tag**
+### Template Tags
 
 | 語法 | 說明 |
-| -- | -- |
+| --- | --- |
 | {% **for** ... **in** ... %}...{% **endfor** %} | 類似 Python 的 for 迴圈，反覆執行 for 區塊中的內容 |
-| {% **if** %} ... {% **else** %} ... {% **endif** %}` | 在 Template Tags 中進行 if／else 的邏輯判斷 |
+| {% **if** %} ... {% **else** %} ... {% **endif** %} | 在 Template Tags 中進行 if／else 的邏輯判斷 |
 
 
-** Template Filter**
+### Template Filters
 
-<table>
-<tr><th>語法</th><th>說明</th></tr>
-<tr><td>{{ value **|date:** *`<date_format>`* }}</td><td>可以將`datetime`型別的物件，以指定的時間格式 Date Format 輸出</td></tr>
-</table>
+| 語法 | 說明 |
+| --- | --- |
+| {{ value**\|date:***\<date_format\>* }} | 可以將 `datetime` 型別的物件，以指定的時間格式輸出 |
 
 
 
