@@ -12,9 +12,9 @@
 
 ## 設定管理後台
 
-### 將 Django admin 加入 INSTALLED_APPS
+### 將 Django Admin 加入 `INSTALLED_APPS`
 
-後台管理的功能 Django 已預設開啟。因此，設定檔中 的 `INSTALLED_APPS`裡，已經有 `django.contrib.admin` 這個 app ：
+後台管理的功能 Django 已預設開啟。因此，設定檔中的 `INSTALLED_APPS` 裡，已經有 `django.contrib.admin` 這個 app ：
 
 ```
 # mysite/settings.py
