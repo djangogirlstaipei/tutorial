@@ -4,10 +4,10 @@
 
 在前面的介紹，我們有提到 Django 的 MTV 架構。其處理 request 的流程如下：
 
-1. 瀏覽器送出 **HTTP Request**
-2. Django 依據 **URL Conf** 分配至對應的 View
-3. View 進行資料庫的操作或其他運算，並回傳 Http Response 物件
-4. 瀏覽器依據 **HTTP Response**，顯示網頁畫面
+1. 瀏覽器送出 **HTTP request**
+2. Django 依據 **URL configuration** 分配至對應的 View
+3. View 進行資料庫的操作或其他運算，並回傳 `HttpResponse` 物件
+4. 瀏覽器依據 **HTTP response** 顯示網頁畫面
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## Django Views
 
-Django view 其實是一個 function，**處理 HttpRequest 物件，並回傳 HttpResponse 物件**，大致說明如下：
+Django view 其實是一個 function，**處理 `HttpRequest` 物件，並回傳 `HttpResponse` 物件**，大致說明如下：
 
 - **會收到`HttpRequest 物件`參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/1.7/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 view function。
 
