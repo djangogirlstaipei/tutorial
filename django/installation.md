@@ -26,7 +26,7 @@ cd djangogirls
 
 我們可以直接開始安裝 Django，但實務上，大多數人都會搭配使用虛擬環境。使用虛擬環境有許多優點：
 
-- 你的專案會擁有一個專屬的獨立 Python 環境
+- 你的專案會擁有一個專屬的獨立 Python 環境。
 - 不需要 root 權限，就可以安裝新套件。
 - 方便控管不同版本的套件，不用擔心升級套件會影響到其他專案。
 - 如果需要多人協作或在不同機器上跑同一個專案時，使用虛擬環境也可以確保環境一致性。
@@ -39,7 +39,7 @@ cd djangogirls
 
 #### Windows
 
-如果有按照安裝教學，使用**Django Environment** 開啟終端機後，輸入以下指令：
+如果有按照安裝教學，使用 **Django Environment** 開啟終端機後，輸入以下指令：
 
     C:\Users\YOUR_NAME\djangogirls> python -m venv VENV
 
@@ -64,14 +64,14 @@ Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
 
     ~/djangogirls$ source VENV/bin/activate
 
-如果無法使用 `source` 的話，可以用下列指令替代:
+如果無法使用 `source` 的話，可以用下列指令替代：
 
     ~/djangogirls$ . VENV/bin/activate
 
 
 ### 目前的虛擬環境
 
-如果看到前面多了 `(虛擬資料夾名稱)`，則表示已經成功切換至該虛擬環境
+如果看到前面多了 `(虛擬資料夾名稱)`，則表示已經成功切換至該虛擬環境。
 
 #### Windows
 
@@ -98,7 +98,7 @@ pip install "django<1.9"
 
 ```
 Installing collected packages: django
-Successfully installed django-1.8.4
+Successfully installed django-1.8.5
 ```
 
 註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.9"` 試試看。之後如果在使用 `pip` 時遇到類似問題，也可以試著在前面加上 `python -m`。
@@ -117,7 +117,7 @@ Successfully installed django-1.8.4
 ```
 >>> import django
 >>> django.VERSION
-(1, 8, 4, 'final, 0')
+(1, 8, 5, 'final, 0')
 ```
 
 如果看見類似上面的訊息，就代表安裝成功囉！
