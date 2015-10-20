@@ -9,7 +9,7 @@
 - 塗鴉牆管理 -- timeline
 - 動態消息管理 -- news
 
-若未來我們需要寫個購物網站，而需要會員功能時，`accounts` app (使用者管理) 就可以被重複使用。
+若未來我們需要寫個購物網站，而需要會員功能時，`accounts` app（使用者管理）就可以被重複使用。
 
 ---
 
@@ -47,7 +47,7 @@ mysite/
 ```
 
 
-### 瞭解 Django 的 Management Commands
+### 瞭解 Django 的 Management commands
 
 `manage.py` 是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下：
 
@@ -106,7 +106,7 @@ optional arguments:
 ```
 (VENV) ~/djangogirls/mysite$ python manage.py runserver
 ...
-Django version 1.8.4, using settings 'mysite.settings'
+Django version 1.8.5, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
@@ -117,6 +117,7 @@ Quit the server with CONTROL-C.
 
 
 最後我們可以在終端機按下 `CTRL+C` ，關閉 web server 回到命令列。
+
 
 ---
 
@@ -130,7 +131,7 @@ Quit the server with CONTROL-C.
 
 ---
 
-## 建立 Django application (app)
+## 建立 Django application（app）
 
 讓我們利用 `startapp` 建立第一個 Django app -- **trips**:
 
@@ -182,7 +183,7 @@ INSTALLED_APPS = (
 
 **預設安裝的 Django app**
 
-Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用者認證)、`admin` (管理後台) ...等等，我們可依需求自行增減。
+Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth`（使用者認證）、`admin` （管理後台）... 等等，我們可依需求自行增減。
 
 ---
 
@@ -192,19 +193,19 @@ Django 已將常用的 app 設定為 `INSTALLED_APPS` 。例如，`auth` (使用
 
 ```
 mysite
+├── manage.py
 ├── mysite
 │   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── trips
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── migrations
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
-└── manage.py
+└── trips
+    ├── __init__.py
+    ├── admin.py
+    ├── migrations
+    ├── models.py
+    ├── tests.py
+    └── views.py
 ```
 
 ---
@@ -213,10 +214,9 @@ mysite
 
 | 指令 | 說明 |
 | ---|--- |
-| django-admin.py **startproject** *`<project_name>`* | 建立 django 專案 |
-| python manage.py **-h** *`<command_name>`* | 查看 django command 的使用方法 |
+| django-admin.py **startproject** *`<project_name>`* | 建立 Django 專案 |
+| python manage.py **-h** *`<command_name>`* | 查看 Django commands 的使用方法 |
 | python manage.py **runserver** | 啟動開發伺服器 |
-| python manage.py **startapp** *`<app_name>`*  | 新增 django app |
+| python manage.py **startapp** *`<app_name>`*  | 新增 Django app |
 
 ---
-
