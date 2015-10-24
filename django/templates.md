@@ -85,18 +85,18 @@ TEMPLATES = [
 ]
 ```
 
-我們將 `'DIRS'` 項目修改成
+我們將 `'DIRS'` 原本的`[]`修改成：
 
 ```python
 [os.path.join(BASE_DIR, 'templates').replace('\\', '/')]
 ```
 
-好讓 Django 找得到剛剛建立的 `templates` 目錄。
+好讓 Django 找得到剛剛建立的 `templates` 資料夾。
 
 
 ### 建立第一個 Template
 
-新增檔案 `templates/hello_world.html` ，並將之前寫在 view function 中的 HTML 複製到 `hello_world.html`
+新增檔案 `templates/hello_world.html` ，並將之前寫在 view function 中的 HTML 複製到 `hello_world.html`：
 
 ```
 mysite
@@ -149,7 +149,7 @@ mysite
 ---
 
 
-## `render`
+### 使用 render function 
 
 最後，將 view function `hello_world` 修改如下：
 
