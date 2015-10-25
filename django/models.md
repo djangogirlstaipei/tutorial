@@ -16,7 +16,7 @@
 
 ## 設定資料庫
 
-為了開發方便，我們使用 Python 預設的 SQLite 資料庫介面。打開 `mysite/settings.py`，看看 `DATABASES` 的設定。它應該長得像下面這樣：
+為了開發方便，我們使用 Python 預設的資料庫引擎 - SQLite。打開 `mysite/settings.py`，看看 `DATABASES` 的設定。它應該長得像下面這樣：
 
 ```python
 # mysite/settings.py
@@ -64,13 +64,13 @@ class Post(models.Model):
 
 - 為 Post 定義以下屬性：
 
-    | 屬性 | 資料型態 | 說明 |參數|
-    | -----------|-----------| -------  |------------------------------------|
-    | title      | CharField | 標題     |`max_length=100` -- 標題不可以超過 100 個字元|
-    | content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用），預設所有欄位都是 `blank=False` |
-    | photo      | URLField  | 照片網址 | 同 content，非必填欄位|
-    | location   | CharField | 地點     | 同 title |
-    | created_at | DateTimeField | 建立時間 | `auto_now_add=True` -- 物件新增的時間。若想設成物件修改時間，則用 `auto_now=True`|
+| 屬性 | 資料型態 | 說明 |參數|
+| -----------|-----------| -------  |------------------------------------|
+| title      | CharField | 標題     |`max_length=100` -- 標題不可以超過 100 個字元|
+| content    | TextField | 內文     | `blank=True` -- 非必填欄位（表單驗證時使用），預設所有欄位都是 `blank=False` |
+| photo      | URLField  | 照片網址 | 同 content，非必填欄位|
+| location   | CharField | 地點     | 同 title |
+| created_at | DateTimeField | 建立時間 | `auto_now_add=True` -- 物件新增的時間。若想設成物件修改時間，則用 `auto_now=True`|
 
 ---
 

@@ -7,7 +7,7 @@
 ```python
 # trips/views.py
 
-import datetime
+from datetime import datetime
 from django.http import HttpResponse
 
 
@@ -21,7 +21,7 @@ def hello_world(request):
                 Hello World! <em style="color:LightSeaGreen;">{current_time}</em>
             </body>
         </html>
-    """.format(current_time=datetime.datetime.now())
+    """.format(current_time=datetime.now())
 
     return HttpResponse(output)
 ```
@@ -149,20 +149,20 @@ mysite
 ---
 
 
-### 使用 render function 
+### 使用 render function
 
 最後，將 view function `hello_world` 修改如下：
 
 ```python
 # trips/views.py
 
-import datetime
+from datetime import datetime
 from django.shortcuts import render
 
 
 def hello_world(request):
     return render(request, 'hello_world.html', {
-        'current_time': datetime.datetime.now(),
+        'current_time': datetime.now(),
     })
 ```
 
