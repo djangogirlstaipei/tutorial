@@ -60,7 +60,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 ```
 
-- Django 預設會為每一個 Model 加上 `id` 欄位，讓每一筆資料都會有一個獨一無二的 ID。這個欄位我們通常叫做 primary key（主鍵），簡稱 **PK**。
+- Django 預設會為每一個 Model 加上 `id` 欄位，並將這個欄位設成 primary key（主鍵），簡稱 **pk**，讓每一筆資料都會有一個獨一無二的 ID。
 
 - 為 Post 定義以下屬性：
 
