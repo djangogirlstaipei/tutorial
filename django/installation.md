@@ -98,7 +98,7 @@ pip install "django<1.9"
 
 ```
 Installing collected packages: django
-Successfully installed django-1.8.5
+Successfully installed django-1.8.6
 ```
 
 註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.9"` 試試看。之後如果在使用 `pip` 時遇到類似問題，也可以試著在前面加上 `python -m`。
@@ -117,7 +117,7 @@ Successfully installed django-1.8.5
 ```
 >>> import django
 >>> django.VERSION
-(1, 8, 5, 'final, 0')
+(1, 8, 6, 'final, 0')
 ```
 
 如果看見類似上面的訊息，就代表安裝成功囉！
