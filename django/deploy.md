@@ -15,7 +15,7 @@
 首先利用 `pip` 安裝一些部署時需要用到的套件：
 
 ```
-(VENV) ~/djangogirls$ pip install dj-database-url gunicorn dj-static
+(djangogirls_venv) ~/djangogirls$ pip install dj-database-url gunicorn dj-static
 ```
 
 當終端機顯示 *Successfully installed...* 時，表示必要的套件都已經安裝好了。
@@ -29,7 +29,7 @@
 在 `djangogirls` 專案目錄底下，利用以下的指令將此虛擬環境裡的 Python 套件全部條列出來，包括套件名稱與版本資訊，並儲存於 [requirements.txt](https://devcenter.heroku.com/articles/python-pip#the-basics)：
 
 ```
-(VENV) ~/djangogirls$ pip freeze > requirements.txt
+(djangogirls_venv) ~/djangogirls$ pip freeze > requirements.txt
 ```
 
 由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫，我們還需要手動在 `requirements.txt` 最後面加上 `psycopg2==2.6.1`（Python 的 PostgreSQL 模組）。最終的檔案內容範例如下，版本可能會稍有不同：
@@ -118,7 +118,7 @@ application = Cling(get_wsgi_application())
 
 我們不希望把有些開發時使用的檔案，例如虛擬環境、本機資料庫等等，都一股腦放到網路上。因此，接下來需要建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案，排除這些資料：
 
-    VENV
+    djangogirls_venv
     *.pyc
     __pycache__
     staticfiles
@@ -141,7 +141,7 @@ djangogirls
 │   ├── templates
 │   ├── trips
 │   └── manage.py
-├── VENV
+├── djangogirls_venv
 ├── .gitignore
 ├── Procfile
 ├── requirements.txt

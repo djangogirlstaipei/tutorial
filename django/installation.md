@@ -35,20 +35,20 @@ cd djangogirls
 
 在較舊的 Python 版本中，建立處擬環境需要另外安裝。但 Python 3.3 已經加入 `venv` 模組，可以直接使用。
 
-那我們立刻開始，首先要創建一個虛擬環境資料夾 `VENV`。
+那我們立刻開始，首先要創建一個虛擬環境資料夾 `djangogirls_venv`。
 
 #### Windows
 
 如果有按照安裝教學，使用 **Django Environment** 開啟終端機後，輸入以下指令：
 
-    C:\Users\YOUR_NAME\djangogirls> python -m venv VENV
+    C:\Users\YOUR_NAME\djangogirls> python -m venv djangogirls_venv
 
 #### Linux / OS X
 
 Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
 
 ```
-~/djangogirls$ python3 -m venv VENV
+~/djangogirls$ python3 -m venv djangogirls_venv
 ```
 
 ### 切換虛擬環境
@@ -58,15 +58,15 @@ Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
 
 #### Windows
 
-    C:\Users\YOUR_NAME\djangogirls> VENV\Scripts\activate
+    C:\Users\YOUR_NAME\djangogirls> djangogirls_venv\Scripts\activate
 
 #### Linux / OS X
 
-    ~/djangogirls$ source VENV/bin/activate
+    ~/djangogirls$ source djangogirls_venv/bin/activate
 
 如果無法使用 `source` 的話，可以用下列指令替代：
 
-    ~/djangogirls$ . VENV/bin/activate
+    ~/djangogirls$ . djangogirls_venv/bin/activate
 
 
 ### 目前的虛擬環境
@@ -75,11 +75,11 @@ Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
 
 #### Windows
 
-    (VENV) C:\Users\YOUR_NAME\djangogirls>
+    (djangogirls_venv) C:\Users\YOUR_NAME\djangogirls>
 
 #### Linux / OS X
 
-    (VENV) ~/djangogirls$
+    (djangogirls_venv) ~/djangogirls$
 
 
 ## 安裝 Django 1.8 最新版本
@@ -110,7 +110,7 @@ Successfully installed django-1.8.6
 
 請在虛擬環境下指令輸入 `python`，進入**互動式命令列**環境
 
-    (VENV) ~/djangogirls$ python
+    (djangogirls_venv) ~/djangogirls$ python
 
 輸入以下的指令取得 Django 版本資訊：
 
