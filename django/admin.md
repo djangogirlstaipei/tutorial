@@ -4,7 +4,7 @@
 
 而這樣的管理後台，Django 也有內建一個 App -- [**Django Admin**](https://docs.djangoproject.com/en/1.8/ref/contrib/admin/) 。只需要稍微設定，網站就能擁有管理後台功能。
 
-前一章，我們學會如何使用 Django Shell 和 QuerySet API ，對 Post 新增、修改及刪除。而現在，我們要利用 **Django Admin** ，來達成類似的資料庫操作。
+前一章，我們學到如何使用 Django Model 抽象地表達資料庫結構。現在，我們要透過 **Django Admin** 看到實際的資料，並跟資料庫進行互動。
 
 ---
 
@@ -93,7 +93,30 @@ admin.site.register(Post)
 
 ![](./../images/django-admin-create.png)
 
-（建議可以多新增幾筆 Post ，在接下來的章節會用到。）
+---
+
+Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.8/ref/models/instances/#str)  更改 Post 的表示方式。
+
+修改 `trips/models.py`：
+
+```python
+# trips/models.py
+
+from django.db import models
+
+
+class Post(models.Model):
+    ...
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+```
+
+重新整理這個頁面後，Post 已經被定義成顯示標題，如 `<Post: Your_Post_Title>`。
+
+
+---
 
 ## 小結
 

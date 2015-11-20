@@ -1,6 +1,6 @@
 # 使用 Django ORM 操作資料庫
 
-在上一章，我們學到如何使用 Django Model 抽象地表達資料庫結構。 在完成 Model 的定義後，我們即可使用 Django 提供的 QuerySet API，來與資料庫互動。
+在前一章，我們利用 **Django Admin** 新增、修改及刪除 Post 。而實際在寫程式時，我們會使用 Django 提供的 QuerySet API，來達成類似的資料庫操作。
 
 ---
 
@@ -55,39 +55,10 @@ python manage.py shell
 [all()](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.all)：
 
 ```
->>> Post.objects.all()
-[<Post: Post object>, <Post: Post object>, <Post: Post object>]
-```
-
----
-
-Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.8/ref/models/instances/#str)  更改 Post 的表示方式。
-
-修改 `trips/models.py`：
-
-```python
-# trips/models.py
-
-from django.db import models
-
-
-class Post(models.Model):
-    ...
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
-```
-
-退出 Django Shell 後再重新進入，Post 已經被重新定義成顯示標題，如 `<Post: Your_Post_Title>`。
-
-```
 >>> from trips.models import Post
 >>> Post.objects.all()
 [<Post: My First Trip>, <Post: My Second Trip>, <Post: Django 大冒險>]
 ```
-
----
 
 只想顯示部分資料時，則可以使用 `get` 或 `filter`：
 
