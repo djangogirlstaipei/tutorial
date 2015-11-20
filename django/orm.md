@@ -1,10 +1,10 @@
 # 使用 Django ORM 操作資料庫
 
-在上一章，我們學到如何使用 Django Model 抽象地表達資料庫結構。 在完成 Model 的定義後，我們即可使用 Django 提供的豐富 API，來與資料庫互動。
+在上一章，我們學到如何使用 Django Model 抽象地表達資料庫結構。 在完成 Model 的定義後，我們即可使用 Django 提供的 QuerySet API，來與資料庫互動。
 
 ---
 
-本章你會學到：如何使用 Django API 來與資料庫互動 (CRUD)。
+本章你會學到：如何使用 Django QuerySet API 與資料庫互動 (CRUD)。
 
 **CRUD** 指的是，**C**reate (新增)、**R**ead (讀取)、**U**pdate (修改)、**D**elete (刪除) 等常見的資料庫操作。
 
@@ -12,9 +12,7 @@
 
 ## 使用 Django Shell
 
-與先前不同的是，在這裡我們不使用 Python Shell。若要在 Python Shell 使用 Django 的功能或模組，還需另外載入設定。
-
-所以我們這裡需要使用 **Django Shell**。
+與先前不同的是，在這裡我們不使用 Python Shell，而是 **Django Shell**。若要在 Python Shell 使用 Django 的功能或模組，還需另外載入設定。
 
 ---
 

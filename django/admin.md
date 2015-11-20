@@ -7,7 +7,9 @@
 前一章，我們學會如何使用 Django Shell 和 QuerySet API ，對 Post 新增、修改及刪除。而現在，我們要利用 **Django Admin** ，來達成類似的資料庫操作。
 
 ---
+
 完成本章後，你會瞭解如何設定 Django Admin，並使用 Django 管理後台，完成 Post 的新增、修改及刪除。
+
 ---
 
 ## 設定管理後台
