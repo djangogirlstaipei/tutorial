@@ -12,15 +12,8 @@
 
 ## 使用 Django Shell
 
-與先前不同的是，在這裡我們不使用 Python Shell，而是 **Django Shell**。若要在 Python Shell 使用 Django 的功能或模組，還需另外載入設定。
+與先前不同的是，在這裡我們不使用 Python Shell，而是 **Django Shell**。
 
----
-
-**Django Shell**
-
-與 Python Shell 類似的互動式命令列。會預先載入 Django 的相關設定，所以可以在此執行 Django 的 API。
-
----
 
 使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
 
@@ -29,6 +22,20 @@ python manage.py shell
 ```
 
 這個 shell 和我們之前輸入 `python` 執行的 shell 長得一樣，只是它會預先為我們設定 Django 需要的環境，方便我們執行 Django 相關的程式。
+
+---
+
+**IPython**
+
+[IPython](http://ipython.org/) 是強化版的 Python 互動式命令列介面，它比預設的命令列介面多了許多進階功能，例如：
+
+- 按 tab 鍵可以補齊未輸入完的指令、檔案及資料夾名稱。
+- 按 ↑ 鍵和 ↓ 鍵可以瀏覽輸入過的程式碼，便於微調先前的程式碼（修改參數等等）。
+- 在套件、模組或函數名稱後加上 `?` 可查看與之相關的資訊。
+- `history` 指令可查看所有輸入過的指令。
+- 可以使用 shell 指令，如：`ls`、`cd`。
+
+---
 
 ## QuerySet API
 
