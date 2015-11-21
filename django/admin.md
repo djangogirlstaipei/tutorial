@@ -84,14 +84,18 @@ admin.site.register(Post)
 
 第一個區塊 **Authentication and Authorization** ，可以管理使用者（User）和 群組（Group）；第二個 **Trips** 區塊裡，則可以看到剛剛設定的 Post model。在這裡可以執行 Post 的新增、修改、刪除等功能。
 
-![](./../images/django-admin-main-screen.png)
+![](./../images/django-admin-home.png)
 
 
 ### 新增一個 Post
 
 現在試著建立一個新的 Post 看看：
 
-![](./../images/django-admin-create.png)
+![](./../images/django-admin-add-post.png)
+
+建立成功後會回到 Posts 頁面，你會發現有一筆資料顯示為 `<Post: Post object>`：
+
+![](./../images/django-admin-posts-1.png)
 
 ---
 
@@ -113,9 +117,9 @@ class Post(models.Model):
         return self.title
 ```
 
-重新整理這個頁面後，Post 已經被定義成顯示標題，如 `<Post: Your_Post_Title>`。
+重新整理 Posts 頁面後，Post 已經被定義成顯示標題，如 `<Post: Your_Post_Title>`。
 
-
+![](./../images/django-admin-posts-2.png)
 ---
 
 ## 小結
