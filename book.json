@@ -1,5 +1,5 @@
 {
-    "gitbook": "2.5.2",
+    "gitbook": ">=2.5.2",
     "links": {
         "sidebar": {
             "Contact us / Support": "mailto:taipei@djangogirls.org"

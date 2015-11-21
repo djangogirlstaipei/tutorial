@@ -38,6 +38,7 @@
 from django.shortcuts import render
 from .models import Post
 
+
 def home(request):
     post_list = Post.objects.all()
     return render(request, 'home.html', {
@@ -255,15 +256,16 @@ urlpatterns = [
 
 | 語法 | 說明 |
 | --- | --- |
-| {% raw %}{% **for** ... **in** ... %}{% raw %}...{% endraw %}{% **endfor** %}{% endraw %} | 類似 Python 的 for 迴圈，反覆執行 for 區塊中的內容 |
+| {% raw %}{% **for** ... **in** ... %}{% endraw %}...{% raw %}{% **endfor** %}{% endraw %} | 類似 Python 的 for 迴圈，反覆執行 for 區塊中的內容 |
 | {% raw %}{% **if** %}{% endraw %} ... {% raw %}{% **else** %}{% endraw %} ... {% raw %}{% **endif** %}{% endraw %} | 在 Template Tags 中進行 if／else 的邏輯判斷 |
 
 
 ### Template Filters
 
-| 語法 | 說明 |
-| --- | --- |
-| {% raw %}{{ value**\|date:***\<date_format\>* }}{% endraw %} | 可以將 `datetime` 型別的物件，以指定的時間格式輸出 |
+<table>
+<tr><th>語法</th><th>說明</th></tr>
+<tr><td>{% raw %}{{{% endraw %} value<strong>|date:</strong><i>&lt;date_format&gt;</i> {% raw %}}}{% endraw %} </td><td>可以將`datetime`型別的物件，以指定的時間格式 Date Format 輸出</td></tr>
+</table>
 
 
 

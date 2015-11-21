@@ -100,7 +100,7 @@ urlpatterns = [
     - 規則以 regular expression（正規表示式）來表達
     -  `r'^hello/$'` 代表的是 `hello/` 這種 URL
 - **view** -- 對應的 view function
-    - 指的是 `hello_world()` 這個 view
+    - 指的是 `hello_world` 這個 view
 
 
 ## 測試 Hello World

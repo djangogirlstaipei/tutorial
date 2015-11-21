@@ -93,13 +93,13 @@ admin.site.register(Post)
 
 ![](./../images/django-admin-add-post.png)
 
-建立成功後會回到 Posts 頁面，你會發現有一筆資料顯示為 `<Post: Post object>`：
+建立成功後會回到 Posts 頁面，你會發現有一筆資料顯示為 `Post object`：
 
 ![](./../images/django-admin-posts-1.png)
 
 ---
 
-Django 通常以 `<Post: Post object>` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.8/ref/models/instances/#str)  更改 Post 的表示方式。
+Django 通常以 `Post object` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.8/ref/models/instances/#str)  更改 Post 的表示方式。
 
 修改 `trips/models.py`：
 
@@ -117,7 +117,7 @@ class Post(models.Model):
         return self.title
 ```
 
-重新整理 Posts 頁面後，Post 已經被定義成顯示標題，如 `<Post: Your_Post_Title>`。
+重新整理 Posts 頁面後，Post 已經被定義成顯示標題：
 
 ![](./../images/django-admin-posts-2.png)
 ---

@@ -1,7 +1,7 @@
 # Dynamic URL
 
 
-除了在首頁顯示文章的摘要外，通常也會希望每篇文章能有獨立的網址與頁面。例如，我們可能會希望 `http://127.0.0.1/post/5/` 能夠是 pk 為 5 那篇文章的網址，而頁面內容則是此篇日記的詳細資訊，而非摘要。
+除了在首頁顯示文章的摘要外，通常也會希望每篇文章能有獨立的網址與頁面。例如，我們可能會希望 `http://127.0.0.1/post/3/` 能夠是 pk 為 3 那篇文章的網址，而頁面內容則是此篇日記的詳細資訊，而非摘要。
 
 ---
 
@@ -21,18 +21,18 @@ def post_detail(request, pk):
     return render(request, 'post.html', {'post': post})
 ```
 
-以訪客瀏覽 `http://127.0.0.1:8000/post/5/` 的例子，來解釋以上程式：
+以訪客瀏覽 `http://127.0.0.1:8000/post/3/` 的例子，來解釋以上程式：
 
-- **目前瀏覽文章的 pk 會傳入 view 中：** 當訪客瀏覽 `http://127.0.0.1/post/5/` 時，傳入 view 的 pk 會是 5。
+- **目前瀏覽文章的 pk 會傳入 view 中：** 當訪客瀏覽 `http://127.0.0.1/post/3/` 時，傳入 view 的 pk 會是 3。
     - URL 與 pk 的對應，會在稍後設定。這裡只需知道 view 中傳入的，會是當前瀏覽文章 pk 即可。
 
-- **取得傳入 pk 的那篇 Post 資料：** 當傳入的 pk=5，代表訪客想看到 pk=5 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該篇日記的 **Post** 物件：
+- **取得傳入 pk 的那篇 Post 資料：** 當傳入的 pk=3，代表訪客想看到 pk=3 那篇文章。我們可以利用之前學過的 ORM 語法 `get`， 取得該篇日記的 **Post** 物件：
 
     ```python
-    post = Post.objects.get(pk=pk)  # 此時 pk = 5
+    post = Post.objects.get(pk=pk)  # 此時 pk = 3
     ```
 
-- **回傳 HttpResponse：** 將取得的 post（pk=5）傳入 Template *post.html*，並呈現 render 後的結果。
+- **回傳 HttpResponse：** 將取得的 post（pk=3）傳入 Template *post.html*，並呈現 render 後的結果。
 
 
 ## 設定動態網址的對應
@@ -49,7 +49,7 @@ urlpatterns = [
 ]
 ```
 
-上面的修改完成後，只要連至`http://127.0.0.1/post/5/` 就會對應到 `post_detail()` 這個 view，並且**傳入的 pk=5** 。
+上面的修改完成後，只要連至`http://127.0.0.1/post/3/` 就會對應到 `post_detail()` 這個 view，並且**傳入的 pk=3** 。
 
 ---
 
@@ -134,7 +134,7 @@ return render(request, 'post.html', {'post': post})
 </html>
 ```
 
-這個 template 將 post 物件的屬性 (e.g. 標題、內文、時間......等)，利用 `{{ var }}` 與 template filter 顯示並格式化於 HTML 中。若資料庫裡有 pk=5 的 Post，現在連至 <http://127.0.0.1:8000/post/5/> 即可看到此日記的單頁。
+這個 template 將 post 物件的屬性 (e.g. 標題、內文、時間......等)，利用 `{{ var }}` 與 template filter 顯示並格式化於 HTML 中。若資料庫裡有 pk=3 的 Post，現在連至 <http://127.0.0.1:8000/post/3/> 即可看到此日記的單頁。
 
 ---
 
