@@ -24,7 +24,7 @@
 
 為了讓 server 了解部署時所需要的安裝環境，我們需要調整和準備一些設定檔案。
 
-### `requirements.txt`
+### requirements.txt
 
 在 `djangogirls` 專案目錄底下，利用以下的指令將此虛擬環境裡的 Python 套件全部條列出來，包括套件名稱與版本資訊，並儲存於 [requirements.txt](https://devcenter.heroku.com/articles/python-pip#the-basics)：
 
@@ -34,15 +34,29 @@
 
 由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫，我們還需要手動在 `requirements.txt` 最後面加上 `psycopg2==2.6.1`（Python 的 PostgreSQL 模組）。最終的檔案內容範例如下，版本可能會稍有不同：
 
-    Django==1.8.4
-    dj-database-url==0.3.0
-    dj-static==0.0.6
-    gunicorn==19.3.0
-    static3==0.6.1
-    psycopg2==2.6.1
+```
+# djangogirls/requirements.txt
 
+Django==1.8.6
+appnope==0.1.0
+decorator==4.0.4
+dj-database-url==0.3.0
+dj-static==0.0.6
+gnureadline==6.3.3
+gunicorn==19.3.0
+ipython==4.0.0
+ipython-genutils==0.1.0
+path.py==8.1.2
+pexpect==4.0.1
+pickleshare==0.5
+ptyprocess==0.5
+simplegeneric==0.8.1
+static3==0.6.1
+traitlets==4.0.0
+psycopg2==2.6.1
+```
 
-### `Procfile`
+### Procfile
 
 建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，告訴 Heroku 要如何啟動我們的應用：
 
@@ -59,7 +73,7 @@
     ```
 
 
-### `runtime.txt`
+### runtime.txt
 
 為了讓 Heroku 知道要用哪一個版本的 Python，新增 [runtime.txt](https://devcenter.heroku.com/articles/python-runtimes) 輸入：
 
@@ -67,11 +81,13 @@
 python-3.4.3
 ```
 
-### `production_settings.py`
+### production_settings.py
 
 在前面的章節中，我們透過修改 `settings.py` 來調整 Django project 的設定，但是通常正式上線（production）的環境會和開發/本機（development/local）環境有所不同。所以我們在 `mysite/mysite/` 底下新建一個 `production_settings.py`，專門放部署時所需要的設定：
 
 ```python
+# mysite/mysite/production_settings.py
+
 # Import all default settings.
 from .settings import *
 
@@ -93,12 +109,12 @@ ALLOWED_HOSTS = ['*']
 DEBUG = False
 ```
 
-### `wsgi.py`
+### wsgi.py
 
 [WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial) 是 Python 定義網頁程式和伺服器溝通的介面。為了讓 Heroku 的服務能夠透過這個介面與我們的網站溝通，修改 `mysite/mysite/wsgi.py` 如下：
 
 ```python
-## mysite/wsgi.py
+# mysite/mysite/wsgi.py
 
 import os
 
@@ -114,16 +130,19 @@ application = Cling(get_wsgi_application())
 我們將 [dj_static](https://github.com/kennethreitz/dj-static) 引入，並在 `application` 上使用它，以協助幫我們部署 static 檔案（例如圖片、CSS、JavaScript 檔案等等）。
 
 
-### `.gitignore`
+### .gitignore
 
 我們不希望把有些開發時使用的檔案，例如虛擬環境、本機資料庫等等，都一股腦放到網路上。因此，接下來需要建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案，排除這些資料：
 
-    djangogirls_venv
-    *.pyc
-    __pycache__
-    staticfiles
-    db.sqlite3
+```
+# djangogirls/.gitignore
 
+djangogirls_venv
+*.pyc
+__pycache__
+staticfiles
+db.sqlite3
+```
 
 ### 小結
 
