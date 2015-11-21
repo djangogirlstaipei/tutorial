@@ -8,6 +8,7 @@
 - 看得懂簡單的 HTML / CSS
 
 
+
 ## 學習前準備
 在使用這份指南前，請先準備好：
 1. [安裝 Python 3.4](http://djangogirlstaipei.herokuapp.com/tutorials/installation/)
