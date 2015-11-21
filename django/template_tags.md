@@ -87,11 +87,11 @@ urlpatterns = [
 
 #### `for` 迴圈
 
-在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% for %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for)。
+在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% raw %}{% for %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for)。
 
 ---
 
-**{% for %}**
+**{% raw %}{% for %}{% endraw %}**
 
 在 template 中使用類似 Python 的 for 迴圈，使用方法如下：
 
@@ -117,7 +117,7 @@ urlpatterns = [
     </div>
 {% endfor %}
 ```
-- 開始標籤為 `{% for %}` 開始；結束標籤為 `{% endfor %}`
+- 開始標籤為 `{% raw %}{% for %}{% endraw %}` 開始；結束標籤為 `{% raw %}{% endfor %}{% endraw %}`
 - `post_list` 中有 3 個元素，所以 for 區塊中的內容會執行 3 次
 - 迴圈中，使用標籤 `{{ var }}`，反覆印出每個 post 中的標題、建立時間、照片網址和文章內容
 
@@ -147,7 +147,7 @@ urlpatterns = [
 
 #### `if`…`else`
 
-另一個常用的 template tags 是 [{% if %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#if) 判斷式，用法如下：
+另一個常用的 template tags 是 [{% raw %}{% if %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#if) 判斷式，用法如下：
 
 ```html
 {% if post.photo %}
@@ -255,15 +255,15 @@ urlpatterns = [
 
 | 語法 | 說明 |
 | --- | --- |
-| {% **for** ... **in** ... %}...{% **endfor** %} | 類似 Python 的 for 迴圈，反覆執行 for 區塊中的內容 |
-| {% **if** %} ... {% **else** %} ... {% **endif** %} | 在 Template Tags 中進行 if／else 的邏輯判斷 |
+| {% raw %}{% **for** ... **in** ... %}{% raw %}...{% endraw %}{% **endfor** %}{% endraw %} | 類似 Python 的 for 迴圈，反覆執行 for 區塊中的內容 |
+| {% raw %}{% **if** %}{% endraw %} ... {% raw %}{% **else** %}{% endraw %} ... {% raw %}{% **endif** %}{% endraw %} | 在 Template Tags 中進行 if／else 的邏輯判斷 |
 
 
 ### Template Filters
 
 | 語法 | 說明 |
 | --- | --- |
-| {{ value**\|date:***\<date_format\>* }} | 可以將 `datetime` 型別的物件，以指定的時間格式輸出 |
+| {% raw %}{{ value**\|date:***\<date_format\>* }}{% endraw %} | 可以將 `datetime` 型別的物件，以指定的時間格式輸出 |
 
 
 

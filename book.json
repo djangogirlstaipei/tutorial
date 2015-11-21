@@ -1,11 +1,10 @@
 {
-    "gitbook": "1.5.0",
+    "gitbook": "2.5.2",
     "links": {
         "sidebar": {
             "Contact us / Support": "mailto:taipei@djangogirls.org"
         }
     },
-    "plugins": ["ga"],
     "pluginsConfig": {
         "ga": {
             "token": "UA-54356331-3"

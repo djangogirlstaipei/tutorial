@@ -138,7 +138,7 @@ return render(request, 'post.html', {'post': post})
 
 ---
 
-### {% url %}
+### {% raw %}{% url %}{% endraw %}
 
 連結到特定 view 的 template tag
 
@@ -146,7 +146,7 @@ return render(request, 'post.html', {'post': post})
 
 | 語法 | 說明 |
 | --- | --- |
-| `{% url '<view_name>' %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
+| `{% raw %}{% url '<view_name>' %}{% endraw %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
 
 也可以傳入參數，如：
 
