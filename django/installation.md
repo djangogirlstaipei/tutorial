@@ -89,7 +89,7 @@ Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
 Python 3.4 預先安裝了 `pip` 這個強大的套件管理工具，我們將使用它來安裝 Django：
 
 ```
-pip install "django<1.9"
+(djangogirls_venv) ~/djangogirls$ pip install "django<1.9"
 ```
 
 這裡需要特別注意，我們使用的指令是 `"django`**`<1.9`**`"`。這樣一來才可以**確保我們安裝的是 Django 1.8 的最新版本**
@@ -110,7 +110,9 @@ Successfully installed django-1.8.6
 
 請在虛擬環境下指令輸入 `python`，進入**互動式命令列**環境
 
-    (djangogirls_venv) ~/djangogirls$ python
+```
+(djangogirls_venv) ~/djangogirls$ python
+```
 
 輸入以下的指令取得 Django 版本資訊：
 

@@ -23,13 +23,13 @@
 首先，使用 `django-admin.py` 來建立第一個 Django project `mysite`:
 
 ```
-django-admin.py startproject mysite
+(djangogirls_venv) ~/djangogirls$ django-admin.py startproject mysite
 ```
 
 此時會多了一個 **mysite** 資料夾。我們切換進去：
 
 ```
-cd mysite
+(djangogirls_venv) ~/djangogirls$ cd mysite
 ```
 
 `startproject` 這個 Django 指令除了建立專案資料夾，也預設會建立一些常用檔案，你可以使用 `ls` 或 `dir /w` (Windows) 檢視檔案結構。
@@ -64,7 +64,7 @@ python manage.py -h
 而如果想了解其中一個指令，可以在指令名字後輸入 `-h`，你會看到簡單的的指令介紹以及用法說明。以 `runserver` 為例：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py runserver -h
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver -h
 usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
                            [--settings SETTINGS] [--pythonpath PYTHONPATH]
                            [--traceback] [--no-color] [--ipv6] [--nothreading]
@@ -104,7 +104,7 @@ optional arguments:
 從說明中可以知道，`runserver` 會啟動一個簡單的 web server，方便於在開發階段使用：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py runserver
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver
 ...
 Django version 1.8.5, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
@@ -124,7 +124,7 @@ Quit the server with CONTROL-C.
 如果無法看到成功畫面，瀏覽器上顯示錯誤訊息 - *A server error occurred.  Please contact the administrator.*，請輸入：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py migrate
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py migrate
 ```
 
 然後再次 `runserver` 啟動你的 web server，我們會在 **Django Models** 解釋 `migrate` 的作用。
@@ -136,7 +136,7 @@ Quit the server with CONTROL-C.
 讓我們利用 `startapp` 建立第一個 Django app -- **trips**:
 
 ```
-python manage.py startapp trips
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py startapp trips
 ```
 
 `startapp` 會按照你的命名建立一個同名資料夾和 app 預設的檔案結構如下：

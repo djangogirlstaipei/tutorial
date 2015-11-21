@@ -18,7 +18,7 @@
 使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
 
 ```
-python manage.py shell
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py shell
 ```
 
 這個 shell 和我們之前輸入 `python` 執行的 shell 長得一樣，只是它會預先為我們設定 Django 需要的環境，方便我們執行 Django 相關的程式。
@@ -34,6 +34,12 @@ python manage.py shell
 - 在套件、模組或函數名稱後加上 `?` 可查看與之相關的資訊。
 - `history` 指令可查看所有輸入過的指令。
 - 可以使用 shell 指令，如：`ls`、`cd`。
+
+我們一樣可以用 pip 來安裝這個強大的套件：
+
+```
+(djangogirls_venv) ~/djangogirls/mysite$ pip install ipython
+```
 
 ---
 

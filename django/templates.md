@@ -58,7 +58,7 @@ def hello_world(request):
 新增一個名為 `templates` 的資料夾`：
 
 ```
-mkdir templates
+(djangogirls_venv) ~/djangogirls/mysite$ mkdir templates
 ```
 
 ### 設定 Templates 資料夾的位置

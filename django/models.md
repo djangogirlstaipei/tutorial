@@ -90,7 +90,7 @@ class Post(models.Model):
 首先執行 [`makemigrations`](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-makemigrations) 指令：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py makemigrations
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py makemigrations
 Migrations for 'trips':
   0001_initial.py:
     - Create model Post
@@ -101,7 +101,7 @@ Migrations for 'trips':
 接著用以下的指令，讓 Django 根據上面的紀錄，把 `models.py` 中的欄位寫入資料庫：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py migrate
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py migrate
 ```
 
 結果應該類似下面這樣：

@@ -108,7 +108,7 @@ urlpatterns = [
 現在啟動你的 web server。 (如果剛剛沒關閉的話，通常 Django 會在你修改程式碼後，自動重新啟動 web server)
 
 ```
-python manage.py runserver
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver
 ```
 
 在瀏覽器輸入 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/)，你會看到網頁顯示我們在 HttpResponse 傳入的文字`Hello World!`。

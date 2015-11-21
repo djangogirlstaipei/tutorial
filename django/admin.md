@@ -46,7 +46,7 @@ url(r'^admin/', include(admin.site.urls)),
 使用 [createsuperuser](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-createsuperuser) 這個指令，建立一個 superuser：
 
 ```
-(VENV) ~/djangogirls/mysite$ python manage.py createsuperuser
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py createsuperuser
 Username (leave blank to use 'YOUR_NAME'):
 Email address: your_name@yourmail.com
 Password:
