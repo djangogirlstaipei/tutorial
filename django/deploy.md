@@ -250,7 +250,7 @@ $ heroku config:set DJANGO_SETTINGS_MODULE=mysite.production_settings
 
 ### Step 5: 利用 git push 上傳到 Heroku
 
-使用 `git push` 指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
+使用 `git push` 指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.3，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
 
 ```
 ~/djangogirls$ git push heroku master
