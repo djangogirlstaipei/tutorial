@@ -6,7 +6,7 @@
 - **重覆 HTML 片段** (for loop) -- 列出所有好友的帳號和顯示圖片
 - **格式化 Template 中的變數** -- 日期的格式化等等
 
-[Django template tags](https://docs.djangoproject.com/en/1.7/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+[Django template tags](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
 
 ---
 
@@ -121,7 +121,7 @@ urlpatterns = [
 ```
 - 開始標籤為 `{% raw %}{% for %}{% endraw %}` 開始；結束標籤為 `{% raw %}{% endfor %}{% endraw %}`
 - `post_list` 中有 3 個元素，所以 for 區塊中的內容會執行 3 次
-- 迴圈中，使用標籤 `{{ var }}`，反覆印出每個 post 中的標題、建立時間、照片網址和文章內容
+- 迴圈中，使用標籤 `{% raw %}{{ var }}{% endraw %}`，反覆印出每個 post 中的標題、建立時間、照片網址和文章內容
 
 重新整理瀏覽器，網頁上會有首頁所需的 post 資訊：
 
@@ -161,9 +161,9 @@ urlpatterns = [
 {% endif %}
 ```
 
-- 符合條件所想要顯示的 HTML 放在 `{% if `*`<condition>`*` %}` 區塊裡
-- 不符合的則放在 `{% else %}` 區塊裡面
-- 最後跟 **for** 一樣，要加上 `{% endif %}` 作為判斷式結尾。
+- 符合條件所想要顯示的 HTML 放在 `{% raw %}{% if `*`<condition>`*` %}{% endraw %}` 區塊裡
+- 不符合的則放在 `{% raw %}{% else %}{% endraw %}` 區塊裡面
+- 最後跟 **for** 一樣，要加上 `{% raw %}{% endif %}{% endraw %}` 作為判斷式結尾。
 
 在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則就多加上一個 CSS class `photo-default` 另外處理。
 
