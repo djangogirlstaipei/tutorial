@@ -16,11 +16,16 @@
 ```python
 # trips/views.py
 
-...
+# ...
+
+from django.shortcuts import render
+from .models import Post
+
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'post.html', {'post': post})
+    
 ```
 
 以訪客瀏覽 `http://127.0.0.1:8000/post/3/` 的例子，來解釋以上程式：
