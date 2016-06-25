@@ -152,12 +152,12 @@ return render(request, 'post.html', {'post': post})
 
 | 語法 | 說明 |
 | --- | --- |
-| `{% raw %}{% url '<view_name>' %}{% endraw %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
+| `{% raw %}{% url '<url_name>' %}{% endraw %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
 
 也可以傳入參數，如：
 
 ```
-{% url '<view_name>' arg1=<var1> arg2=<var2> ...%}
+{% url '<url_name>' arg1=<var1> arg2=<var2> ...%}
 ```
 
 其餘用法可參考[官方文件](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#url)。
