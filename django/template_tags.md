@@ -46,6 +46,7 @@ def home(request):
     return render(request, 'home.html', {
         'post_list': post_list,
     })
+
 ```
 
 - **匯入所需的 model** -- 記得 import 需要用到的 Model `Post`
