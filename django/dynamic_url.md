@@ -120,8 +120,7 @@ return render(request, 'post.html', {'post': post})
     </div>
     <div class="container post post-detail">
         <div class="post-heading">
-            <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-            </h1>
+            <h1 class="title">{{ post.title }}</h1>
             <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
         </div>
         <div class="location">
