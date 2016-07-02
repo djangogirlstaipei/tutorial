@@ -33,7 +33,7 @@ cd djangogirls
 
 ### 創建虛擬環境
 
-在較舊的 Python 版本中，建立處擬環境需要另外安裝。但 Python 3.3 已經加入 `venv` 模組，可以直接使用。
+在較舊的 Python 版本中，建立處擬環境需要另外安裝。但 Python 3.3 之後已經加入 `venv` 模組，可以直接使用。
 
 那我們立刻開始，首先要創建一個虛擬環境資料夾 `djangogirls_venv`。
 

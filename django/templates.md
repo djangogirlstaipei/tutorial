@@ -1,6 +1,7 @@
 # Templates
 
-上一章的例子，只是很簡單的顯示一行字串。現在，讓我們來加上一些 HTML/CSS 美化網頁。
+上一章的例子，只是很簡單的顯示一行字串。
+現在，讓我們加上一些 HTML/CSS 美化網頁，並動態顯示每次進來這個頁面的時間。
 
 ## 第一個 Template
 
@@ -51,7 +52,7 @@ TEMPLATES = [
 
 ### 建立第一個 Template
 
-新增檔案 `templates/hello_world.html` ，並將之前寫在 view function 中的 HTML 複製到 `hello_world.html`：
+新增檔案 `templates/hello_world.html`：
 
 ```
 mysite
@@ -62,7 +63,7 @@ mysite
 └── manage.py
 ```
 
-為了區別，我們做了一些樣式上的調整：
+並將下列的 HTML 複製到 `hello_world.html`：
 
 ```html
 <!-- hello_world.html -->
@@ -89,11 +90,11 @@ mysite
 
 #### 在 Template 中顯示變數
 
-以上 template 中，有個地方要特別注意：
+以上 Template 中，有個地方要特別注意：
 
     <em>{{ current_time }}</em>
 
-仔細比較，可以發現變數 `current_time` 的使用方式與之前不同，在這裡用的是兩個大括號。
+在 Template 裡面．我們會使用兩個大括號，來顯示變數`current_time`。
 
 ---
 
@@ -117,11 +118,15 @@ from django.shortcuts import render
 
 def hello_world(request):
     return render(request, 'hello_world.html', {
-        'current_time': datetime.now(),
+        'current_time': str(datetime.now()),
     })
-```
 
-我們改成用 `render` 這個 function 產生要回傳的 `HttpResponse` 物件。
+```
+1. **顯示目前時間：**
+   為了顯示動態內容，我們 import [datetime](https://docs.python.org/3/library/datetime.html) 時間模組，並用`datetime.now()`取得現在的時間。
+
+2. **render：**
+   我們改成用 `render` 這個 function 產生要回傳的 `HttpResponse` 物件。
 
 這次傳入的參數有：
 
@@ -138,12 +143,11 @@ def hello_world(request):
 ---
 
 
-
 #### 大功告成
 
-HTML 程式碼獨立成 template 後，程式也變得簡潔許多了。
+現在啟動 web server ，連至 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/) 後，會發現網頁不再是純文字。除了加上了一些樣式外，也會顯示當下的時間。
 
-重新載入 [http://127.0.0.1:8000/hello/](http://127.0.0.1:8000/hello/)，你會發現畫面有了小小的改變：
+*你可以重新整理網頁，試試看時間有沒有改變*
 
 ![HelloWorld From Template](./../images/hello-world-from-template.png)
 

@@ -16,9 +16,16 @@
 ```python
 # trips/views.py
 
+# ...
+
+from django.shortcuts import render
+from .models import Post
+
+
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'post.html', {'post': post})
+    
 ```
 
 以訪客瀏覽 `http://127.0.0.1:8000/post/3/` 的例子，來解釋以上程式：
@@ -113,8 +120,7 @@ return render(request, 'post.html', {'post': post})
     </div>
     <div class="container post post-detail">
         <div class="post-heading">
-            <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-            </h1>
+            <h1 class="title">{{ post.title }}</h1>
             <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
         </div>
         <div class="location">
@@ -146,12 +152,12 @@ return render(request, 'post.html', {'post': post})
 
 | 語法 | 說明 |
 | --- | --- |
-| `{% raw %}{% url '<view_name>' %}{% endraw %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
+| `{% raw %}{% url '<url_name>' %}{% endraw %}` | 根據在 urls.py 中設定的「name」值，找到對應的 URL |
 
 也可以傳入參數，如：
 
 ```
-{% url '<view_name>' arg1=<var1> arg2=<var2> ...%}
+{% url '<url_name>' arg1=<var1> arg2=<var2> ...%}
 ```
 
 其餘用法可參考[官方文件](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#url)。

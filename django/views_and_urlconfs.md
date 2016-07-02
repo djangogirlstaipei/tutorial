@@ -37,6 +37,7 @@ Django view 其實是一個 function，**處理 `HttpRequest` 物件，並回傳
 
 from django.http import HttpResponse
 
+
 def hello_world(request):
     return HttpResponse("Hello World!")
 ```

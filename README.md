@@ -10,7 +10,7 @@
 
 ## 學習前準備
 在使用這份指南前，請先準備好：
-1. [安裝 Python 3.4](http://djangogirlstaipei.herokuapp.com/tutorials/installation/)
+1. [安裝 Python 3.5](http://djangogirlstaipei.herokuapp.com/tutorials/installation/)
 2. [安裝 Git](http://djangogirlstaipei.herokuapp.com/tutorials/installation/)
 3. [Heroku 註冊與安裝設定](http://djangogirlstaipei.herokuapp.com/tutorials/setting-up-heroku/)
 
