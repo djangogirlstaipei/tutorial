@@ -1,331 +1,148 @@
-# Deploy
+# # Deploy
 
 目前為止，我們所有的工作都是在自己的電腦完成，你可以在自己的瀏覽器上看到成果。但是，如果我們想要讓其他使用者使用這個網站，就必須將它部署（deploy）到穩定的伺服器上，才能隨時瀏覽。
 
 ---
 
-我們選擇 [Heroku](https://www.heroku.com/) 作為這次的範例，它的免費額度足夠經營一個小型網站，並擁有完善的開發者教學資源。
-
-本章根據 [Heroku 的官方教學 “Getting Started with Django on Heroku”](https://devcenter.heroku.com/articles/getting-started-with-django) 稍作調整，教你如何準備部署，並在 Heroku 上發佈你的網站。
+我們選擇 [PythonAnyWhere](https://www.pythonanywhere.com/) 作為這次的範例，它對於 Python 的支援性相當好，免費帳號也足夠經營一個小型網站。
 
 ---
-
-## 安裝部署工具
-
-首先利用 `pip` 安裝一些部署時需要用到的套件：
-
-```
-(djangogirls_venv) ~/djangogirls$ pip install dj-database-url gunicorn dj-static
-```
-
-當終端機顯示 *Successfully installed...* 時，表示必要的套件都已經安裝好了。
 
 ## 部署準備
 
-為了讓 server 了解部署時所需要的安裝環境，我們需要調整和準備一些設定檔案。
+為了將你的程式碼上傳到雲端，我們要先講整個專案包成一個壓縮檔。
 
-### requirements.txt
+### zip
 
-在 `djangogirls` 專案目錄底下，利用以下的指令將此虛擬環境裡的 Python 套件全部條列出來，包括套件名稱與版本資訊，並儲存於 [requirements.txt](https://devcenter.heroku.com/articles/python-pip#the-basics)：
-
-```
-(djangogirls_venv) ~/djangogirls$ pip freeze > requirements.txt
-```
-
-由於 Heroku 使用 [PostgreSQL](http://www.postgresql.org/) 資料庫，我們還需要手動在 `requirements.txt` 最後面加上 `psycopg2==2.6.1`（Python 的 PostgreSQL 模組）。最終的檔案內容範例如下，版本可能會稍有不同：
+在 `djangogirls` 專案目錄底下，利用以下的指令將整個專案打包成`mysite.zip`檔案：
 
 ```
-# djangogirls/requirements.txt
-
-Django==1.8.6
-appnope==0.1.0
-decorator==4.0.4
-dj-database-url==0.3.0
-dj-static==0.0.6
-gnureadline==6.3.3
-gunicorn==19.3.0
-ipython==4.0.0
-ipython-genutils==0.1.0
-path.py==8.1.2
-pexpect==4.0.1
-pickleshare==0.5
-ptyprocess==0.5
-simplegeneric==0.8.1
-static3==0.6.1
-traitlets==4.0.0
-psycopg2==2.6.1
+(djangogirls_venv) ~/djangogirls$ python -m zipfile -c mysite.zip mysite
 ```
 
-### Procfile
 
-建立一個 [Procfile](https://devcenter.heroku.com/articles/procfile) 檔案，告訴 Heroku 要如何啟動我們的應用：
+## 部署到雲端
 
-    web: gunicorn --pythonpath mysite mysite.wsgi
+在開始部署（deploy）之前，請先確定你已經註冊 [PythonAnyWhere](https://www.pythonanywhere.com/)：
 
-這一行指令分成兩個部分，其格式 *`<process_type>: <command>`* 表示：
+![](./../images/PythonAnyWhere-signup.png)
 
-- **<process_type>** -- 啟用 `web` 應用
-
-- **<command>** -- [Gunicorn](http://gunicorn.org/) 是一個用 Python 開發的 WSGI 工具，可以用來執行 Django 的網站。我們透過指令下列指令來啟動網站：
-
-    ```
-    gunicorn --pythonpath <directory_path> <project_name>.wsgi
-    ```
+### Step 1: 上傳專案 zip 檔
 
 
-### runtime.txt
+這一個步驟將使用 PythonAnyWhere 的檔案介面，請切換到 **Files** 分頁，你會發現一個`Upload a file`的按鈕：
 
-為了讓 Heroku 知道要用哪一個版本的 Python，新增 [runtime.txt](https://devcenter.heroku.com/articles/python-runtimes) 輸入：
+![](./../images/PythonAnyWhere-upload.png)
+
+按下按鈕選擇你剛剛壓縮好的`mysite.zip`，當畫面上出現你的檔案時，表示已經上傳完成了。
+
+![](./../images/PythonAnyWhere-upload-done.png)
+
+### Step 2: 開啟 Bash console
+
+切換到 **Consoles** 分頁，點選 `Bash` 開啟一個新的 Bash console，讓我們可以透過它下指令建置部署環境。
+
+![](./../images/PythonAnyWhere-consoles.png)
+
+首先，利用`unzip`的指令，解壓縮檔案：
 
 ```
-python-3.4.3
+~ $ unzip mysite.zip
 ```
 
-### production_settings.py
+![](./../images/PythonAnyWhere-bash.png)
 
-在前面的章節中，我們透過修改 `settings.py` 來調整 Django project 的設定，但是通常正式上線（production）的環境會和開發/本機（development/local）環境有所不同。所以我們在 `mysite/mysite/` 底下新建一個 `production_settings.py`，專門放部署時所需要的設定：
+接下來，由於雲端的環境與我們本機端不同，我們還是要創建一個虛擬環境，並安裝 Django：
 
-```python
-# mysite/mysite/production_settings.py
+```
+~ $ virtualenv --python=python3.5 djangogirls_venv
+~ $ source djangogirls_venv/bin/activate
+(djangogirls_venv) ~ $ pip install "django<1.9"
 
-# Import all default settings.
-from .settings import *
-
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config()
-}
-
-# Static asset configuration.
-STATIC_ROOT = 'staticfiles'
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure().
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers.
-ALLOWED_HOSTS = ['*']
-
-# Turn off DEBUG mode.
-DEBUG = False
 ```
 
-### wsgi.py
 
-[WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial) 是 Python 定義網頁程式和伺服器溝通的介面。為了讓 Heroku 的服務能夠透過這個介面與我們的網站溝通，修改 `mysite/mysite/wsgi.py` 如下：
+### Step 3: 新增一個新的 web app
 
-```python
-# mysite/mysite/wsgi.py
+點擊左上角的 logo 回到主頁面，切換到 **Web** 分頁後，請點選`Add a new web app`按鈕：
 
+![](./../images/PythonAnyWhere-web.png)
+
+你會看到一個新視窗，由於免費版的無法設定 domain name，這裡直接按下`Next`即可。
+
+![](./../images/PythonAnyWhere-new-web-1.png)
+
+在選擇 Python Web framework 時，請特別注意**不要選擇 Django**。我們需要手動設定虛擬環境，請選擇`Manual configuration`。
+
+![](./../images/PythonAnyWhere-new-web-2.png)
+
+Python 的版本請選擇`Python 3.5`。
+
+![](./../images/PythonAnyWhere-new-web-3.png)
+
+直接按下`Next`，完成創建 web app 的程序。
+
+![](./../images/PythonAnyWhere-new-web-4.png)
+
+### Step 4: 修改 web app 設定
+
+當你完成上一個步驟後，**Web** 分頁會出現 web app 的設定介面，你可以夠過此介面修改設定、重載 web app、或是查看錯誤訊息等等。
+
+![](./../images/PythonAnyWhere-web-config.png)
+
+在`Virtualenv`區塊，填入你的虛擬環境位置`/home/<your-PythonAnywhere-username>/djangogirls_venv`，並點選按鈕儲存設定。
+
+![](./../images/PythonAnyWhere-venv.png)
+
+[WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial) 是 Python 定義網頁程式和伺服器溝通的介面。
+
+為了讓 PythonAnyWhere 的服務能夠透過這個介面與我們的網站溝通，在`Code`區塊點選 `/var/www/<your-PythonAnywhere-username>_pythonanywhere_com_wsgi.py`：
+
+![](./../images/PythonAnyWhere-wsgi.png)
+
+刪除原有的程式碼，並覆蓋為：
+
+```
 import os
+import sys
+
+path = '/home/<your-PythonAnywhere-username>/mysite'  # use your own PythonAnywhere username here
+if path not in sys.path:
+    sys.path.append(path)
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
 
 from django.core.wsgi import get_wsgi_application
-
-from dj_static import Cling
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-
-application = Cling(get_wsgi_application())
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+application = StaticFilesHandler(get_wsgi_application())
 ```
 
-我們將 [dj_static](https://github.com/kennethreitz/dj-static) 引入，並在 `application` 上使用它，以協助幫我們部署 static 檔案（例如圖片、CSS、JavaScript 檔案等等）。
+記得要將 `<your-PythonAnywhere-username>` 改成你在 PythonAnyWhere 註冊的 *username*。
 
+點選`Save`儲存你的修改後，回到上一頁。
 
-### .gitignore
+![](./../images/PythonAnyWhere-wsgi-save.png)
 
-我們不希望把有些開發時使用的檔案，例如虛擬環境、本機資料庫等等，都一股腦放到網路上。因此，接下來需要建立一個 [.gitignore](http://git-scm.com/docs/gitignore) 檔案，排除這些資料：
+### Step 5: 重新載入（Reload）web app
 
-```
-# djangogirls/.gitignore
+點選`Reload`按鈕，重新載入我們更新的設定：
 
-djangogirls_venv
-*.pyc
-__pycache__
-staticfiles
-db.sqlite3
-```
+![](./../images/PythonAnyWhere-reload.png)
 
-### 小結
+### Step 6: 開啟瀏覽器觀看你的網站
 
-最後的檔案結構如下：
+最後，你可以直接點選網址在瀏覽器打開你的網站：
 
-```
-djangogirls
-├──mysite
-│   ├── mysite
-│   │   ├── __init__.py
-│   │   ├── production_settings.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── templates
-│   ├── trips
-│   └── manage.py
-├── djangogirls_venv
-├── .gitignore
-├── Procfile
-├── requirements.txt
-└── runtime.txt
-```
-
-
-## Deploy to Heroku
-
-在開始部署（deploy）之前，請先確定你已經按照[教學手冊](http://djangogirlstaipei.herokuapp.com/tutorials/setting-up-heroku/)：
-
-1. 註冊 Heroku 帳號：<https://id.heroku.com/signup>
-2. 安裝 Heroku 工具箱：<https://toolbelt.heroku.com/>
-
-
-### Step 1: 登入 Heroku
-
-安裝完工具箱裡的 Heroku client 後，就可以使用 `heroku` 指令，首先讓我們登入：
-
-```
-$ heroku login
-```
-
-輸入註冊時的 Email 帳號和密碼，當你看到 *Authentication successful.* 時，表示認證成功。
-
-
-### Step 2: 新增一個新的 git repository
-
-在 `djangogirls` 資料夾底下新增一個 git repository：
-
-```
-~/djangogirls$ git init
-~/djangogirls$ git add .
-~/djangogirls$ git commit -m "my djangogirls app"
-```
-
-### Step 3-1: 新增新的 Heroku app
-
-接下來，我們需要新增一個可以上傳 repository 的地方，如果你之前已經新增過 app，請跳到 **Step 3-2**：
-
-```
-~/djangogirls$ heroku create
-```
-
-預設`create`後面不放名字時，會自動產生隨機名稱的 Heroku app，如果想要命名自己的 app，如下：
-
-```
-~/djangogirls$ heroku create djangogirlsdiary
-```
-
-注意：
-
-- Heroku app 是不能重名的，所以如果你也輸入 `djangogirlsdiary`，會得到 ` !    Name is already taken` 的警告。
-- Heroku app 名稱會顯示在 deploy 成功後的網址上，例如：<https://djangogirlsdiary.herokuapp.com>
-
-### Step 3-2: 指定已經存在的 app
-
-如果你之前已經新增過 app ，並且想發佈在已經存在的 app 上時，可以先用指令 `heroku apps` 查看 app 的名稱：
-
-```
-$ heroku apps
-=== My Apps
-djangogirlsdiary
-```
-
-然後設定成你想要上傳的 app：
-
-```
-$  heroku git:remote -a djangogirlsdiary
-Git remote heroku added.
-```
-
-最後透過 `git remote -v` 檢查一下是否設定到正確的位置：
-
-```
-$ git remote -v
-heroku	https://git.heroku.com/djangogirlsdiary.git (fetch)
-heroku	https://git.heroku.com/djangogirlsdiary.git (push)
-```
-
-### Step 4: 設定環境變數
-
-我們利用 `heroku config:set` 指令設置 [環境變數](https://devcenter.heroku.com/articles/config-vars)，以確保未來在 Heroku 執行任何指令時，都是使用到部署專用的設定檔：
-```
-$ heroku config:set DJANGO_SETTINGS_MODULE=mysite.production_settings
-```
-
-### Step 5: 利用 git push 上傳到 Heroku
-
-使用 `git push` 指令上傳 git repository 後，你會發現它按照 **runtime.txt** 安裝 python-3.4.1，也透過 pip 安裝我們在 **requirements.txt** 上列出的所有套件：
-
-```
-~/djangogirls$ git push heroku master
-...
-remote: Compressing source files... done.
-remote: Building source:
-remote:
-remote: -----> Python app detected
-remote: -----> Installing runtime (python-3.4.3)
-remote: -----> Installing dependencies with pip
-...
-remote: -----> Compressing... done, 50.8MB
-remote: -----> Launching... done, v1
-remote:        https://djangogirlsdiary.herokuapp.com/ deployed to Heroku
-remote:
-remote: Verifying deploy... done.
-To https://git.heroku.com/djangogirlsdiary.git
- * [new branch]      master -> master
-```
-
-如果你遇到下列的錯誤訊息：
-
-```
-Permission denied (publickey).
-fatal: The remote end hung up unexpectedly
-```
-
-請透過下列指令新增 public key，然後再重新 `git push`。
-
-```
-~/djangogirls$ heroku keys:add
-```
-
-### Step 6: 啟動 web process
-
-先前建立了 **Procfile** 檔案告訴 Heroku 啟動時要執行的指令，現在我們使用指令啟動 web process，並指定只需要 1 個 instance：
-
-```
-~/djangogirls$ heroku ps:scale web=1
-```
-
-### Step 7: Django project 初始化
-
-Django 已經成功啟動了，但是我們還需要進行資料庫初始化，利用 `heroku run` 可以在 Heroku 執行指令：
-
-```
-~/djangogirls$ heroku run python mysite/manage.py migrate
-```
-
-並為新資料庫建立一個 superuser：
-
-```
-~/djangogirls$ heroku run python mysite/manage.py createsuperuser
-```
-
-### Step 8: 開啟瀏覽器觀看你的網站
-
-最後，透過 `open` 指令會自動在瀏覽器打開你的網站：
-
-```
-~/djangogirls$ heroku open
-```
+![](./../images/PythonAnyWhere-url.png)
 
 恭喜你成功地把網站發佈到網路上了！
 
-因為資料庫是不同的，之前在本機端的日記都需要再重新輸入喔。
 
-你可以分享網址給任何人：<https://djangogirlsdiary.herokuapp.com/>。記得前面要替換成你自己的 Heroku app 名稱！
+
+你可以分享網址給任何人：<https://djangogirlstaipei.pythonanywhere.com/>。記得前面要替換成你自己的 PythonAnyWhere `username`！
 
 ---
 
-未來如果對網站進行任何修改並想更新到 Heroku，只要先確定 **git commit** 完成後再 push 到 Heroku 即可。
-
-```
-$ git push heroku master
-```
+未來如果對網站進行任何修改並想更新到 PythonAnyWhere，只要壓縮整個專案並上傳，再用 Bash console 解壓縮即可。
 
 ---
