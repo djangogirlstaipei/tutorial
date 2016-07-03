@@ -10,7 +10,7 @@
 
 ## 部署準備
 
-為了將你的程式碼上傳到雲端，我們要先講整個專案包成一個壓縮檔。
+為了將你的程式碼上傳到雲端，我們要先將整個專案包成一個壓縮檔。
 
 ### zip
 
@@ -25,24 +25,24 @@
 
 在開始部署（deploy）之前，請先確定你已經註冊 [PythonAnyWhere](https://www.pythonanywhere.com/)：
 
-![](./../images/PythonAnyWhere-signup.png)
+![](./../images/PythonAnywhere-signup.png)
 
 ### Step 1: 上傳專案 zip 檔
 
 
 這一個步驟將使用 PythonAnyWhere 的檔案介面，請切換到 **Files** 分頁，你會發現一個`Upload a file`的按鈕：
 
-![](./../images/PythonAnyWhere-upload.png)
+![](./../images/PythonAnywhere-upload.png)
 
 按下按鈕選擇你剛剛壓縮好的`mysite.zip`，當畫面上出現你的檔案時，表示已經上傳完成了。
 
-![](./../images/PythonAnyWhere-upload-done.png)
+![](./../images/PythonAnywhere-upload-done.png)
 
 ### Step 2: 開啟 Bash console
 
 切換到 **Consoles** 分頁，點選 `Bash` 開啟一個新的 Bash console，讓我們可以透過它下指令建置部署環境。
 
-![](./../images/PythonAnyWhere-consoles.png)
+![](./../images/PythonAnywhere-consoles.png)
 
 首先，利用`unzip`的指令，解壓縮檔案：
 
@@ -50,7 +50,7 @@
 ~ $ unzip mysite.zip
 ```
 
-![](./../images/PythonAnyWhere-bash.png)
+![](./../images/PythonAnywhere-bash.png)
 
 接下來，由於雲端的環境與我們本機端不同，我們還是要創建一個虛擬環境，並安裝 Django：
 
@@ -66,39 +66,39 @@
 
 點擊左上角的 logo 回到主頁面，切換到 **Web** 分頁後，請點選`Add a new web app`按鈕：
 
-![](./../images/PythonAnyWhere-web.png)
+![](./../images/PythonAnywhere-web.png)
 
 你會看到一個新視窗，由於免費版的無法設定 domain name，這裡直接按下`Next`即可。
 
-![](./../images/PythonAnyWhere-new-web-1.png)
+![](./../images/PythonAnywhere-new-web-1.png)
 
 在選擇 Python Web framework 時，請特別注意**不要選擇 Django**。我們需要手動設定虛擬環境，請選擇`Manual configuration`。
 
-![](./../images/PythonAnyWhere-new-web-2.png)
+![](./../images/PythonAnywhere-new-web-2.png)
 
 Python 的版本請選擇`Python 3.5`。
 
-![](./../images/PythonAnyWhere-new-web-3.png)
+![](./../images/PythonAnywhere-new-web-3.png)
 
 直接按下`Next`，完成創建 web app 的程序。
 
-![](./../images/PythonAnyWhere-new-web-4.png)
+![](./../images/PythonAnywhere-new-web-4.png)
 
 ### Step 4: 修改 web app 設定
 
 當你完成上一個步驟後，**Web** 分頁會出現 web app 的設定介面，你可以夠過此介面修改設定、重載 web app、或是查看錯誤訊息等等。
 
-![](./../images/PythonAnyWhere-web-config.png)
+![](./../images/PythonAnywhere-web-config.png)
 
 在`Virtualenv`區塊，填入你的虛擬環境位置`/home/<your-PythonAnywhere-username>/djangogirls_venv`，並點選按鈕儲存設定。
 
-![](./../images/PythonAnyWhere-venv.png)
+![](./../images/PythonAnywhere-venv.png)
 
 [WSGI - Web Server Gateway Interface](http://webpython.codepoint.net/wsgi_tutorial) 是 Python 定義網頁程式和伺服器溝通的介面。
 
 為了讓 PythonAnyWhere 的服務能夠透過這個介面與我們的網站溝通，在`Code`區塊點選 `/var/www/<your-PythonAnywhere-username>_pythonanywhere_com_wsgi.py`：
 
-![](./../images/PythonAnyWhere-wsgi.png)
+![](./../images/PythonAnywhere-wsgi.png)
 
 刪除原有的程式碼，並覆蓋為：
 
@@ -127,13 +127,13 @@ application = StaticFilesHandler(get_wsgi_application())
 
 點選`Reload`按鈕，重新載入我們更新的設定：
 
-![](./../images/PythonAnyWhere-reload.png)
+![](./../images/PythonAnywhere-reload.png)
 
 ### Step 6: 開啟瀏覽器觀看你的網站
 
 最後，你可以直接點選網址在瀏覽器打開你的網站：
 
-![](./../images/PythonAnyWhere-url.png)
+![](./../images/PythonAnywhere-url.png)
 
 恭喜你成功地把網站發佈到網路上了！
 
