@@ -99,7 +99,10 @@
 ```
 
 ---
-注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django 會因為找不到欄位`title_contains`而出錯。
+
+注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django 
+會因為找不到欄位`title_contains`而出錯。
+
 ---
 
 共有 2 個 Post 符合上面的條件
