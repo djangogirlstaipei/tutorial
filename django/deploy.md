@@ -1,4 +1,4 @@
-# # Deploy
+# Deploy
 
 目前為止，我們所有的工作都是在自己的電腦完成，你可以在自己的瀏覽器上看到成果。但是，如果我們想要讓其他使用者使用這個網站，就必須將它部署（deploy）到穩定的伺服器上，才能隨時瀏覽。
 
@@ -143,7 +143,13 @@ application = StaticFilesHandler(get_wsgi_application())
 
 ---
 
-未來如果對網站進行任何修改並想更新到 PythonAnywhere，只要壓縮整個專案並上傳，再用 Bash console 解壓縮即可。
+未來如果對網站進行任何修改並想更新到 PythonAnywhere：
+
+1. 壓縮整個專案並上傳
+2. 用 Bash console 解壓縮
+3. 重新載入（Reload）web app
+
+你就可以看到你的修改已同步更新到雲端。
 
 注意：使用壓縮檔整包上傳的方法，雲端資料庫也會被本機端資料庫覆蓋。
 
