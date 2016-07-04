@@ -92,7 +92,7 @@
 
 當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
-首先，取得欲更新的 Post。這裡使用 `title__contains='Trip'` 的條件，篩選所有標題中包含 `Trip` 字眼的 Post
+首先，這裡使用 `__contains` 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
 
 ```
 >>> posts = Post.objects.filter(title__contains='Trip')
