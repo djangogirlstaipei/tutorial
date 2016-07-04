@@ -92,11 +92,15 @@
 
 當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
-首先，這裡使用[__contains](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#contains)針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
+首先，這裡使用 [contains](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
 
 ```
 >>> posts = Post.objects.filter(title__contains='Trip')
 ```
+
+---
+注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django 會因為找不到欄位`title_contains`而出錯。
+---
 
 共有 2 個 Post 符合上面的條件
 
