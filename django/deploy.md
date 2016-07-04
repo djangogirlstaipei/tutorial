@@ -144,6 +144,7 @@ application = StaticFilesHandler(get_wsgi_application())
 ---
 
 未來如果對網站進行任何修改並想更新到 PythonAnywhere，只要壓縮整個專案並上傳，再用 Bash console 解壓縮即可。
+
 注意：使用壓縮檔整包上傳的方法，雲端資料庫也會被本機端資料庫覆蓋。
 
 ---
