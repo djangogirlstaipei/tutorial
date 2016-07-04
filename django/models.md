@@ -44,7 +44,7 @@ DATABASES = {
 
 ## Django Models
 
-我們在 `trips/models.py` 宣告一個 `Post` 物件，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
+我們在 `trips/models.py` 宣告一個 `Post` 類別，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定：
 
 ```python
 # trips/models.py
