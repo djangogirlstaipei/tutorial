@@ -55,7 +55,7 @@
 >>> Post.objects.create(title='My First Trip', content='肚子好餓，吃什麼好呢?',  location='台北火車站')
 <Post: My First Trip>
 
->>> Post.objects.create(title='My Second Trip', content='去散散步吧',  location='台北火車站')
+>>> Post.objects.create(title='My Second Trip', content='去散散步吧',  location='大安森林公園')
 <Post: My Second Trip>
 
 >>> Post.objects.create(title='Django 大冒險', content='從靜態到動態',  location='台北市大安區復興南路一段293號')
@@ -79,8 +79,8 @@
 >>> Post.objects.get(pk=1)
 <Post: My First Trip>
 
->>> Post.objects.filter(pk__gt=1)
-[<Post: My Second Trip>, <Post: Django 大冒險>]
+>>> Post.objects.filter(location__contains='台北')
+[<Post: My First Trip>, <Post: Django 大冒險>]
 ```
 
 - [**get**](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。（*注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）
@@ -92,11 +92,18 @@
 
 當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
-首先，先取得欲更新的 Post。這裡使用 `pk < 3` 的條件篩選
+首先，這裡使用 [contains](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
 
 ```
->>> posts = Post.objects.filter(pk__lt=3)
+>>> posts = Post.objects.filter(title__contains='Trip')
 ```
+
+---
+
+注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django 
+會因為找不到欄位`title_contains`而出錯。
+
+---
 
 共有 2 個 Post 符合上面的條件
 
@@ -112,14 +119,14 @@
 '台北火車站'
 
 >>> posts[1].location
-'台北火車站'
+'大安森林公園'
 >>>
 ```
 
-印出後發現， 兩個 Post 的 location 都是台北火車站。現在我們試試用 `update` 指令，把它改成 **'捷運大安站'**
+印出後發現，Post 的 location 分別為`'台北火車站'`和`'大安森林公園'`。現在我們試試用 `update` 指令，把它們改成 **'象山親山步道'**
 
 ```
->>> posts.update(location='捷運大安站')
+>>> posts.update(location='象山親山步道')
 2
 ```
 
@@ -127,10 +134,10 @@
 
 ```
 >>> posts[0].location
-'捷運大安站'
+'象山親山步道'
 
 >>> posts[1].location
-'捷運大安站'
+'象山親山步道'
 ```
 
 ### Delete
@@ -143,7 +150,7 @@
 >>> posts.delete()
 ```
 
-確認一下，資料是否刪除
+最後確認一下，資料是否刪除
 
 ```
 >>> Post.objects.all()

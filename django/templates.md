@@ -118,8 +118,9 @@ from django.shortcuts import render
 
 def hello_world(request):
     return render(request, 'hello_world.html', {
-        'current_time': datetime.now(),
+        'current_time': str(datetime.now()),
     })
+
 ```
 1. **顯示目前時間：**
    為了顯示動態內容，我們 import [datetime](https://docs.python.org/3/library/datetime.html) 時間模組，並用`datetime.now()`取得現在的時間。

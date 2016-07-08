@@ -58,6 +58,7 @@ class Post(models.Model):
     photo = models.URLField(blank=True)
     location = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
 ```
 
 - Django 預設會為每一個 Model 加上 `id` 欄位，並將這個欄位設成 primary key（主鍵），簡稱 **pk**，讓每一筆資料都會有一個獨一無二的 ID。
