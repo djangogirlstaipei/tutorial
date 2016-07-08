@@ -71,7 +71,13 @@ def hello_world(request):
 
 現在我們來設定 Hello World 範例的 URL conf。
 
-首先打開 `mysite/urls.py`，先 import 剛剛寫的 view function，然後在 `urlpatterns` 中加入下面這行：
+首先打開 `mysite/urls.py`，先 import 剛剛寫的 view function：
+
+```python
+from trips.views import hello_world
+```
+
+然後在 `urlpatterns` 中加入下面這行：
 
 ```python
 url(r'^hello/$', hello_world),
