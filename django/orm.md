@@ -14,18 +14,7 @@
 
 與先前不同的是，在這裡我們不使用 Python Shell，而是 **Django Shell**。
 
-
-使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
-
-```
-(djangogirls_venv) ~/djangogirls/mysite$ python manage.py shell
-```
-
-這個 shell 和我們之前輸入 `python` 執行的 shell 長得一樣，只是它會預先為我們設定 Django 需要的環境，方便我們執行 Django 相關的程式。
-
----
-
-**IPython**
+在練習之前，我們先來安裝一個「加強版」的 Python shell：**IPython**。
 
 [IPython](http://ipython.org/) 是強化版的 Python 互動式命令列介面，它比預設的命令列介面多了許多進階功能，例如：
 
@@ -38,10 +27,17 @@
 我們一樣可以用 pip 來安裝這個強大的套件：
 
 ```
-(djangogirls_venv) ~/djangogirls/mysite$ pip install ipython
+(djangogirls_venv) ~/djangogirls/mysite$ pip install ipython[terminal]
 ```
 
----
+安裝完畢後，就可以使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
+
+```
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py shell
+```
+
+這個 shell 和我們之前輸入 `python` 執行的 shell 類似，只是它會預先為我們設定 Django 需要的環境，方便我們執行 Django 相關的程式。
+
 
 ## QuerySet API
 
@@ -100,7 +96,7 @@
 
 ---
 
-注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django 
+注意：Django ORM 會使用雙底線`__`，來區隔欄位`title`和篩選方法`contains`，如果只用一個底線，Django
 會因為找不到欄位`title_contains`而出錯。
 
 ---
