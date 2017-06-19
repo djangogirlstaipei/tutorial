@@ -6,7 +6,7 @@
 - **重覆 HTML 片段** (for loop) -- 列出所有好友的帳號和顯示圖片
 - **格式化 Template 中的變數** -- 日期的格式化等等
 
-[Django template tags](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+[Django template tags](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
 
 ---
 
@@ -85,13 +85,13 @@ urlpatterns = [
 
 ### 顯示 Post 中的資料
 
-仔細觀察印出的 `post_list`，會發現是以 list 的形式顯示。但我們希望的則是：**存取每個 Post 中的資料，並印出來**。
+現在我們印出的 `post_list` 是一個 QuerySet，但我們希望的其實是**存取每個 Post 中的資料，並按照我們想要的格式印出來**。
 
 為了達成這個功能，我們會用到 `for` 這個 template tag。
 
 #### `for` 迴圈
 
-在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% raw %}{% for %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for)。
+在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% raw %}{% for %}{% endraw %}](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#for)。
 
 ---
 
@@ -113,12 +113,12 @@ urlpatterns = [
 <!-- home.html -->
 
 {% for post in post_list %}
-    <div>
+<div>
     {{ post.title }}
     {{ post.created_at }}
     {{ post.photo }}
     {{ post.content }}
-    </div>
+</div>
 {% endfor %}
 ```
 - 開始標籤為 `{% raw %}{% for %}{% endraw %}` 開始；結束標籤為 `{% raw %}{% endfor %}{% endraw %}`
@@ -143,7 +143,7 @@ urlpatterns = [
 
 ```html
 <div class="thumbnail">
-    <img src="{{ post.photo }}" alt="">
+    <img src="{{ post.photo }}" alt="{{ post.title }}">
 </div>
 ```
 
@@ -151,28 +151,28 @@ urlpatterns = [
 
 #### `if`…`else`
 
-另一個常用的 template tags 是 [{% raw %}{% if %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#if) 判斷式，用法如下：
+另一個常用的 template tags 是 [{% raw %}{% if %}{% endraw %}](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#if) 判斷式，用法如下：
 
 ```html
-{% if post.photo %}
 <div class="thumbnail">
-    <img src="{{ post.photo }}" alt="">
+    {% if post.photo %}
+    <img src="{{ post.photo }}" alt="Cover photo for {{ post.title }}">
+    {% else %}
+    <img src="https://placeholder.com/800x600" alt="No image">
+    {% endif %}
 </div>
-{% else %}
-<div class="thumbnail thumbnail-default"></div>
-{% endif %}
 ```
 
 - 符合條件所想要顯示的 HTML 放在 `{% raw %}{% if `*`<condition>`*` %}{% endraw %}` 區塊裡
 - 不符合的則放在 `{% raw %}{% else %}{% endraw %}` 區塊裡面
 - 最後跟 **for** 一樣，要加上 `{% raw %}{% endif %}{% endraw %}` 作為判斷式結尾。
 
-在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則就多加上一個 CSS class `photo-default` 另外處理。
+在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則使用 https://placeholder.com 這個服務，產生一張空白的圖片，讓版面一致。我們把這種沒有實際意義的內容叫做 placeholder，也就是這個服務的名稱。
 
 
 ## Template Filter
 
-除了 template tags ，Django 也內建也許多好用的 [template filters](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容等等。使用方法如下:
+除了 template tags ，Django 也內建也許多好用的 [template filters](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容等等。使用方法如下:
 
 `{{<variable_name>|<filter_name>:<filter_arguments>}}`
 
@@ -182,12 +182,12 @@ urlpatterns = [
 
 #### 變更時間的顯示格式
 
-在這裡，我們只練習一種很常用的 filter [date](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#date)。它可以將 `datetime` 型別的物件，以指定的時間格式輸出。
+在這裡，我們只練習一種很常用的 filter [date](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#date)。它可以將 `datetime` 型別的物件，以指定的時間格式輸出。
 
 我們試著將 `created_at` 時間顯示成**年 / 月 / 日**：
 
 ```html
-{{ post.created_at|date:"Y / m / d" }}
+{{ post.created_at|date:'Y / m / d' }}
 ```
 ---
 
@@ -205,9 +205,9 @@ urlpatterns = [
 <head>
     <meta charset="utf-8">
     <title>A Django Girl's Adventure</title>
-    <link href="//fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="header">
@@ -223,15 +223,15 @@ urlpatterns = [
                     <h2 class="title">
                         <a href="#">{{ post.title }}</a>
                     </h2>
-                    <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
+                    <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
                 </div>
-                {% if post.photo %}
                 <div class="thumbnail">
-                    <img src="{{ post.photo }}" alt="">
+                    {% if post.photo %}
+                    <img src="{{ post.photo }}" alt="Cover photo for {{ post.title }}">
+                    {% else %}
+                    <img src="https://placeholder.com/800x600" alt="No image">
+                    {% endif %}
                 </div>
-                {% else %}
-                <div class="thumbnail thumbnail-default"></div>
-                {% endif %}
                 <div class="post-content read-more-block">
                     {{ post.content }}
                 </div>
@@ -269,6 +269,3 @@ urlpatterns = [
 <tr><th>語法</th><th>說明</th></tr>
 <tr><td>{% raw %}{{{% endraw %} value<strong>|date:</strong><i>&lt;date_format&gt;</i> {% raw %}}}{% endraw %} </td><td>可以將`datetime`型別的物件，以指定的時間格式 Date Format 輸出</td></tr>
 </table>
-
-
-

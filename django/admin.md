@@ -2,7 +2,7 @@
 
 大部份網站都設計有管理後台，讓管理者方便新增或異動網站內容。
 
-而這樣的管理後台，Django 也有內建一個 App -- [**Django Admin**](https://docs.djangoproject.com/en/1.8/ref/contrib/admin/) 。只需要稍微設定，網站就能擁有管理後台功能。
+而這樣的管理後台，Django 也有內建一個 App — [**Django Admin**](https://docs.djangoproject.com/en/1.11/ref/contrib/admin/) 。只需要稍微設定，網站就能擁有管理後台功能。
 
 前一章，我們學到如何使用 Django Model 抽象地表達資料庫結構。現在，我們要透過 **Django Admin** 看到實際的資料，並跟資料庫進行互動。
 
@@ -21,29 +21,29 @@
 ```
 # mysite/settings.py
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     ...
-)
+]
 ```
 
 當你在同步資料庫時，也會建立需要的資料表及欄位。
 
 ### 設定管理後台的 URL
 
-為了讓你可以從瀏覽器進入管理後台，我們需要設定對應的 urls 。
+為了讓你可以從瀏覽器進入管理後台，我們需要設定對應的 URL patterns。
 
 我們將管理後台的網址設定為 `/admin/`。確認 `mysite/urls.py` 中的 `urlpatterns` 包含下面這行：
 
 ```
-url(r'^admin/', include(admin.site.urls)),
+url(r'^admin/', admin.site.urls),
 ```
 
 ## 建立 superuser
 
 要使用 Django 的管理後台，需要一個管理員帳號。
 
-使用 [createsuperuser](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-createsuperuser) 這個指令，建立一個 superuser：
+使用 [createsuperuser](https://docs.djangoproject.com/en/1.11/ref/django-admin/#django-admin-createsuperuser) 這個指令，建立一個 superuser：
 
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py createsuperuser
@@ -61,7 +61,7 @@ Superuser created successfully.
 
 最後，我們需要在讓 Django 知道，有哪些 Model 需要管理後台。
 
-修改 **trips app** 裡的 admin.py，並註冊 **Post** 這個 Model：
+修改 **trips** app 裡的 `admin.py`，並註冊 **Post** 這個 model：
 
 ```python
 # trips/admin.py
@@ -71,7 +71,6 @@ from .models import Post
 
 
 admin.site.register(Post)
-
 ```
 
 ## 使用管理後台
@@ -101,7 +100,7 @@ admin.site.register(Post)
 
 ---
 
-Django 通常以 `Post object` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.8/ref/models/instances/#str)  更改 Post 的表示方式。
+Django 通常以 `Post object` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/1.11/ref/models/instances/#str)  更改 Post 的表示方式。
 
 修改 `trips/models.py`：
 

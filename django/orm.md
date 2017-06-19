@@ -16,7 +16,7 @@
 
 在練習之前，我們先來安裝一個「加強版」的 Python shell：**IPython**。
 
-[IPython](http://ipython.org/) 是強化版的 Python 互動式命令列介面，它比預設的命令列介面多了許多進階功能，例如：
+[IPython](https://ipython.org/) 是強化版的 Python 互動式命令列介面，它比預設的命令列介面多了許多進階功能，例如：
 
 - 按 tab 鍵可以補齊未輸入完的指令、檔案及資料夾名稱。
 - 按 ↑ 鍵和 ↓ 鍵可以瀏覽輸入過的程式碼，便於微調先前的程式碼（修改參數等等）。
@@ -30,7 +30,7 @@
 (djangogirls_venv) ~/djangogirls/mysite$ pip install ipython[terminal]
 ```
 
-安裝完畢後，就可以使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
+安裝完畢後，就可以使用 [shell](https://docs.djangoproject.com/en/1.11/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
 
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py shell
@@ -43,7 +43,7 @@
 
 ### Create
 
-首先，讓我們來試著新增幾筆資料：
+首先，讓我們來試著新增幾筆資料。在新增的同時，也可以用上一章提到的 admin 介面，當你新增資料，然後重新整理頁面，真的會多一行一行增加！
 
 ```
 >>> from trips.models import Post
@@ -61,12 +61,12 @@
 ### Read
 
 若想顯示所有的 Post ，可以使用
-[all()](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.all)：
+[all()](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#django.db.models.query.QuerySet.all)：
 
 ```
 >>> from trips.models import Post
 >>> Post.objects.all()
-[<Post: My First Trip>, <Post: My Second Trip>, <Post: Django 大冒險>]
+<QuerySet [<Post: My First Trip>, <Post: My Second Trip>, <Post: Django 大冒險>]>
 ```
 
 只想顯示部分資料時，則可以使用 `get` 或 `filter`：
@@ -76,19 +76,19 @@
 <Post: My First Trip>
 
 >>> Post.objects.filter(location__contains='台北')
-[<Post: My First Trip>, <Post: Django 大冒險>]
+<QuerySet [<Post: My First Trip>, <Post: Django 大冒險>]>
 ```
 
-- [**get**](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。（*注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）
+- [**get**](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。（*注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）
 
-- [**filter**](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
+- [**filter**](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
 
 
 ### Update
 
-當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
+當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
-首先，這裡使用 [contains](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
+首先，這裡使用 [contains](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
 
 ```
 >>> posts = Post.objects.filter(title__contains='Trip')
@@ -105,7 +105,7 @@
 
 ```
 >>> posts
-[<Post: My First Trip>, <Post: My Second Trip>]
+<QuerySet [<Post: My First Trip>, <Post: My Second Trip>]>
 ```
 
 我們將 location 的值印出
@@ -138,17 +138,18 @@
 
 ### Delete
 
-我們也可以使用 [delete](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除資料：
+我們也可以使用 [delete](https://docs.djangoproject.com/en/1.11/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除資料：
 
 我們試著使用 `delete`，將剛剛的那兩筆 Post 刪除。
 
 ```
 >>> posts.delete()
+(2, {'trips.Post': 2})
 ```
 
 最後確認一下，資料是否刪除
 
 ```
 >>> Post.objects.all()
-[<Post: Django 大冒險>]
+<QuerySet [<Post: Django 大冒險>]>
 ```
