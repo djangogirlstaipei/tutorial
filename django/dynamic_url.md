@@ -25,7 +25,7 @@ from .models import Post
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'post.html', {'post': post})
-    
+
 ```
 
 以訪客瀏覽 `http://127.0.0.1:8000/post/3/` 的例子，來解釋以上程式：
@@ -108,9 +108,9 @@ return render(request, 'post.html', {'post': post})
 <head>
     <meta charset="utf-8">
     <title>{{ post.title }} | A Django Girl’s Adventure</title>
-    <link href="//fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="header">
@@ -132,15 +132,17 @@ return render(request, 'post.html', {'post': post})
             {{ post.content }}
         </div>
         <hr class="fancy-line">
+        {% if post.photo %}
         <img class="photo" src="{{ post.photo }}" alt="Cover photo for {{ post.title }}">
+        {% endif %}
     </div>
-    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
-    <script src="//djangogirlstaipei.github.io/assets/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
+    <script src="https://djangogirlstaipei.github.io/assets/js/map.js"></script>
 </body>
 </html>
 ```
 
-這個 template 將 post 物件的屬性 (e.g. 標題、內文、時間......等)，利用 `{{ var }}` 與 template filter 顯示並格式化於 HTML 中。若資料庫裡有 pk=3 的 Post，現在連至 <http://127.0.0.1:8000/post/3/> 即可看到此日記的單頁。
+這個 template 將 post 物件的屬性 (標題、內文、時間等等)，利用 `{{ var }}` 與 template filter 顯示並格式化於 HTML 中。若資料庫裡有 pk=3 的 Post，現在連至 <http://127.0.0.1:8000/post/3/> 即可看到此日記的單頁。
 
 ---
 
@@ -160,7 +162,7 @@ return render(request, 'post.html', {'post': post})
 {% url '<url_name>' arg1=<var1> arg2=<var2> ...%}
 ```
 
-其餘用法可參考[官方文件](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#url)。
+其餘用法可參考[官方文件](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#url)。
 
 ---
 

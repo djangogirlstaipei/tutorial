@@ -4,8 +4,31 @@
 
 我們選擇 [PythonAnywhere](https://www.PythonAnywhere.com/) 作為範例。它對於 Python 的支援性相當好，免費帳號也足夠經營一個小型網站。
 
+在開始部署之前，請先確定已經根據[課前準備](https://djangogirlstaipei.herokuapp.com/tutorials/setting-up-pythonanywhere/)，在 [PythonAnywhere](https://www.PythonAnywhere.com/) 註冊帳號：
 
-## 部署準備
+![](./../images/PythonAnywhere-signup.png)
+
+
+## 修改設定
+
+打開 `settings.py`，找到下面這行：
+
+```python
+ALLOWED_HOSTS = []
+```
+
+這段設定是用來控制你的網站可以用哪些網址連線。我們之前都是用 `127.0.0.1` 或 `localhost`，代表本機連線，所以不需要指定，但當我們把網站放到雲端，就不能再用這個網址。
+
+我們把 PythonAnywhere 的網址加入這個設定。在預設狀況下，這個網址會是 <https://你的帳號.pythonanywhere.com>，所以假設你的 PythonAnywhere username 是 `djangogirls`，就請把這個設定改成
+
+```python
+ALLOWED_HOSTS = ['djangogirls.pythonanywhere.com']
+```
+
+再提醒一次，記得要將 `djangogirls` 改成你在 PythonAnywhere 註冊的 *username*。
+
+
+## 打包程式碼
 
 為了將你的程式碼上傳到雲端，我們要先將整個專案打包成一個壓縮檔。在 `djangogirls` 專案目錄下，用以下的指令將整個專案壓縮成 `mysite.zip`：
 
@@ -13,12 +36,8 @@
 (djangogirls_venv) ~/djangogirls$ python -m zipfile -c mysite.zip mysite
 ```
 
+
 ## 部署到雲端
-
-在開始部署之前，請先確定已經在 [PythonAnywhere](https://www.PythonAnywhere.com/) 註冊帳號：
-
-![](./../images/PythonAnywhere-signup.png)
-
 
 ### Step 1: 上傳專案
 
@@ -36,6 +55,8 @@
 
 ![](./../images/PythonAnywhere-consoles.png)
 
+#### Step 2.1: 解壓縮專案
+
 首先利用 `unzip` 指令將專案解壓縮：
 
 ```
@@ -44,12 +65,14 @@
 
 ![](./../images/PythonAnywhere-bash.png)
 
+#### Step 2.2: 建立虛擬環境、安裝 Django
+
 由於雲端的環境與我們本機端不同，我們需要為它建立一個新的虛擬環境，並在裡面安裝 Django：
 
 ```
-~ $ virtualenv --python=python3.5 djangogirls_venv
+~ $ virtualenv --python=python3.6 djangogirls_venv
 ~ $ source djangogirls_venv/bin/activate
-(djangogirls_venv) ~ $ pip install "django<1.9"
+(djangogirls_venv) ~ $ pip install "django<1.12"
 ```
 
 
@@ -67,7 +90,7 @@
 
 ![](./../images/PythonAnywhere-new-web-2.png)
 
-在 Python 版本選擇畫面中使用 *Python 3.5*。
+在 Python 版本選擇畫面中使用 *Python 3.6*。
 
 ![](./../images/PythonAnywhere-new-web-3.png)
 
@@ -130,10 +153,11 @@ application = StaticFilesHandler(get_wsgi_application())
 
 ---
 
-未來如果對網站進行任何修改，可以使用以下的步驟更新：
+未來如果對網站進行任何修改，只要重複以下的章節，就可以更新程式：
 
-1. 壓縮專案、上傳
-2. 用 Bash console 解壓縮
+1. 打包程式碼
+2. 上傳專案
+2. 開啟 Bash console，解壓縮專案
 3. 重新載入（Reload）web app
 
 就可以在 PythonAnywhere 上看到新的程式。

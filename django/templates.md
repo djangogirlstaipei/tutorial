@@ -27,7 +27,7 @@
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -44,7 +44,7 @@ TEMPLATES = [
 我們將 `'DIRS'` 原本的`[]`修改成：
 
 ```python
-[os.path.join(BASE_DIR, 'templates').replace('\\', '/')]
+[os.path.join(BASE_DIR, 'templates')]
 ```
 
 好讓 Django 找得到剛剛建立的 `templates` 資料夾。
@@ -92,13 +92,15 @@ mysite
 
 以上 Template 中，有個地方要特別注意：
 
-    <em>{{ current_time }}</em>
+```html
+<em>{{ current_time }}</em>
+```
 
 在 Template 裡面．我們會使用兩個大括號，來顯示變數`current_time`。
 
 ---
 
-`{{`*`<variable_name>`*`}}` 是在 Django Template 中顯示變數的語法。
+`{{ <variable_name> }}` 是在 Django Template 中顯示變數的語法。
 
 其它 Django Template 語法，我們會在後面的章節陸續練習到。
 
@@ -138,7 +140,7 @@ def hello_world(request):
 
 `render`：產生 HttpResponse 物件。
 
-[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.8/topics/http/shortcuts/#render)
+[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.11/topics/http/shortcuts/#render)
 
 ---
 

@@ -1,15 +1,15 @@
 # Project and apps
 
-每一個 Django project 裡面可以有多個 Django apps，可以想成是類似模組的概念。在實務上，**通常會依功能分成不同 app**，方便未來的維護和重複使用。
+每一個 Django project 裡面可以有多個 Django apps，可以想成是類似模組的概念。在實務上，通常會依功能分成不同 app，方便未來的維護和重複使用。
 
 例如，我們要做一個類似 Facebook 這種網站時，依功能可能會有以下 apps：
 
-- 使用者管理 -- accounts
-- 好友管理 -- friends
-- 塗鴉牆管理 -- timeline
-- 動態消息管理 -- news
+- 使用者管理 — accounts
+- 好友管理 — friends
+- 塗鴉牆管理 — timeline
+- 動態消息管理 — news
 
-若未來我們需要寫個購物網站，而需要會員功能時，`accounts` app（使用者管理）就可以被重複使用。
+則將來如果我們需要寫個購物網站，而需要會員功能時，`accounts` app（使用者管理）就可以被重複使用。
 
 ---
 
@@ -19,8 +19,9 @@
 
 ## 建立 Django project
 
-### 建立專案資料夾 -- startproject
-首先，使用 `django-admin.py` 來建立第一個 Django project `mysite`:
+### 建立專案資料夾 — `startproject`
+
+使用 `django-admin.py` 來建立第一個 Django project `mysite`:
 
 ```
 (djangogirls_venv) ~/djangogirls$ django-admin.py startproject mysite
@@ -47,7 +48,7 @@ mysite/
 ```
 
 
-### 瞭解 Django 的 Management commands
+### 瞭解 Django 的 management commands
 
 `manage.py` 是 Django 提供的命令列工具，我們可以利用它執行很多工作，例如同步資料庫、建立 app 等等，指令的使用方式如下：
 
@@ -55,16 +56,16 @@ mysite/
 python manage.py <command> [options]
 ```
 
-如果你想要了解有什麼指令可以使用，輸入 `help` 或 `-h` 指令會列出所有指令列表:
+如果你想要了解有什麼指令可以使用，輸入 `help`、`--help` 或 `-h` 指令會列出所有指令列表:
 
 ```
-python manage.py -h
+python manage.py help
 ```
 
-而如果想了解其中一個指令，可以在指令名字後輸入 `-h`，你會看到簡單的的指令介紹以及用法說明。以 `runserver` 為例：
+而如果想了解其中一個指令，可以在指令名字後輸入 `--help`，你會看到簡單的的指令介紹以及用法說明。以 `runserver` 為例：
 
 ```
-(djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver -h
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver --help
 usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
                            [--settings SETTINGS] [--pythonpath PYTHONPATH]
                            [--traceback] [--no-color] [--ipv6] [--nothreading]
@@ -99,14 +100,46 @@ optional arguments:
   --insecure            Allows serving static files even if DEBUG is False.
 ```
 
-### 啟動開發伺服器 -- `runserver`
+### 資料庫初始化 — `migrate`
+
+為了讓你的網站儲存資料，Django 會把一些資料儲存在資料庫裡。使用 `migrate` 指令，為 Django 建立必要的資料格式：
+
+```
+(djangogirls_venv) ~/djangogirls/mysite$ python manage.py migrate
+```
+
+應該會得到類似下面的效果：
+
+```
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying sessions.0001_initial... OK
+```
+
+我們會在 **Django Models** 這章詳細解釋資料庫、Django 使用資料庫的方法、以及 `migrate` 指令。
+
+
+### 啟動開發伺服器 — `runserver`
 
 從說明中可以知道，`runserver` 會啟動一個簡單的 web server，方便於在開發階段使用：
 
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver
 ...
-Django version 1.8.5, using settings 'mysite.settings'
+Django version 1.11.2, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
@@ -115,21 +148,8 @@ Quit the server with CONTROL-C.
 
 ![Django startproject success](./../images/django-startproject-success.png)
 
-
 最後我們可以在終端機按下 `CTRL+C` ，關閉 web server 回到命令列。
 
-
----
-
-如果無法看到成功畫面，瀏覽器上顯示錯誤訊息 - *A server error occurred.  Please contact the administrator.*，請輸入：
-
-```
-(djangogirls_venv) ~/djangogirls/mysite$ python manage.py migrate
-```
-
-然後再次 `runserver` 啟動你的 web server，我們會在 **Django Models** 解釋 `migrate` 的作用。
-
----
 
 ## 建立 Django application（app）
 
@@ -157,7 +177,7 @@ trips
 
 ##新增 app
 
-打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.8/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
 ```
 # mysite/settings.py
@@ -166,7 +186,7 @@ trips
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -174,7 +194,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'trips',
-)
+]
 ```
 
 請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的 `trips` 加在最後面。
@@ -215,7 +235,8 @@ mysite
 | 指令 | 說明 |
 | ---|--- |
 | django-admin.py **startproject** *`<project_name>`* | 建立 Django 專案 |
-| python manage.py **-h** *`<command_name>`* | 查看 Django commands 的使用方法 |
+| python manage.py *`<command_name>`* **--help** | 查看 Django commands 的使用方法 |
+| python manage.py **migrate** | 為 Django 設定資料庫 |
 | python manage.py **runserver** | 啟動開發伺服器 |
 | python manage.py **startapp** *`<app_name>`*  | 新增 Django app |
 
