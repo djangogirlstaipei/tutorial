@@ -106,7 +106,7 @@ optional arguments:
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver
 ...
-Django version 1.8.5, using settings 'mysite.settings'
+Django version 2.0.5, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
@@ -145,6 +145,7 @@ Quit the server with CONTROL-C.
 trips
 ├── __init__.py
 ├── admin.py
+├── apps.py
 ├── migrations
 ├── models.py
 ├── tests.py
@@ -157,7 +158,7 @@ trips
 
 ##新增 app
 
-打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.8/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
 ```
 # mysite/settings.py
@@ -202,6 +203,7 @@ mysite
 └── trips
     ├── __init__.py
     ├── admin.py
+    ├── apps.py
     ├── migrations
     ├── models.py
     ├── tests.py

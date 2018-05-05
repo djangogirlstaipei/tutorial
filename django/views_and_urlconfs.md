@@ -19,10 +19,10 @@
 
 Django view 其實是一個 function，**處理 `HttpRequest` 物件，並回傳 `HttpResponse` 物件**，大致說明如下：
 
-- **會收到 `HttpRequest` 參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/1.8/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 view function。
+- **會收到 `HttpRequest` 參數：** Django 從網頁接收到 request 後，會將 request 中的資訊封裝產生一個 [HttpRequest](https://docs.djangoproject.com/en/2.0/ref/request-response/#httprequest-objects) 物件，並當成第一個參數，傳入對應的 view function。
 
 - **需要回傳 `HttpResponse` 物件：**
-[HttpResponse](https://docs.djangoproject.com/en/1.8/ref/request-response/#httpresponse-objects) 物件裡面包含：
+[HttpResponse](https://docs.djangoproject.com/en/2.0/ref/request-response/#httpresponse-objects) 物件裡面包含：
     - `HttpResponse.content`
     - `HttpResponse.status_code` …等
 
@@ -80,7 +80,7 @@ from trips.views import hello_world
 然後在 `urlpatterns` 中加入下面這行：
 
 ```python
-url(r'^hello/$', hello_world),
+path('hello/', hello_world),
 ```
 
 現在 `mysite/urls.py` 的內容應該會像下面這樣：
@@ -88,24 +88,23 @@ url(r'^hello/$', hello_world),
 ```python
 # mysite/urls.py
 
-from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import path
 # Import view functions from trips app.
 from trips.views import hello_world
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', hello_world),
+    path('admin/', admin.site.urls),
+    path('hello/', hello_world),
 ]
 ```
 
-以上程式透過 [url()](https://docs.djangoproject.com/en/1.8/ref/urls/#django.conf.urls.url) function 傳入兩個參數 `regex`, `view`：
+以上程式透過 [path()](https://docs.djangoproject.com/en/2.0/ref/urls/#django.urls.path) function 傳入兩個參數 `route`, `view`：
 
-    url(regex, view)
+    path(route, view)
 
-- **regex** -- 定義的 URL 規則
-    - 規則以 regular expression（正規表示式）來表達
-    -  `r'^hello/$'` 代表的是 `hello/` 這種 URL
+- **route** -- 定義 URL 規則的字串
+    -  `'hello/'` 代表的是 `http://127.0.0.1:8000/hello/` 這種 URL
 - **view** -- 對應的 view function
     - 指的是 `hello_world` 這個 view
 
