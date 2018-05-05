@@ -27,10 +27,10 @@
 我們一樣可以用 pip 來安裝這個強大的套件：
 
 ```
-(djangogirls_venv) ~/djangogirls/mysite$ pip install ipython[terminal]
+(djangogirls_venv) ~/djangogirls/mysite$ pip install ipython
 ```
 
-安裝完畢後，就可以使用 [shell](https://docs.djangoproject.com/en/1.8/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
+安裝完畢後，就可以使用 [shell](https://docs.djangoproject.com/en/2.0/ref/django-admin/#django-admin-shell) 指令，進入 Django Shell：
 
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py shell
@@ -61,7 +61,7 @@
 ### Read
 
 若想顯示所有的 Post ，可以使用
-[all()](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.all)：
+[all()](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#django.db.models.query.QuerySet.all)：
 
 ```
 >>> from trips.models import Post
@@ -79,16 +79,16 @@
 [<Post: My First Trip>, <Post: Django 大冒險>]
 ```
 
-- [**get**](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。（*注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）
+- [**get**](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#get)：返回符合條件的**唯一一筆資料**。（*注意：*如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）
 
-- [**filter**](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
+- [**filter**](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#filter)：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
 
 
 ### Update
 
-當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
+當想修改資料時，可以使用 [update](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#django.db.models.query.QuerySet.update) 更新一筆或多筆資料：
 
-首先，這裡使用 [contains](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
+首先，這裡使用 [contains](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#contains) 針對`title`欄位，篩選出所有標題中包含 `Trip` 字眼的 Post
 
 ```
 >>> posts = Post.objects.filter(title__contains='Trip')
@@ -138,7 +138,7 @@
 
 ### Delete
 
-我們也可以使用 [delete](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除資料：
+我們也可以使用 [delete](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#django.db.models.query.QuerySet.delete) 刪除資料：
 
 我們試著使用 `delete`，將剛剛的那兩筆 Post 刪除。
 
