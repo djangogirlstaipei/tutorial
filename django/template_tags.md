@@ -6,7 +6,7 @@
 - **重覆 HTML 片段** (for loop) -- 列出所有好友的帳號和顯示圖片
 - **格式化 Template 中的變數** -- 日期的格式化等等
 
-[Django template tags](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
+[Django template tags](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/) 讓你可以在 HTML 檔案裡使用類似 Python 的語法，動態存取從 view function 傳過來的變數，或是在顯示到瀏覽器之前幫你做簡單的資料判斷、轉換、計算等等。
 
 ---
 
@@ -34,18 +34,20 @@
 
 ```python
 # trips/views.py
+from django.shortcuts import render
+
+from .models import Post
 
 # ...
 
-from django.shortcuts import render
-from .models import Post
-
-
 def home(request):
     post_list = Post.objects.all()
-    return render(request, 'home.html', {
-        'post_list': post_list,
-    })
+    return render(request,
+                  'home.html',
+                  {
+                      'post_list': post_list,
+                  }
+    )
 
 ```
 
@@ -54,7 +56,7 @@ def home(request):
 
 ### 設定首頁的 URL
 
-接下來，我們修改 **urls.py** ，將首頁（正規表達式 `^$`）指向 **home()** 這個 view function：
+接下來，我們修改 **urls.py** ，將首頁指向 **home()** 這個 view function：
 
 ```python
 # mysite/urls.py
@@ -62,7 +64,7 @@ from trips.views import hello_world, home
 
 urlpatterns = [
     ...
-    url(r'^$', home),
+    path('', home),
 ]
 ```
 
@@ -91,7 +93,7 @@ urlpatterns = [
 
 #### `for` 迴圈
 
-在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% raw %}{% for %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for)。
+在寫 Python 時，若想存取 list 裡的每一個元素，我們會使用 `for` 迴圈。而在 Django Template 中，也提供了類似的 template tags -- [{% raw %}{% for %}{% endraw %}](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#for)。
 
 ---
 
@@ -151,15 +153,15 @@ urlpatterns = [
 
 #### `if`…`else`
 
-另一個常用的 template tags 是 [{% raw %}{% if %}{% endraw %}](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#if) 判斷式，用法如下：
+另一個常用的 template tags 是 [{% raw %}{% if %}{% endraw %}](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#if) 判斷式，用法如下：
 
 ```html
 {% if post.photo %}
-<div class="thumbnail">
-    <img src="{{ post.photo }}" alt="">
-</div>
+    <div class="thumbnail">
+        <img src="{{ post.photo }}" alt="">
+    </div>
 {% else %}
-<div class="thumbnail thumbnail-default"></div>
+    <div class="thumbnail thumbnail-default"></div>
 {% endif %}
 ```
 
@@ -167,12 +169,12 @@ urlpatterns = [
 - 不符合的則放在 `{% raw %}{% else %}{% endraw %}` 區塊裡面
 - 最後跟 **for** 一樣，要加上 `{% raw %}{% endif %}{% endraw %}` 作為判斷式結尾。
 
-在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則就多加上一個 CSS class `photo-default` 另外處理。
+在這裡，我們判斷如果 `post.photo` 有值就顯示照片，否則就多加上一個 CSS class `thumbnail-default` 另外處理。
 
 
 ## Template Filter
 
-除了 template tags ，Django 也內建也許多好用的 [template filters](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容等等。使用方法如下:
+除了 template tags ，Django 也內建也許多好用的 [template filters](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#built-in-filter-reference)。它能在變數顯示之前幫你做計算、設定預設值，置中、或是截斷過長的內容等等。使用方法如下:
 
 `{{<variable_name>|<filter_name>:<filter_arguments>}}`
 
@@ -182,7 +184,7 @@ urlpatterns = [
 
 #### 變更時間的顯示格式
 
-在這裡，我們只練習一種很常用的 filter [date](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#date)。它可以將 `datetime` 型別的物件，以指定的時間格式輸出。
+在這裡，我們只練習一種很常用的 filter [date](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#date)。它可以將 `datetime` 型別的物件，以指定的時間格式輸出。
 
 我們試著將 `created_at` 時間顯示成**年 / 月 / 日**：
 
