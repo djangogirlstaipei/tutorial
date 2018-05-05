@@ -27,7 +27,7 @@
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -44,7 +44,7 @@ TEMPLATES = [
 我們將 `'DIRS'` 原本的`[]`修改成：
 
 ```python
-[os.path.join(BASE_DIR, 'templates').replace('\\', '/')]
+[os.path.join(BASE_DIR, 'templates')]
 ```
 
 好讓 Django 找得到剛剛建立的 `templates` 資料夾。
@@ -117,9 +117,12 @@ from django.shortcuts import render
 
 
 def hello_world(request):
-    return render(request, 'hello_world.html', {
-        'current_time': str(datetime.now()),
-    })
+    return render(request,
+                  'hello_world.html',
+                  {
+                      'current_time': str(datetime.now())
+                  }
+    )
 
 ```
 1. **顯示目前時間：**
@@ -138,7 +141,7 @@ def hello_world(request):
 
 `render`：產生 HttpResponse 物件。
 
-[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/1.8/topics/http/shortcuts/#render)
+[render(request, template_name, dictionary)](https://docs.djangoproject.com/en/2.0/topics/http/shortcuts/#render)
 
 ---
 
