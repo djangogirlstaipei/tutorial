@@ -54,7 +54,8 @@ Password (again):
 Superuser created successfully.
 
 ```
-輸入帳號、Email、密碼（必須超過八個字元）等資訊，就完成 superuser 的新增了。
+輸入帳號、Email、密碼等資訊，就完成 superuser 的新增了。
+注意：密碼不能太常見，並且需要超過八個字元。
 
 
 ## 註冊 Model class
@@ -99,7 +100,7 @@ admin.site.register(Post)
 
 ---
 
-Django 通常以 `Post object` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/2.0/ref/models/instances/#str)  更改 Post 的表示方式。
+Django 預設以 `Post object` 來表示 Post 物件，但此種顯示不易辨別。我們可以透過 [`def __str__`](https://docs.djangoproject.com/en/2.0/ref/models/instances/#str)  更改 Post 的表示方式。
 
 修改 `trips/models.py`：
 

@@ -51,7 +51,7 @@ from trips.views import hello_world, home, post_detail
 
 urlpatterns = [
     ...
-    path('post/<int:pk>/', views.detail, name='detail'),
+    path('post/<int:pk>/', post_detail, name='post_detail'),
 ]
 ```
 
