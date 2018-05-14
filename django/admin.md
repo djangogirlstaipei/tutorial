@@ -21,10 +21,10 @@
 ```
 # mysite/settings.py
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     ...
-)
+]
 ```
 
 當你在同步資料庫時，也會建立需要的資料表及欄位。

@@ -36,7 +36,7 @@ DATABASES = {
 - **ENGINE** -- 你要使用的資料庫引擎。例如：
     - MySQL: `django.db.backends.mysql`
     - SQLite 3: `django.db.backends.sqlite3`
-    - PostgreSQL: `django.db.backends.postgresql_psycopg2`
+    - PostgreSQL: `django.db.backends.postgresql`
 - **NAME** -- 你的資料庫名稱
 
 如果你使用 MySQL 或 PostgreSQL 等等資料庫，可能還要設定它的位置、名稱、使用者等等。不過我們這裡使用的 SQLite 3 不需要這些性質，所以可以省略。

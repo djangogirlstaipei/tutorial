@@ -23,7 +23,7 @@
 首先，使用 `django-admin.py` 來建立第一個 Django project `mysite`:
 
 ```
-(djangogirls_venv) ~/djangogirls$ django-admin.py startproject mysite
+(djangogirls_venv) ~/djangogirls$ django-admin startproject mysite
 ```
 
 此時會多了一個 **mysite** 資料夾。我們切換進去：
@@ -167,7 +167,7 @@ trips
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -175,7 +175,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'trips',
-)
+]
 ```
 
 請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的 `trips` 加在最後面。
