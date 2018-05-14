@@ -23,7 +23,7 @@
 首先，使用 `django-admin.py` 來建立第一個 Django project `mysite`:
 
 ```
-(djangogirls_venv) ~/djangogirls$ django-admin.py startproject mysite
+(djangogirls_venv) ~/djangogirls$ django-admin startproject mysite
 ```
 
 此時會多了一個 **mysite** 資料夾。我們切換進去：
@@ -106,7 +106,7 @@ optional arguments:
 ```
 (djangogirls_venv) ~/djangogirls/mysite$ python manage.py runserver
 ...
-Django version 1.8.5, using settings 'mysite.settings'
+Django version 2.0.5, using settings 'mysite.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
@@ -145,6 +145,7 @@ Quit the server with CONTROL-C.
 trips
 ├── __init__.py
 ├── admin.py
+├── apps.py
 ├── migrations
 ├── models.py
 ├── tests.py
@@ -157,7 +158,7 @@ trips
 
 ##新增 app
 
-打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/1.8/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
+打開 *mysite/settings.py*，找到 [INSTALLED_APPS](https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-INSTALLED_APPS)，調整如下：
 
 ```
 # mysite/settings.py
@@ -166,7 +167,7 @@ trips
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -174,7 +175,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'trips',
-)
+]
 ```
 
 請注意 app 之間有時候需要特定先後順序。在此，我們將自訂的 `trips` 加在最後面。
@@ -202,6 +203,7 @@ mysite
 └── trips
     ├── __init__.py
     ├── admin.py
+    ├── apps.py
     ├── migrations
     ├── models.py
     ├── tests.py

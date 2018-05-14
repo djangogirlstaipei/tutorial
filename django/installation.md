@@ -6,15 +6,15 @@
 
 ---
 
-首先，請開啟**終端機**，確定現在的位置是在**家目錄**底下：
+首先，請開啟**終端機**，確定現在的位置是在**家目錄**底下。
 
-我們先建立一個名為 `djangogirls` 的資料夾
+我們先建立一個名為 `djangogirls` 的資料夾：
 
 ```
 mkdir djangogirls
 ```
 
-並切換至剛剛建立的目錄
+並切換至剛剛建立的目錄：
 
 ```
 cd djangogirls
@@ -82,44 +82,33 @@ Linux 或 OS X 需要使用 `python3` 來建立虛擬環境，指令如下：
     (djangogirls_venv) ~/djangogirls$
 
 
-## 安裝 Django 1.8 最新版本
+## 安裝 Django 2.0 最新版本
 
 ### 開始安裝
 
 Python 3.4 預先安裝了 `pip` 這個強大的套件管理工具，我們將使用它來安裝 Django：
 
 ```
-(djangogirls_venv) ~/djangogirls$ pip install "django<1.9"
+(djangogirls_venv) ~/djangogirls$ pip install django~=2.0
 ```
 
-這裡需要特別注意，我們使用的指令是 `"django`**`<1.9`**`"`。這樣一來才可以**確保我們安裝的是 Django 1.8 的最新版本**
-
-輸入了應該會看到如下的訊息，表示安裝成功
+輸入以後應該會看到如下的訊息，表示安裝成功。
 
 ```
-Installing collected packages: django
-Successfully installed django-1.8.6
+Installing collected packages: pytz, django
+Successfully installed django-2.0.5 pytz-2018.4
 ```
 
-註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install "django<1.9"` 試試看。之後如果在使用 `pip` 時遇到類似問題，也可以試著在前面加上 `python -m`。
+註：如果你看到以 *Fatal error in launcher* 開頭的輸出，而不是上面的安裝成功訊息，請改用 `python -m pip install django` 試試看。之後如果在使用 `pip` 時遇到類似問題，也可以試著在前面加上 `python -m`。
 
 
 ### 確認安裝成功
 
-最後，讓我們最後來測試一下。
-
-請在虛擬環境下指令輸入 `python`，進入**互動式命令列**環境
+最後，讓我們來確定一下安裝的版本是否正確，請在虛擬環境下輸入:
 
 ```
-(djangogirls_venv) ~/djangogirls$ python
+(djangogirls_venv) ~/djangogirls$ python -m django --version
+2.0.5
 ```
 
-輸入以下的指令取得 Django 版本資訊：
-
-```
->>> import django
->>> django.VERSION
-(1, 8, 6, 'final, 0')
-```
-
-如果看見類似上面的訊息，就代表安裝成功囉！
+出現的數字代表虛擬環境中 Django 的版本資訊，如果看見類似上面的訊息，就代表安裝成功囉！

@@ -15,12 +15,11 @@
 
 ```python
 # trips/views.py
-
-# ...
-
 from django.shortcuts import render
+
 from .models import Post
 
+# ...
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
@@ -52,7 +51,7 @@ from trips.views import hello_world, home, post_detail
 
 urlpatterns = [
     ...
-    url(r'^post/(?P<pk>\d+)/$', post_detail, name='post_detail'),
+    path('post/<int:pk>/', post_detail, name='post_detail'),
 ]
 ```
 
@@ -60,25 +59,21 @@ urlpatterns = [
 
 ---
 
-### 使用 Regex 提取部份 URL 為參數
+### 使用 Route 字串將參數從 URL 中提取出來
 
-我們前面提過，Django 的 URL 是一個 *regular expression (regex)*。Regular expression 語法可用來描述一個字串的樣式。 除了可以表示固定字串之外，還可以用來表示不確定的內容。我們一步一步解釋文章單頁所使用的 URL 設定：
+前面提過，如何使用 route 定義 URL 規則，讓 Django 知道該對應到哪個 view function。 除了可以表示固定字串之外，還可以用來表示動態的內容。我們一步一步解釋文章單頁所使用的 URL 設定：
 
 ```
-(?P<pk>\d+)
+'post/<int:pk>/'
 ```
 
-1. `\d` 代表一個阿拉伯數字。
+1. `post/` 表示 URL 前面為 **post/** 開頭。
 
-2. `+` 代表「一個以上」。
+2. `int` 定義參數必須為整數。
 
-    所以 `\d+` 代表一個以上的阿拉伯數字，例如「0」、「99」、「12345」。可是像「8a」就不符合，因為「a」不是數字。
+3. `<int:pk>` 將傳入的整數，命名為 pk。
 
-3. `(?P<pk>)` 代表「把這一串東西抓出來，命名為 pk。
-
-    所以 `(?P<pk>\d+)` 代表：抓出一個以上阿拉伯數字，並把抓出來的東西取名為 pk。
-
-綜合以上的規則，`r'^post/(?P<pk>\d+)/$'` 會達成以下的效果：
+綜合以上的規則，`'post/<int:pk>/'` 會達成以下的效果：
 
 URL       | 符合結果
 ----------|------------------------
@@ -160,7 +155,7 @@ return render(request, 'post.html', {'post': post})
 {% url '<url_name>' arg1=<var1> arg2=<var2> ...%}
 ```
 
-其餘用法可參考[官方文件](https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#url)。
+其餘用法可參考[官方文件](https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#url)。
 
 ---
 
